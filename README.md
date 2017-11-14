@@ -1,5 +1,5 @@
 # Lukuvinkkikirjasto
-[![Build Status](https://travis-ci.org/mluukkai/spring-cucumber.svg?branch=master)](https://travis-ci.org/mluukkai/spring-cucumber)
+[![Build Status](https://travis-ci.org/betallica/lukuvinkkikirjasto.svg?branch=master)](https://travis-ci.org/betallica/lukuvinkkikirjasto)
 
 
 ## Linkkejä
