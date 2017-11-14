@@ -1,10 +1,15 @@
-# spring boot + cucumber 
-
-Suorita sovellus komennolla _gradle run_, käynnistyy osoitteeseen http://localhost:8080
-
-Testit suoritetaan komennolla _gradle test_
-
+# Lukuvinkkikirjasto
 [![Build Status](https://travis-ci.org/mluukkai/spring-cucumber.svg?branch=master)](https://travis-ci.org/mluukkai/spring-cucumber)
+
+
+## Linkkejä
+- [Backlog](https://docs.google.com/spreadsheets/d/1I5ekYUIwwIMCS3j7zQsP_keDep6tV_8D772lOwKTHKE)
+
+
+## Sovelluskehitys
+Suorita sovellus komennolla `gradle run`, käynnistyy osoitteeseen http://localhost:8080
+
+Testit suoritetaan komennolla `gradle test`
 
 Testit käyttävät _lib_-hakemistossa olevaa firefox Geckodriveriä
 
