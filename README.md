@@ -1,5 +1,6 @@
 # Lukuvinkkikirjasto
 [![Build Status](https://travis-ci.org/betallica/lukuvinkkikirjasto.svg?branch=master)](https://travis-ci.org/betallica/lukuvinkkikirjasto)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f9d636065686458ca444386f1556b2be)](https://www.codacy.com/app/V-Kopio/lukuvinkkikirjasto?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=betallica/lukuvinkkikirjasto&amp;utm_campaign=Badge_Grade)
 
 
 ## Linkkejä
