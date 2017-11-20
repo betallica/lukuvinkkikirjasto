@@ -1,5 +1,20 @@
 @import "node_modules/bulma/bulma";
 
-h1 {
-    color: blue;
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+
+    > section.section {
+        flex: 1;
+    }
 }

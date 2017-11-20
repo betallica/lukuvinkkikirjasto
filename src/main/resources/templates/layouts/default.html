@@ -4,15 +4,55 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
         <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
         <title>Lukuvinkkikirjasto</title>
 
         <link rel="stylesheet" href="/css/app.css"/>
     </head>
 
     <body>
-        <div class="container" layout:fragment="content">
-            Page content goes here
-        </div>
+        <nav class="navbar is-link is-uppercase" role="navigation" aria-label="main navigation">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a class="navbar-item has-text-weight-bold" href="/">
+                        Lukuvinkkikirjasto
+                    </a>
+
+                    <div class="navbar-burger burger" data-target="main-menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+                <div class="navbar-menu" id="main-menu">
+                    <div class="navbar-end">
+                        <a class="navbar-item">
+                            Linkki
+                        </a>
+
+                        <a class="navbar-item">
+                            Kirjaudu
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <section class="section">
+            <div class="container" layout:fragment="content">
+                Page content goes here
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="content has-text-centered">
+                    Lukuvinkkikirjasto by Betallica
+                </div>
+            </div>
+        </footer>
 
         <script src="/js/app.js"></script>
         <th:block layout:fragment="scripts"></th:block>
