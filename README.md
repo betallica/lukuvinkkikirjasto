@@ -1,10 +1,14 @@
 # Lukuvinkkikirjasto
-[![Build Status](https://travis-ci.org/betallica/lukuvinkkikirjasto.svg?branch=master)](https://travis-ci.org/betallica/lukuvinkkikirjasto)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f9d636065686458ca444386f1556b2be)](https://www.codacy.com/app/V-Kopio/lukuvinkkikirjasto?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=betallica/lukuvinkkikirjasto&amp;utm_campaign=Badge_Grade)
+
 
 
 ## Linkkejä
-- [Backlog](https://docs.google.com/spreadsheets/d/1I5ekYUIwwIMCS3j7zQsP_keDep6tV_8D772lOwKTHKE)
+
+Travis CI: [![Build Status](https://travis-ci.org/betallica/lukuvinkkikirjasto.svg?branch=master)](https://travis-ci.org/betallica/lukuvinkkikirjasto)
+
+Codacy: [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f9d636065686458ca444386f1556b2be)](https://www.codacy.com/app/V-Kopio/lukuvinkkikirjasto?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=betallica/lukuvinkkikirjasto&amp;utm_campaign=Badge_Grade)
+
+Google Sheets: [Backlog](https://docs.google.com/spreadsheets/d/1I5ekYUIwwIMCS3j7zQsP_keDep6tV_8D772lOwKTHKE)
 
 
 ## Sovelluskehitys
