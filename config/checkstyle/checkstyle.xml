@@ -13,6 +13,10 @@
     <module name="Indentation"/>
     <module name="FinalLocalVariable"/>
     <module name="GenericWhitespace"/>
+    <module name="UnnecessaryParentheses"/>
+    <module name="StringLiteralEquality"/>
+    <module name="SimplifyBooleanReturn"/>
+    <module name="SimplifyBooleanExpression"/>
 
     </module>
 
