@@ -13,15 +13,15 @@ import ohtu.service.BookHintService;
 
 @Controller
 public class Controllers {
-	
-	@Autowired
-	private BookHintService bhService;
-	
-	@Autowired
-	private BookHintRepository bhRep;
+
+    @Autowired
+    private BookHintService bhService;
+
+    @Autowired
+    private BookHintRepository bhRep;
 
     @GetMapping("/")
-    public String home(Model model) {    	
+    public String home(Model model) {
         return "home";
     }
 }

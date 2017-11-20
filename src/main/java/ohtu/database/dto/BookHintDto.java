@@ -6,40 +6,40 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class BookHintDto {
 
-	@NotEmpty
-	@NotNull
-	private long id;
-	
-	@NotEmpty
-	@NotNull
-	private String author;
-	
-	@NotEmpty
-	@NotNull
-	private String name;
+    @NotEmpty
+    @NotNull
+    private long id;
 
-	public long getId() {
-		return id;
-	}
+    @NotEmpty
+    @NotNull
+    private String author;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    @NotEmpty
+    @NotNull
+    private String name;
 
-	public String getAuthor() {
-		return author;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getAuthor() {
+        return author;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

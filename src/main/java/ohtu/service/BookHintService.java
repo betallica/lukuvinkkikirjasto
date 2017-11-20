@@ -9,18 +9,18 @@ import ohtu.model.BookHint;
 
 @Component
 public class BookHintService {
-	
-	@Autowired
-	private BookHintRepository bhRep;
 
-	public BookHint createBookHint(BookHintDto bookHintDto) {
-		BookHint bh = new BookHint();
-		bh.setAuthor(bookHintDto.getAuthor());
-		bh.setName(bookHintDto.getName());
-		
-		bhRep.save(bh);
-		
-		return null;
-	}
-	
+    @Autowired
+    private BookHintRepository bhRep;
+
+    public BookHint createBookHint(BookHintDto bookHintDto) {
+        final BookHint bh = new BookHint();
+        bh.setAuthor(bookHintDto.getAuthor());
+        bh.setName(bookHintDto.getName());
+
+        bhRep.save(bh);
+
+        return null;
+    }
+
 }
