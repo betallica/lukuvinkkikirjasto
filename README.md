@@ -21,3 +21,7 @@ Testit suoritetaan komennolla `gradle test`
 Testit käyttävät _lib_-hakemistossa olevaa firefox Geckodriveriä
 
 Konfiguraatiosta on kiittäminen kevään 2017 [TKT-FUBAR](https://github.com/TKT-FUBAR/Ohtu-miniprojekti)-miniprojektiryhmää.
+
+
+## Definition of Done
+User storyn mukainen toiminnallisuus on koodattu niin, että se toimii. Se on myös testattu, dokumentoitu ja integroitu (koodi on githubissa master-branchissa).
