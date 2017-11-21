@@ -1,2 +1,7 @@
 input{
 	display: block;
+}
+
+.errormessage {
+	color: #FF0000;
+}

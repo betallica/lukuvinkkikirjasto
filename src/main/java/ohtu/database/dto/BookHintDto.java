@@ -8,21 +8,15 @@ import ohtu.validation.IsbnValid;
 
 public class BookHintDto {
 
-    @NotEmpty
-    @NotNull
-    private long id;
-
-    @NotEmpty
+    @NotEmpty(message = "Author can not be empty")
     @NotNull
     private String author;
 
-    @NotEmpty
+    @NotEmpty(message = "Name can not be empty")
     @NotNull
     private String name;
     
     @IsbnValid
-    @NotEmpty
-    @NotNull
     private String isbn;
     
     public String getIsbn() {
@@ -32,14 +26,6 @@ public class BookHintDto {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
-
-	public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getAuthor() {
         return author;
