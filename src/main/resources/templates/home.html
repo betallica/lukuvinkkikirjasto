@@ -1,11 +1,22 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
   <h1 class="title">Kirjat</h1>
-  
-  <ul>
-  	<li th:each="hint : ${hints}">
-  		<span th:text="${hint.name}"/>
-  	</li>
-  </ul>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Author</th>
+        <th>ISBN</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="hint : ${hints}">
+        <th> <span th:text="${hint.name}"></span></th>
+        <th> <span th:text="${hint.author}"></span></th>
+        <th> <span th:text="${hint.isbn}"/> </th>
+      </tr>
+    </tbody>
+  </table>
   
   <a href="/hint/add">Lisää kirja</a>
   
