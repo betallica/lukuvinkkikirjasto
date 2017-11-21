@@ -20,7 +20,7 @@ public class BookHintService {
 		
 		bhRep.save(bh);
 		
-		return null;
+		return bh;
 	}
 	
 }
