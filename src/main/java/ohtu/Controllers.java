@@ -24,6 +24,4 @@ public class Controllers {
     public String home(Model model) {    	
         return "home";
     }
-    
-    @GetMapping("/hint/add")
 }
