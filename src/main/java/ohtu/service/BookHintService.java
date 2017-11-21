@@ -17,9 +17,12 @@ public class BookHintService {
 		BookHint bh = new BookHint();
 		bh.setAuthor(bookHintDto.getAuthor());
 		bh.setName(bookHintDto.getName());
+		bh.setIsbn(bookHintDto.getIsbn());
 		
 		bhRep.save(bh);
 		
 		return bh;
 	}
+	
+	
 }
