@@ -6,6 +6,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import ohtu.validation.IsbnValid;
 
+/**
+ * The book hint data transfer object for communication between processes. Has all required data for remote 
+ * call.
+ */
 public class BookHintDto {
 
     @NotEmpty(message = "Author can not be empty")
