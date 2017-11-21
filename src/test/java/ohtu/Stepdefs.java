@@ -77,6 +77,19 @@ public class Stepdefs {
         addBookWith(name, author, isbn);
     }
     
+    @Given("^a book with a name \"([^\"]*)\" and author \"([^\"]*)\" and isbn \"([^\"]*)\" is added$")
+    public void a_book_with_a_name_and_author_and_isbn_is_added(String name, String author, String isbn) throws Throwable {
+        driver.get(BASE_URL);
+        clickLinkWithText("Lisää kirja");
+        addBookWith(name, author, isbn);
+    }
+
+    @When("^at the home page$")
+    public void at_the_home_page() throws Throwable {
+        driver.get(BASE_URL);
+    }
+
+    
     private void addBookWith(String name, String author, String isbn) {
         WebElement element = driver.findElement(By.name("name"));
         element.sendKeys(name);

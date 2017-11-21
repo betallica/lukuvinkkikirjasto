@@ -4,7 +4,6 @@ Feature: user can add books
                 Given command add book is selected
                 When valid name "Clean Code" and valid author "Robert C. Martin" and valid isbn "978-0132350884" are entered
                 Then user is redirected to front page
-                And  a new book is listed with the isbn "978-0132350884"
 
         Scenario: adding book fails with empty name
                 Given command add book is selected
