@@ -22,7 +22,7 @@ public class Stepdefs {
         } else {
             file = new File("lib/geckodriver");
         }
-        String absolutePath = file.getAbsolutePath();
+        final String absolutePath = file.getAbsolutePath();
         System.setProperty("webdriver.gecko.driver", absolutePath);
 
         this.driver = new FirefoxDriver();
@@ -56,7 +56,7 @@ public class Stepdefs {
         int trials = 0;
         while( trials++<5 ) {
             try{
-                WebElement element = driver.findElement(By.linkText(text));
+                final WebElement element = driver.findElement(By.linkText(text));
                 element.click();
                 break;           
             } catch(Exception e) {

@@ -1,0 +1,14 @@
+<div layout:decorator="layouts/default" layout:fragment="content">
+<!-- ajatuksena että kaikkien hint:ien lisääminen
+		seuraavissa sprinteissä tältä samalta sivulta 
+		kirja, podcast, blopost)-->
+  <form th:action="@{/hint/add}" th:method="POST" th:object="${bookHintDto}">
+    <label>Otsikko:</label>
+    <input type="text" th:field="*{name}"/>
+    <label>Kirjoittaja:</label>
+    <input type="text" th:field="*{author}"/>
+    <label>ISBN:</label>
+    <input type="text" th:field="*{isbn}"/>
+    <input type="submit" value="Lisää"/>
+  </form>
+</div>

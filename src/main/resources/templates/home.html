@@ -1,3 +1,12 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
-    <h1>Hello, world!</h1>
+  <h1 class="title">Kirjat</h1>
+  
+  <ul>
+  	<li th:each="hint : ${hints}">
+  		<span th:text="${hint.name}"/>
+  	</li>
+  </ul>
+  
+  <a href="/hint/add">Lisää kirja</a>
+  
 </div>
