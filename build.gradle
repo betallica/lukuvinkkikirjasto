@@ -48,14 +48,17 @@ dependencies {
 	compile group: 'org.jsoup', name: 'jsoup', version: '1.10.2'
 
     compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'
+    
     compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: seleniumVersion
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version: seleniumVersion
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: seleniumVersion
     compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: seleniumVersion
     compile group: 'org.seleniumhq.selenium', name: 'selenium-remote-driver', version: seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-htmlunit-driver',version: '2.52.0' 
+    
     testCompile("io.github.bonigarcia:webdrivermanager:1.6.2") {
         exclude group: 'org.seleniumhq.selenium'
     }
+
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("org.springframework:spring-test")
     testCompile "info.cukes:cucumber-core:" + cucumberVersion

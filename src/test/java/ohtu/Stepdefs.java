@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class Stepdefs {
 
@@ -28,7 +28,7 @@ public class Stepdefs {
         final String absolutePath = file.getAbsolutePath();
         System.setProperty("webdriver.gecko.driver", absolutePath);
 
-        this.driver = new FirefoxDriver();
+        driver = new HtmlUnitDriver();
     }
 
     @After
