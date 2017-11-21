@@ -2,6 +2,7 @@ package ohtu.model;
 
 import java.io.Serializable;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,7 @@ public class BookHint implements Hint, Serializable {
     private String author;
     private String name;
     private String isbn;
+    
 
     public String getIsbn() {
 		return isbn;
