@@ -4,6 +4,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import ohtu.validation.IsbnValid;
+
 public class BookHintDto {
 
     @NotEmpty
@@ -18,6 +20,7 @@ public class BookHintDto {
     @NotNull
     private String name;
     
+    @IsbnValid
     @NotEmpty
     @NotNull
     private String isbn;
