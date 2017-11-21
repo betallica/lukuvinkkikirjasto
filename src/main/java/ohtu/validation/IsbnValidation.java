@@ -3,6 +3,10 @@ package ohtu.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+/**
+ * Class for checking that given ISBN number is valid. The ISBN needs to have correct length
+ * and check digit.
+ */
 public class IsbnValidation implements ConstraintValidator<IsbnValid, String> {
 
 	@Override
