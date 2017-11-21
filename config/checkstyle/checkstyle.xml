@@ -10,8 +10,6 @@
         <property name="countEmpty" value="false"/>
     </module>
     <module name="NestedForDepth"/>
-    <module name="Indentation"/>
-    <module name="FinalLocalVariable"/>
     <module name="GenericWhitespace"/>
     <module name="UnnecessaryParentheses"/>
     <module name="StringLiteralEquality"/>
