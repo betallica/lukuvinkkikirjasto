@@ -18,7 +18,7 @@ public class IsbnValidation implements ConstraintValidator<IsbnValid, String>{
 
         isbn = isbn.replaceAll( "-", "" );
 
-        if ( isbn.length() != 13 )S{
+        if ( isbn.length() != 13 ){
             return false;
         }
         
