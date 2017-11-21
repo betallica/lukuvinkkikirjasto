@@ -34,7 +34,7 @@ public class Controllers {
     }
     
     @GetMapping("/hint/add")
-    public String addBook(Model model, BindingResult result){
+    public String addBook(Model model){
     	model.addAttribute("bookHintDto", new BookHintDto());
     	
         return "add_hint";
