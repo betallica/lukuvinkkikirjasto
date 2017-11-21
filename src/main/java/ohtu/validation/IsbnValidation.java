@@ -3,7 +3,7 @@ package ohtu.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class IsbnValidation implements ConstraintValidator<IsbnValid, String>{
+public class IsbnValidation implements ConstraintValidator<IsbnValid, String> {
 
 	@Override
 	public void initialize(IsbnValid constraintAnnotation) {
