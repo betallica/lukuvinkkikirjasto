@@ -3,24 +3,21 @@ addons:
   firefox: '49.0'
 jdk:
 - oraclejdk8
-
 before_script:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 - sleep 3
-
 before_install:
 - wget https://github.com/mozilla/geckodriver/releases/download/v0.15.0/geckodriver-v0.15.0-linux64.tar.gz
 - mkdir geckodriver
 - tar -xzf geckodriver-v0.15.0-linux64.tar.gz -C geckodriver
 - export PATH=$PATH:$PWD/geckodriver
-
-# For jacoco test coverage reports
 - sudo apt-get install jq
-- wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
+- wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest
+  | jq -r .assets[0].browser_download_url)
 after_success:
-  - java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
-
+- java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter
+  -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
 deploy:
   provider: heroku
   api_key:
@@ -28,3 +25,6 @@ deploy:
   app: fast-sands-82937
   on:
     repo: betallica/lukuvinkkikirjasto
+env:
+  global:
+    secure: UbJgLB3iPpW4pJ36Cd2R94oQDgnmInhG+jRg9rCIzFNISTvLxUKKWF5j4uMbHIDse1ChyqGeNLXZ/F/zi0pJZLfKg6EVLfPSAVpVSt4zYW5IsNpjIUrNBOHe48mWXXF1wehWRhu8smqY6lYJC6gytRmuhxNmsyTSaFnEl7zctOfkD6Yl3dQZscsAyW1bDJ/JfDjLjUqRDLxJM/IEvnmNSVI84ENI53zBKCPsXSOxY8LRtP224Iyzxul7SNA2uZdsTn5iWvV15w3Itw19SlAFtXWrFbX77xb3Wjf16pt/tFsbGHiquIz7XPKem0hdIdycpoQBBi8aUaintB4T4ANw4lG7X58uSpi5HYT1qChFulnGvnc7xuaU+s646OsJ1RdM/HTHml1LFlRDm+RPrR9rG6+ozqi9Z2EwYlvAeoTGxY0Fl1K7W0lAcqSCYCJ6IuN36C+cutWrEZa1KauRNZXHqP+Q43npuhN+ORSLNpkuLfrgyo1oSG16TfXvz1xPMTVzifd8L/qQ76KwFXTEqCIhAw7rm/XXlVFITHrQT72jND7x0npKG5TCULHkXScp78+Nds3WS+vMLZrDpKDyQKxVZEA1YicPPnqiNOqbhYuQz9ksreOZefwe4foPZMU5e+QZ+6qh0T9iv1T7C0RaOu2LbzYwl+EIreh6PQxQEFP3oEE=
