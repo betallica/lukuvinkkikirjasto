@@ -88,6 +88,21 @@ public class Stepdefs {
     public void at_the_home_page() throws Throwable {
         driver.get(BASE_URL);
     }
+    
+    @Given("^ten books are created with same name \"([^\"]*)\" same author \"([^\"]*)\" and same isbn \"([^\"]*)\"$")
+    public void ten_books_are_created_with_same_name_same_author_and_same_isbn(String name, String author, String isbn) throws Throwable {
+        for(int i = 0; i < 10; i++) {
+        	driver.get(BASE_URL);
+        	clickLinkWithText("Lisää kirja");
+        	addBookWith(name, author, isbn);
+        }
+    }
+
+    @When("^next page is selected$")
+    public void next_page_is_selected() throws Throwable {
+        clickLinkWithText("Next »");
+    }
+
 
     
     private void addBookWith(String name, String author, String isbn) {

@@ -11,3 +11,9 @@ Feature: User can browse books in home page
                 When at the home page
                 Then a new book is listed with the isbn "978-0132350884"
                 And a new book is listed with the isbn "978-0-471-35846-6"
+                
+        Scenario: User can change between pages of books
+        	Given ten books are created with same name "Clean Code" same author "Robert C. Martin" and same isbn "978-0132350884"
+        	And a book with a name "Testing Computer Software" and author "Cem Kaner" and isbn "978-0-471-35846-6" is added
+        	When next page is selected
+        	Then a new book is listed with the isbn "978-0-471-35846-6"
