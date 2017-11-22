@@ -74,3 +74,9 @@ test {
     systemProperties System.getProperties()
 }
 
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
+
