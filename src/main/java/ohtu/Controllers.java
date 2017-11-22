@@ -2,6 +2,7 @@ package ohtu;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,20 +27,32 @@ public class Controllers {
     @Autowired
     private BookHintRepository bhRep;
 
+    final private int HINTS_PER_PAGE = 10;
+
     /**
      * Request is made to home address and all book hints are added to model.
      * @param model
      * @return View of home file is sent.
      */
     @GetMapping("/")
-    public String home(Model model) {
-    	ArrayList<BookHint> hints = (ArrayList<BookHint>)bhRep.findAll();
-    	
-    	model.addAttribute("hints", hints);
-    	
+    public String home(Model model, HttpServletRequest request) {
+
+    	String action = request.getParameter("action");
+    	int page;
+
+    	if (action == null) {
+    	    page = 0;
+        } else {
+    	    page = newPageNumber(request.getParameter("page"), action);
+        }
+
+    	model.addAttribute("page", page);
+        model.addAttribute("totalPages", totalNumberOfPages());
+    	model.addAttribute("hints", bhService.getBookHintsInPage(page, HINTS_PER_PAGE));
+
         return "home";
     }
-    
+
     /**
      * A request is made to the hint/add address and a book hint is added to the model.
      * @param model
@@ -71,4 +84,20 @@ public class Controllers {
             return "add_hint";
     	}
     }
+
+    private int newPageNumber(String pageParameter, String action) {
+        int page = Integer.parseInt(pageParameter);
+        if (action.equals("prev")) {
+            return Math.max(0, page - 1);
+        } else {
+            return Math.min(totalNumberOfPages(), page + 1);
+        }
+    }
+
+    private int totalNumberOfPages() {
+        int totalHints = bhRep.findAll().size();
+        return (totalHints - 1) / HINTS_PER_PAGE;
+    }
+
+
 }

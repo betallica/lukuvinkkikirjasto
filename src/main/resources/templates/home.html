@@ -18,4 +18,20 @@
       </tbody>
     </table>
 
+
+    <div>
+      <a th:if="${page > 0}" th:href="@{/(page=${page}, action='prev')}">
+        &laquo; Previous
+      </a>
+      <span>
+        <span>Page</span>
+        <span th:text="${page}"/>
+        <span>/</span>
+        <span th:text="${totalPages}"/>
+      </span>
+      <a th:if="${page != totalPages}" th:href="@{/(page=${page}, action='next')}">
+        Next &raquo;
+      </a>
+    </div>
+
 </div>

@@ -7,5 +7,5 @@ import ohtu.model.BookHint;
 
 @Component
 public interface BookHintRepository extends JpaRepository<BookHint, Long> {
-	
+
 }

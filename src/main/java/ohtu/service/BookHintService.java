@@ -1,11 +1,16 @@
 package ohtu.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import ohtu.database.dto.BookHintDto;
 import ohtu.database.repository.BookHintRepository;
 import ohtu.model.BookHint;
+
+import java.util.List;
 
 @Component
 public class BookHintService {
@@ -23,6 +28,11 @@ public class BookHintService {
 		
 		return bh;
 	}
-	
+
+	public List<BookHint> getBookHintsInPage(int pageNumber, int numberOfHints) {
+		Pageable pageable = new PageRequest(pageNumber, numberOfHints);
+		Page<BookHint> pages = bhRep.findAll(pageable);
+		return pages.getContent();
+	}
 	
 }
