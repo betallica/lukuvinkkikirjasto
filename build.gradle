@@ -80,3 +80,6 @@ jacocoTestReport {
     }
 }
 
+bootRun {
+    args = ["--spring.profiles.active=development"]
+}
