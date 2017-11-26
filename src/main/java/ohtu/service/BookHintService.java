@@ -15,7 +15,7 @@ import ohtu.model.BookHint;
 import java.util.List;
 
 @Component
-public class HintService {
+public class BookHintService {
 	
 	@Autowired
 	private BookHintRepository bookHintRepository;

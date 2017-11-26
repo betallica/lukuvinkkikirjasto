@@ -1,11 +1,8 @@
 package ohtu;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.jboss.logging.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import ohtu.database.dto.BookHintDto;
 import ohtu.database.repository.BookHintRepository;
-import ohtu.model.BookHint;
 import ohtu.service.BookHintService;
 
 @Controller
@@ -49,7 +45,7 @@ public class Controllers {
 
     	model.addAttribute("page", page);
         model.addAttribute("totalPages", totalNumberOfPages());
-    	model.addAttribute("hints", bhService.getBookHintsInPage(page, HINTS_PER_PAGE));
+    	model.addAttribute("hints", bhService.getHintsInPage(page, HINTS_PER_PAGE));
 
         return "home";
     }

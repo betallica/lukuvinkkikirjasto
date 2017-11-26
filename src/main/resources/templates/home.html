@@ -5,15 +5,13 @@
       <thead>
       <tr>
         <th>Name</th>
-        <th>Author</th>
-        <th>ISBN</th>
+        <th>Type</th>
       </tr>
       </thead>
       <tbody>
       <tr th:each="hint : ${hints}">
         <th> <span th:text="${hint.name}"></span></th>
-        <th> <span th:text="${hint.author}"></span></th>
-        <th> <span th:text="${hint.isbn}"/> </th>
+        <th><span th:text="${hint.type}"></span></th>
       </tr>
       </tbody>
     </table>
