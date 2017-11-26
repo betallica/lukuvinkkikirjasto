@@ -52,9 +52,9 @@ public class Stepdefs {
         assertTrue(driver.getPageSource().contains("Kirjat"));
     }
     
-    @Then("^a new book is listed with the isbn \"([^\"]*)\"$")
-    public void a_new_book_is_listed_with_the_isbn(String isbn) throws Throwable {
-        assertTrue(driver.getPageSource().contains(isbn));
+    @Then("^a new book is listed with the name \"([^\"]*)\"$")
+    public void a_new_book_is_listed_with_the_isbn(String title) throws Throwable {
+        assertTrue(driver.getPageSource().contains(title));
     }
 
     @When("^empty name \"([^\"]*)\" and valid author \"([^\"]*)\" and valid isbn \"([^\"]*)\" are entered$")
