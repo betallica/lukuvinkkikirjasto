@@ -13,16 +13,14 @@ import javax.persistence.Id;
  * number.
  */
 @Entity
-public class BookHint implements Hint, Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class BookHint extends Hint {
 
     private String author;
-    private String name;
     private String isbn;
-    
+
+    public BookHint() {
+        setType("Book");
+    }
 
     public String getIsbn() {
 		return isbn;
@@ -32,28 +30,12 @@ public class BookHint implements Hint, Serializable {
 		this.isbn = isbn;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	public String getAuthor() {
         return author;
     }
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public long getId() {
-        return id;
     }
 
 }
