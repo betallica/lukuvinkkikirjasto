@@ -1,5 +1,7 @@
 package ohtu.service;
 
+import ohtu.database.repository.HintRepository;
+import ohtu.model.Hint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,10 +15,12 @@ import ohtu.model.BookHint;
 import java.util.List;
 
 @Component
-public class BookHintService {
+public class HintService {
 	
 	@Autowired
-	private BookHintRepository bhRep;
+	private BookHintRepository bookHintRepository;
+	@Autowired
+	private HintRepository hintRepository;
 
 	public BookHint createBookHint(BookHintDto bookHintDto) {
 		BookHint bh = new BookHint();
@@ -24,14 +28,14 @@ public class BookHintService {
 		bh.setName(bookHintDto.getName());
 		bh.setIsbn(bookHintDto.getIsbn());
 		
-		bhRep.save(bh);
+		bookHintRepository.save(bh);
 		
 		return bh;
 	}
 
-	public List<BookHint> getBookHintsInPage(int pageNumber, int numberOfHints) {
+	public List<Hint> getHintsInPage(int pageNumber, int numberOfHints) {
 		Pageable pageable = new PageRequest(pageNumber, numberOfHints);
-		Page<BookHint> pages = bhRep.findAll(pageable);
+		Page<Hint> pages = hintRepository.findAll(pageable);
 		return pages.getContent();
 	}
 	
