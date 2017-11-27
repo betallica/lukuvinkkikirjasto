@@ -117,10 +117,15 @@ public class Controllers {
 
     @GetMapping("/books/{id}")
     public String getHint(Model model, @PathVariable long id) {
-    	System.out.println(hintService.getHint(id));
         model.addAttribute("bookHint", hintService.getHint(id));
         return "book";
     }
+
+   @GetMapping("/blogs/{id}")
+   public String getBlog(Model model, @PathVariable long id) {
+        model.addAttribute("blogHint", hintService.getHint(id));
+        return "blog";
+   }
 
     private int newPageNumber(String pageParameter, String action) {
         int page = Integer.parseInt(pageParameter);
