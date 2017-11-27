@@ -23,6 +23,17 @@ Testit käyttävät _lib_-hakemistossa olevaa firefox Geckodriveriä
 
 Konfiguraatiosta on kiittäminen kevään 2017 [TKT-FUBAR](https://github.com/TKT-FUBAR/Ohtu-miniprojekti)-miniprojektiryhmää.
 
+### Frontend
+
+Frontendin muokattavat tiedostot löytyvät hakemistosta `frontend/`. Omat Javascript- ja css-tiedostot sekä kolmannen osapuolen kirjastot kootaan yhdeksi 
+tiedostoksi Springin `static/`-hakemistoon tiedostoiksi `js/app.js` ja `css/app.css` **Webpackin** avulla.
+
+Tätä operaatiota varten tarvitaan [Node.js](https://nodejs.org/en/). Node asennettuna voidaan ladata kaikki riippuvuudet hakemistossa `frontend/` komennolla
+    npm install
+
+Projektin omat javascript- ja sass-tiedostot ovat hakemistossa `frontend/src/`. Muutokset tiedostoihin saadaan Springin käyttöön komennolla
+    npm run build
+
 
 ## Definition of Done
 User storyn mukainen toiminnallisuus on koodattu niin, että se toimii. Se on myös testattu, dokumentoitu ja integroitu (koodi on githubissa master-branchissa).
