@@ -38,5 +38,9 @@ public class BookHintService {
 		Page<Hint> pages = hintRepository.findAll(pageable);
 		return pages.getContent();
 	}
+
+	public BookHint getBookHint(Long id) {
+		return bookHintRepository.findOne(id);
+	}
 	
 }
