@@ -14,6 +14,9 @@
           <a th:case="'Book'" th:href="@{/books/{hintID}/(hintID=${hint.id})}">
             <span th:text="${hint.name}"></span>
           </a>
+          <a th:case="'Blog'" th:href="@{/blogs/{hintID}/(hintID=${hint.id})}">
+            <span th:text="${hint.name}"></span>
+          </a>
         </th>
         <th>
           <span th:text="${hint.type}"></span>
