@@ -34,6 +34,10 @@ Tätä operaatiota varten tarvitaan [Node.js](https://nodejs.org/en/). Node asen
 Projektin omat javascript- ja sass-tiedostot ovat hakemistossa `frontend/src/`. Muutokset tiedostoihin saadaan Springin käyttöön komennolla
     npm run build
 
+#### Frameworks
+
+Projektissa on käytössä [Bulma](https://bulma.io/)-css-framework, jonka kaikki dokumentaatiosta löytyvät assetit ovat käytettävissä.
+
 
 ## Definition of Done
 User storyn mukainen toiminnallisuus on koodattu niin, että se toimii. Se on myös testattu, dokumentoitu ja integroitu (koodi on githubissa master-branchissa).
