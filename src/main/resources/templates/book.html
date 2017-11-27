@@ -1,0 +1,21 @@
+<div layout:decorator="layouts/default" layout:fragment="content">
+    <h1 class="title">Kirja</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <th th:text="${bookHint.name}"></th>
+            </tr>
+            <tr>
+                <th>Author</th>
+                <th th:text="${bookHint.author}"></th>
+            </tr>
+            <tr>
+                <th>ISBN</th>
+                <th th:text="${bookHint.isbn}"></th>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
