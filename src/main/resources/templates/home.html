@@ -10,8 +10,14 @@
       </thead>
       <tbody>
       <tr th:each="hint : ${hints}">
-        <th> <span th:text="${hint.name}"></span></th>
-        <th><span th:text="${hint.type}"></span></th>
+        <th th:switch="${hint.type}">
+          <a th:case="'Book'" th:href="@{/books/{hintID}/(hintID=${hint.id})}">
+            <span th:text="${hint.name}"></span>
+          </a>
+        </th>
+        <th>
+          <span th:text="${hint.type}"></span>
+        </th>
       </tr>
       </tbody>
     </table>

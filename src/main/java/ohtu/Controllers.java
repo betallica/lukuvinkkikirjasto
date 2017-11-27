@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import ohtu.database.dto.BookHintDto;
 import ohtu.database.repository.BookHintRepository;
@@ -80,6 +78,12 @@ public class Controllers {
         	
             return "add_hint";
     	}
+    }
+
+    @GetMapping("/books/{id}")
+    public String getHint(Model model, @PathVariable long id) {
+        model.addAttribute("bookHint", bhService.getBookHint(id));
+        return "book";
     }
 
     private int newPageNumber(String pageParameter, String action) {
