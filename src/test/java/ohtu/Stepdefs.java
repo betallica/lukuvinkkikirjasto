@@ -49,7 +49,7 @@ public class Stepdefs {
 
     @Then("^user is redirected to front page$")
     public void user_is_redirected_to_front_page() throws Throwable {
-        assertTrue(driver.getPageSource().contains("Kirjat"));
+        assertTrue(driver.getPageSource().contains("Vinkit"));
     }
     
     @Then("^a new book is listed with the name \"([^\"]*)\"$")
