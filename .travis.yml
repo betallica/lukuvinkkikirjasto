@@ -13,14 +13,15 @@ before_install:
 - tar -xzf geckodriver-v0.15.0-linux64.tar.gz -C geckodriver
 - export PATH=$PATH:$PWD/geckodriver
 - sudo apt-get install jq
-- wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
+- wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest
+  | jq -r .assets[0].browser_download_url)
 after_success:
 - java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter
   -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
 deploy:
   provider: heroku
   api_key:
-    secure: dvEexUQmfF918ZxEepeQDhvIY2ejdavvuXeF82mlRZWv2AmTtvSQnE5p7aELmIpIyc9E3lSKv4bniwtAzbrbcWYbD464bnuEpTcQWw+KUMlD/nLHPgGo4ckwcd5qpGRZ9XYpSdr8oZahkeHT7Vd+kumOAhOd1cQKBQlEnha0jYAnNCw8CqeU18nwgteW5xnw/lopIyqj7QEW6pNvovTP4pCjP7NV1Rkpu2QhlvQb0Kt9AS5SFBRH47krRiH0yUpMRwkuvaBsnXGyP7osNvNZpH0xILHPVlEn9Tf0OKYNj4Zk8UeWvJA228vVOh6Tjox3du1lodSc6dpRQSNxEEdFoeWjzs4lhalORrpxDDsfHZ1kKGx5thO47L6Egsfes2yu+4xkpNMeV8jQ96IqBAMuRKlMHmM/9jAsTQ9ClW1QgwPdaGONpU58k6BQpTssl9cM4TqzLL9qfuo9JeoA3Vh6qldKARUxnSWfS1KYzsEJGB9iVx8ycqrr6zY+etORmM070LZyfsRiutN0P98gz/Mq36zSIct931hnhI3CpmHcc7WpbohKVjSCBieTgNaF88JWKGEjsVi705oGKkbY1M7H8BIlg3XOYz8HHdry/A1JCj/KVsHAOcq1eQ9a7G/agpxDgRzaka8NQ6aSKvV0mzw8PNi1SGXetr44W0xXwnMdF6U=
+    secure: V0XxUkMpV+pT8+XTvPHQdKAuKsH11IXGqov/ZbhammINYMM6JrtPX3Wo+B00N/2B6+buxvfYFGHMjcA5SM4yfpCGxifR1L3OPQ1DNIbkdSVX3KJnsmGuqQdeoUQJxmjkaCaIDO7eEt36apC3QoZU8gERtCkuCm9ydr08VujzuuOFIhJdUdydvcTmebGRZG3yCM72KNXZeWZROwcxqzlOIzPADwJ0aX2Z6Pz0rdR9sAgWSsiX8SVBTy2xU9C9zu/zjlPmhALPgcBW+39n/W+0jA5oWrMYpWdMgTqI8b5R020rkBn0wAodm1x/2iXH2xSBsVn3O9+p0u1i+M/Ctf/iZT5YMRw/Cpi2DJaq9PocUsMBe6IC94ABOlhGd2Nowhop8gEBoqOStCl9JENJ26qceY3MNIq1eTZvwsqBcqxYhVX0w5Z8y+kWOCyrum2gtiq/9nc7tzXygiMLwwSWjtsb/q+WlRAU7/TAMc3rz3B/KU+CJw2vWMi2CgeooQfK9Q9pkVpx9s01v+EOP7bxl6wuvgw9yYkM8zkjWr2mWGJTc637Osr5Kck+PIrK702Rp7snJFGtrNY2UAJv0zJDS4uqJT1QpKcHK7EmxDm9ZkZDEeesIH2UlGKQLhn9yHWFb3+Y6wKakT8Qu/LafVi17jvxq9UjkJoeXmIz5eGStRWTXeY=
   app: fast-sands-82937
   on:
     repo: betallica/lukuvinkkikirjasto
