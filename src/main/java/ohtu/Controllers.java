@@ -2,6 +2,7 @@ package ohtu;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import ohtu.database.dto.BlogHintDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,15 +56,15 @@ public class Controllers {
     /**
      * A request is made to the hint/add address and a book hint is added to the model.
      * @param model
-     * @return Creates a view of add_hint sends it.
+     * @return Creates a view of add_book sends it.
      */
-    @GetMapping("/hint/add")
+    @GetMapping("/book/add")
     public String addBook(Model model){
     	BookHintDto bhDto = new BookHintDto();
     	
     	model.addAttribute("bookHintDto", bhDto);
     	
-        return "add_hint";
+        return "add_book";
     }
     
     /**
@@ -71,9 +72,9 @@ public class Controllers {
      * @param model
      * @param bookHintDto
      * @param result
-     * @return Redirects to home or creates view of add_hint and sends it.
+     * @return Redirects to home or creates view of add_book and sends it.
      */
-    @PostMapping("/hint/add")
+    @PostMapping("/book/add")
     public String saveBook(Model model, @ModelAttribute @Valid BookHintDto bookHintDto, BindingResult result) {   	
      	if(!result.hasErrors()) {
     		hintService.createHint(bookHintDto);
@@ -82,7 +83,35 @@ public class Controllers {
     	} else {       		
     		model.addAttribute("bookHintDto", bookHintDto);
         	
-            return "add_hint";
+            return "add_book";
+    	}
+    }
+    @GetMapping("/blog/add")
+    public String addBlog(Model model){
+    	BlogHintDto bhDto = new BlogHintDto();
+    	
+    	model.addAttribute("blogHintDto", bhDto);
+    	
+        return "add_blog";
+    }
+    
+    /**
+     * Checks if that the book hint is added successfully.
+     * @param model
+     * @param blogHintDto
+     * @param result
+     * @return Redirects to home or creates view of add_blog and sends it.
+     */
+    @PostMapping("/blog/add")
+    public String saveBlog(Model model, @ModelAttribute @Valid BlogHintDto blogHintDto, BindingResult result) {   	
+     	if(!result.hasErrors()) {
+    		hintService.createHint(blogHintDto);
+    	
+    		return "redirect:/";
+    	} else {       		
+    		model.addAttribute("blogHintDto", blogHintDto);
+        	
+            return "add_blog";
     	}
     }
 
