@@ -29,9 +29,11 @@ Frontendin muokattavat tiedostot löytyvät hakemistosta `frontend/`. Omat Javas
 tiedostoksi Springin `static/`-hakemistoon tiedostoiksi `js/app.js` ja `css/app.css` **Webpackin** avulla.
 
 Tätä operaatiota varten tarvitaan [Node.js](https://nodejs.org/en/). Node asennettuna voidaan ladata kaikki riippuvuudet hakemistossa `frontend/` komennolla
+
     npm install
 
 Projektin omat javascript- ja sass-tiedostot ovat hakemistossa `frontend/src/`. Muutokset tiedostoihin saadaan Springin käyttöön komennolla
+
     npm run build
 
 #### Frameworks
