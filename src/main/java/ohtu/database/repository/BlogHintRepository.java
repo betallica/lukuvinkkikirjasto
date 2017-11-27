@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 import ohtu.model.BlogHint;
 
 @Component
-public interface BlogHintRepository extends JpaRepository<BlogHint, Long>{
+public interface BlogHintRepository extends JpaRepository<BlogHint, Long> {
 
 }
