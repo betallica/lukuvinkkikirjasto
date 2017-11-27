@@ -5,13 +5,3 @@ input{
 .errormessage {
     color: #FF0000;
 }
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-table, th, td {
-    border: 1px solid black;
-    padding: 15px;
-}
