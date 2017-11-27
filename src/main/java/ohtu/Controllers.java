@@ -7,17 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import ohtu.database.dto.BookHintDto;
 import ohtu.database.repository.BookHintRepository;
 import ohtu.service.BookHintService;
+import ohtu.service.HintService;
 
 @Controller
 public class Controllers {
+	
+	@Autowired
+	private HintService hintService;
 
-    @Autowired
-    private BookHintService bhService;
 
     @Autowired
     private BookHintRepository bhRep;
@@ -43,7 +47,7 @@ public class Controllers {
 
     	model.addAttribute("page", page);
         model.addAttribute("totalPages", totalNumberOfPages());
-    	model.addAttribute("hints", bhService.getHintsInPage(page, HINTS_PER_PAGE));
+    	model.addAttribute("hints", hintService.getHintsInPage(page, HINTS_PER_PAGE));
 
         return "home";
     }
@@ -55,7 +59,9 @@ public class Controllers {
      */
     @GetMapping("/hint/add")
     public String addBook(Model model){
-    	model.addAttribute("bookHintDto", new BookHintDto());
+    	BookHintDto bhDto = new BookHintDto();
+    	
+    	model.addAttribute("bookHintDto", bhDto);
     	
         return "add_hint";
     }
@@ -68,9 +74,9 @@ public class Controllers {
      * @return Redirects to home or creates view of add_hint and sends it.
      */
     @PostMapping("/hint/add")
-    public String saveBook(Model model, @ModelAttribute @Valid BookHintDto bookHintDto, BindingResult result) {
-    	if(!result.hasErrors()) {
-    		bhService.createBookHint(bookHintDto);
+    public String saveBook(Model model, @ModelAttribute @Valid BookHintDto bookHintDto, BindingResult result) {   	
+     	if(!result.hasErrors()) {
+    		hintService.createHint(bookHintDto);
     	
     		return "redirect:/";
     	} else {       		
@@ -82,7 +88,8 @@ public class Controllers {
 
     @GetMapping("/books/{id}")
     public String getHint(Model model, @PathVariable long id) {
-        model.addAttribute("bookHint", bhService.getBookHint(id));
+    	System.out.println(hintService.getHint(id));
+        model.addAttribute("bookHint", hintService.getHint(id));
         return "book";
     }
 

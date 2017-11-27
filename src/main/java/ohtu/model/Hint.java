@@ -1,7 +1,8 @@
 package ohtu.model;
 
-import javax.persistence.*;
 import java.io.Serializable;
+
+import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy= InheritanceType.JOINED)
@@ -14,21 +15,21 @@ public abstract class Hint implements Serializable {
     private String name;
 
     private String type;
+    
+    public long getId() {
+		return id;
+	}
 
-    public String getName() {
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getType() {

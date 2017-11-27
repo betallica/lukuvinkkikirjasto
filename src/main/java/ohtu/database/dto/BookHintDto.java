@@ -10,15 +10,11 @@ import ohtu.validation.IsbnValid;
  * The book hint data transfer object for communication between processes. Has all required data for remote 
  * call.
  */
-public class BookHintDto {
+public class BookHintDto extends HintDto{
 
     @NotEmpty(message = "Author can not be empty")
     @NotNull
     private String author;
-
-    @NotEmpty(message = "Name can not be empty")
-    @NotNull
-    private String name;
     
     @IsbnValid
     private String isbn;
@@ -37,14 +33,6 @@ public class BookHintDto {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }
