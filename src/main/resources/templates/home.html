@@ -1,7 +1,7 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
   <h1 class="title">Vinkit</h1>
 
-    <table>
+    <table class="table is-striped is-fullwidth">
       <thead>
       <tr>
         <th>Nimi</th>
@@ -10,35 +10,35 @@
       </thead>
       <tbody>
       <tr th:each="hint : ${hints}">
-        <th th:switch="${hint.type}">
+        <td th:switch="${hint.type}">
           <a th:case="'Book'" th:href="@{/books/{hintID}/(hintID=${hint.id})}">
             <span th:text="${hint.name}"></span>
           </a>
           <a th:case="'Blog'" th:href="@{/blogs/{hintID}/(hintID=${hint.id})}">
             <span th:text="${hint.name}"></span>
           </a>
-        </th>
-        <th>
+        </td>
+        <td>
           <span th:text="${hint.type}"></span>
-        </th>
+        </td>
       </tr>
       </tbody>
     </table>
 
 
-    <div>
-      <a th:if="${page > 0}" th:href="@{/(page=${page}, action='prev')}">
+    <nav class="pagination">
+      <a th:disabled="${page == 0}" th:href="@{/(page=${page}, action='prev')}" class="pagination-previous">
         &laquo; Edellinen
       </a>
-      <span>
-        <span>Sivu</span>
-        <span th:text="${page}"/>
-        <span>/</span>
-        <span th:text="${totalPages}"/>
-      </span>
-      <a th:if="${page != totalPages}" th:href="@{/(page=${page}, action='next')}">
+      <a th:disabled="${page >= totalPages}" th:href="@{/(page=${page}, action='next')}" class="pagination-next">
         Seuraava &raquo;
       </a>
-    </div>
+      <ul class="pagination-list">
+        <li class="pagination-ellipsis">Sivu</li>
+        <li class="pagination-ellipsis" th:text="${page}"/>
+        <li class="pagination-ellipsis">/</li>
+        <li class="pagination-ellipsis" th:text="${totalPages}"/>
+      </ul>
+    </nav>
 
 </div>

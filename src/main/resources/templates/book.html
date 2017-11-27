@@ -1,19 +1,19 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
     <h1 class="title">Kirja</h1>
 
-    <table>
+    <table class="table is-striped is-fullwidth">
         <tbody>
             <tr>
                 <th>Otsikko</th>
-                <th th:text="${bookHint.name}"></th>
+                <td th:text="${bookHint.name}"></td>
             </tr>
             <tr>
                 <th>Kirjoittaja</th>
-                <th th:text="${bookHint.author}"></th>
+                <td th:text="${bookHint.author}"></td>
             </tr>
             <tr>
                 <th>ISBN</th>
-                <th th:text="${bookHint.isbn}"></th>
+                <td th:text="${bookHint.isbn}"></td>
             </tr>
         </tbody>
     </table>
