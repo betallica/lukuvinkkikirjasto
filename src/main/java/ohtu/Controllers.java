@@ -13,8 +13,10 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import ohtu.database.dto.BookHintDto;
+import ohtu.database.dto.CommentDto;
 import ohtu.database.repository.BookHintRepository;
 import ohtu.service.BookHintService;
+import ohtu.service.CommentService;
 import ohtu.service.HintService;
 
 @Controller
@@ -22,7 +24,9 @@ public class Controllers {
 	
 	@Autowired
 	private HintService hintService;
-
+	
+	@Autowired
+	private CommentService commentService;
 
     @Autowired
     private BookHintRepository bhRep;
@@ -118,13 +122,49 @@ public class Controllers {
     @GetMapping("/books/{id}")
     public String getHint(Model model, @PathVariable long id) {
         model.addAttribute("bookHint", hintService.getHint(id));
+        model.addAttribute("comments", commentService.getCommentsForHint(id));
+        
+        CommentDto commentDto = new CommentDto();
+        model.addAttribute("commentDto", commentDto);
         return "book";
+    }
+    
+    @PostMapping(value = "/books/{id}", params="text")
+    public String addCommentForBook(Model model, @ModelAttribute @Valid CommentDto commentDto, @PathVariable long id, BindingResult result) {
+    	if(!result.hasErrors()) {
+            commentDto.setHint(hintService.getHint(id));
+    		commentService.createComment(commentDto);
+    	} else {
+    		model.addAttribute("commentDto", commentDto);
+    		
+    		return "book";
+    	}
+    	
+    	return "redirect:/books/"+id;
     }
 
    @GetMapping("/blogs/{id}")
    public String getBlog(Model model, @PathVariable long id) {
         model.addAttribute("blogHint", hintService.getHint(id));
+        model.addAttribute("comments", commentService.getCommentsForHint(id));
+        
+        CommentDto commentDto = new CommentDto();
+        model.addAttribute("commentDto", commentDto);
         return "blog";
+   }
+   
+   @PostMapping(value="/blogs/{id}", params="text")
+   public String addCommentForBlog(Model model, @ModelAttribute @Valid CommentDto commentDto, @PathVariable long id, BindingResult result) {
+   	if(!result.hasErrors()) {
+           commentDto.setHint(hintService.getHint(id));
+   		commentService.createComment(commentDto);
+   	} else {
+   		model.addAttribute("commentDto", commentDto);
+   		
+   		return "blog";
+   	}
+   	
+   	return "redirect:/blogs/"+id;
    }
 
     private int newPageNumber(String pageParameter, String action) {

@@ -19,5 +19,16 @@
             </tr>
         </tbody>
     </table>
+    
+    <form th:method="POST" th:action="@{/blogs/{id} (id=${blogHint.id})}" th:object="${commentDto}">
+    	<textarea rows="3" cols="50" th:field="*{text}">Kirjoita kommentti...</textarea>
+    	<input type="submit" value="Kommentoi"/>
+    </form>
+    
+    <ul>
+    	<li th:each="comment : ${comments}">
+    		<span th:text="${comment.text}">Kommentti</span>	
+    	</li>
+    </ul>
 
 </div>
