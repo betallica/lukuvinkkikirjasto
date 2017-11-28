@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ohtu.database.dto.BlogHintDto;
 import ohtu.database.repository.BlogHintRepository;
 import ohtu.model.BlogHint;
+import ohtu.model.BookHint;
 
 @Service
 public class BlogHintService {
@@ -20,7 +21,7 @@ public class BlogHintService {
 		bh.setName(blogHintDto.getName());
 		bh.setUrl(blogHintDto.getUrl());
 		bh.setType("Blog");
-		
+                bh.setIsRead(false);
 		blogHintRepository.save(bh);
 		
 		return bh;
@@ -29,5 +30,9 @@ public class BlogHintService {
 	public BlogHint getBlogHint(Long id) {
 		return blogHintRepository.findOne(id);
 	}
+        
+        public BlogHint saveBlogHint(BlogHint blogHint) {
+            return blogHintRepository.save(blogHint);
+        }
 	
 }

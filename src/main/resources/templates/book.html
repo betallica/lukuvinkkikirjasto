@@ -17,5 +17,10 @@
             </tr>
         </tbody>
     </table>
-
+    <form th:method="POST" th:action="@{/books/{id} (id=${bookHint.id})}">
+        <div th:switch="${bookHint.isRead}">
+            <input th:case="false" type="submit" value="Merkitse luetuksi" name="isRead"/>
+            <input th:case="true" type="submit" value="Merkitse lukemattomaksi" name="isRead"/>
+        </div>
+    </form>
 </div>
