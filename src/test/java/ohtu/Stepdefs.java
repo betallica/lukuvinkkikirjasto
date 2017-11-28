@@ -49,7 +49,38 @@ public class Stepdefs {
         clickLinkWithText("Lisää blogi");
     }
     
+    @Given("^user is at home page$")
+    public void user_is_at_home_page() throws Throwable {
+        driver.get(BASE_URL);
+    }
     
+    @Given("^blog with valid name \"([^\"]*)\" and valid author \"([^\"]*)\" and valid url \"([^\"]*)\" is entered")
+    public void a_blog_has_been_entered(String name, String author, String url) throws Throwable {
+        driver.get(BASE_URL);
+        clickLinkWithText("Lisää blogi");
+        addBlogWith(name, author, url);
+    }
+    
+    
+    @When("^book name is clicked$")
+    public void book_name_is_clicked() throws Throwable {
+        clickLinkWithText("Clean Code");
+    }
+    
+    @Then("^page with book information is presented$")
+    public void page_with_book_information_is_presented() throws Throwable {
+        assertTrue(driver.getPageSource().contains("Kirja"));
+    }
+    
+    @When("^blog name is clicked$")
+    public void blog_name_is_clicked() throws Throwable {
+        clickLinkWithText("A Simple Way to Run a Sprint Retrospective");
+    }
+    
+    @Then("^page with blog information is presented$")
+    public void page_with_blog_information_is_presented() throws Throwable {
+        assertTrue(driver.getPageSource().contains("Blogi"));
+    }
     
     
 
@@ -69,7 +100,7 @@ public class Stepdefs {
     @Then("^user is redirected to front page$")
     public void user_is_redirected_to_front_page() throws Throwable {
         System.out.println(driver.getPageSource());
-        assertTrue(driver.getPageSource().contains("Vinkit")); //pelkastaan addblogin tilanteessa errori testien kanssa
+        assertTrue(driver.getPageSource().contains("Vinkit"));
     }
     
     @Then("^a new book is listed with the name \"([^\"]*)\"$")
