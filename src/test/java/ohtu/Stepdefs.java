@@ -42,27 +42,54 @@ public class Stepdefs {
         driver.get(BASE_URL);
         clickLinkWithText("Lisää kirja");
     }
+    
+    @Given("^command add blog is selected$")
+    public void command_add_blog_is_selected() throws Throwable {
+        driver.get(BASE_URL);
+        clickLinkWithText("Lisää blogi");
+    }
+    
+    
+    
+    
 
     @When("^valid name \"([^\"]*)\" and valid author \"([^\"]*)\" and valid isbn \"([^\"]*)\" are entered$")
     public void valid_name_and_valid_author_and_valid_isbn_are_entered(String name, String author, String isbn) throws Throwable {
         addBookWith(name, author, isbn);
     }
+    
+    @When("^valid name \"([^\"]*)\" and valid author \"([^\"]*)\" and valid url \"([^\"]*)\" are entered$")
+    public void valid_name_and_valid_author_and_valid_url_are_entered(String name, String author, String url) throws Throwable {
+        addBlogWith(name, author, url);
+    }
+    
+    
+    
 
     @Then("^user is redirected to front page$")
     public void user_is_redirected_to_front_page() throws Throwable {
         System.out.println(driver.getPageSource());
-        assertTrue(driver.getPageSource().contains("Vinkit"));
+        assertTrue(driver.getPageSource().contains("Vinkit")); //pelkastaan addblogin tilanteessa errori testien kanssa
     }
     
     @Then("^a new book is listed with the name \"([^\"]*)\"$")
     public void a_new_book_is_listed_with_the_isbn(String title) throws Throwable {
         assertTrue(driver.getPageSource().contains(title));
     }
+    
+    
+    
 
     @When("^empty name \"([^\"]*)\" and valid author \"([^\"]*)\" and valid isbn \"([^\"]*)\" are entered$")
     public void empty_name_and_valid_author_and_valid_isbn_are_entered(String name, String author, String isbn) throws Throwable {
         addBookWith(name, author, isbn);
     }
+    
+    @When("^empty name \"([^\"]*)\" and valid author \"([^\"]*)\" and valid url \"([^\"]*)\" are entered$")
+    public void empty_name_and_valid_author_and_valid_url_are_entered(String name, String author, String url) throws Throwable {
+        addBlogWith(name, author, url);
+    }
+
 
     @Then("^error message \"([^\"]*)\" is shown$")
     public void error_message_is_shown(String error_message) throws Throwable {
@@ -73,10 +100,20 @@ public class Stepdefs {
     public void valid_name_and_empty_author_and_valid_isbn_are_entered(String name, String author, String isbn) throws Throwable {
         addBookWith(name, author, isbn);
     }
+    
+    @When("^valid name \"([^\"]*)\" and empty author \"([^\"]*)\" and valid url \"([^\"]*)\" are entered$")
+    public void valid_name_and_empty_author_and_valid_url_are_entered(String name, String author, String url) throws Throwable {
+        addBlogWith(name, author, url);
+    }
 
     @When("^valid name \"([^\"]*)\" and empty author \"([^\"]*)\" and invalid isbn \"([^\"]*)\" are entered$")
     public void valid_name_and_empty_author_and_invalid_isbn_are_entered(String name, String author, String isbn) throws Throwable {
         addBookWith(name, author, isbn);
+    }
+    
+    @When("^valid name \"([^\"]*)\" and valid author \"([^\"]*)\" and empty url \"([^\"]*)\" are entered$")
+    public void valid_name_and_valid_author_and_empty_url_are_entered(String name, String author, String url) throws Throwable {
+        addBlogWith(name, author, url);
     }
     
     @Given("^a book with a name \"([^\"]*)\" and author \"([^\"]*)\" and isbn \"([^\"]*)\" is added$")
@@ -114,6 +151,17 @@ public class Stepdefs {
         element.sendKeys(author);
         element = driver.findElement(By.name("isbn"));
         element.sendKeys(isbn);
+        element = driver.findElement(By.name("submit"));
+        element.click();
+    }
+    
+    private void addBlogWith(String name, String author, String url) {
+        WebElement element = driver.findElement(By.name("name"));
+        element.sendKeys(name);
+        element = driver.findElement(By.name("author"));
+        element.sendKeys(author);
+        element = driver.findElement(By.id("url"));
+        element.sendKeys(url);
         element = driver.findElement(By.name("submit"));
         element.click();
     }

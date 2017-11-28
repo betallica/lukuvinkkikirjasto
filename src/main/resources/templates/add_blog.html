@@ -2,7 +2,7 @@
 <!-- ajatuksena että kaikkien hint:ien lisääminen
 		seuraavissa sprinteissä tältä samalta sivulta 
 		kirja, podcast, blopost)-->
-  <form th:action="@{/book/add}" th:method="POST" th:object="${blogHintDto}">
+  <form th:action="@{/blog/add}" th:method="POST" th:object="${blogHintDto}">
   	<div>
 	  	<p class="errormessage" th:each="error : ${#fields.errors('name')}"
            th:text="	${error}">Validation error</p>
