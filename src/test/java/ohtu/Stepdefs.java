@@ -160,7 +160,7 @@ public class Stepdefs {
         element.sendKeys(name);
         element = driver.findElement(By.name("author"));
         element.sendKeys(author);
-        element = driver.findElement(By.id("url"));
+        element = driver.findElement(By.name("url"));
         element.sendKeys(url);
         element = driver.findElement(By.name("submit"));
         element.click();

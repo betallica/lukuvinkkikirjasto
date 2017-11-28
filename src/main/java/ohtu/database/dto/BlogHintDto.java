@@ -6,11 +6,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class BlogHintDto extends HintDto{
 
-	@NotEmpty
+	@NotEmpty(message = "Author can not be empty")
 	@NotNull
 	private String author;
 	
-	@NotEmpty
+	@NotEmpty(message = "url can not be empty")
 	@NotNull
 	private String url;
 
