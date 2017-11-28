@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.remote.server.handler.ClickElement;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
@@ -214,6 +215,41 @@ public class Stepdefs {
         driver.get(BASE_URL);
         clickLinkWithText(name);
     }
+    
+    //marking a book and blog as read start from here
+    @When("^the mark as read button is clicked$")
+    public void the_mark_as_read_button_is_clicked() throws Throwable {
+        WebElement element = driver.findElement(By.name("isRead"));
+        element.click();
+        
+    }
+
+    @Then("^the button's text changes to mark as unread$")
+    public void the_button_s_text_changes_to_mark_as_unread() throws Throwable {
+        WebElement element = driver.findElement(By.name("isRead"));
+        assertTrue(element.getAttribute("value").equals("Merkitse lukemattomaksi"));
+    }
+
+    @Then("^the button's text changes to mark as read$")
+    public void the_button_s_text_changes_to_mark_as_read() throws Throwable {
+        WebElement element = driver.findElement(By.name("isRead"));
+        assertTrue(element.getAttribute("value").equals("Merkitse luetuksi"));
+    }
+
+    @When("^the mark as unread button is clicked$")
+    public void the_mark_as_unread_button_is_clicked() throws Throwable {
+        WebElement element = driver.findElement(By.name("isRead"));
+        element.click();
+    }
+    
+    @Given("^the book with name \"([^\"]*)\" is marked as read$")
+    public void the_book_with_name_is_marked_as_read(String name) throws Throwable {
+        driver.get(BASE_URL);
+        clickLinkWithText(name);
+        WebElement element = driver.findElement(By.name("isRead"));
+        element.click();
+    }
+
 
     
     private void addBookWith(String name, String author, String isbn) {
