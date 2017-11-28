@@ -3,7 +3,7 @@ Feature: User can browse books in home page
         Scenario: User can see one added book
                 Given a book with a name "Clean Code" and author "Robert C. Martin" and isbn "978-0132350884" is added
                 When at the home page
-                Then a new book is listed with the name "Clean Code"
+                Then a new book is listed with the isbn "Clean Code"
 
         Scenario: User can see two added books
                 Given a book with a name "Clean Code" and author "Robert C. Martin" and isbn "978-0132350884" is added

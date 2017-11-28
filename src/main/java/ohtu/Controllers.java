@@ -31,7 +31,7 @@ public class Controllers {
     @Autowired
     private BookHintRepository bhRep;
 
-    final private int HINTS_PER_PAGE = 10;
+    final private int HINTS_PER_PAGE = 1;
 
     /**
      * Request is made to home address and all book hints are added to model.
@@ -130,13 +130,16 @@ public class Controllers {
     }
     
     @PostMapping(value = "/books/{id}", params="text")
-    public String addCommentForBook(Model model, @ModelAttribute @Valid CommentDto commentDto, @PathVariable long id, BindingResult result) {
+    public String addCommentForBook(Model model, @ModelAttribute @Valid CommentDto commentDto, BindingResult result, @PathVariable long id) {
     	if(!result.hasErrors()) {
             commentDto.setHint(hintService.getHint(id));
     		commentService.createComment(commentDto);
     	} else {
-    		model.addAttribute("commentDto", commentDto);
+    		model.addAttribute("bookHint", hintService.getHint(id));
+            model.addAttribute("comments", commentService.getCommentsForHint(id));
     		
+    		model.addAttribute("commentDto", commentDto);
+
     		return "book";
     	}
     	
@@ -154,11 +157,14 @@ public class Controllers {
    }
    
    @PostMapping(value="/blogs/{id}", params="text")
-   public String addCommentForBlog(Model model, @ModelAttribute @Valid CommentDto commentDto, @PathVariable long id, BindingResult result) {
+   public String addCommentForBlog(Model model, @ModelAttribute @Valid CommentDto commentDto, BindingResult result, @PathVariable long id) {
    	if(!result.hasErrors()) {
-           commentDto.setHint(hintService.getHint(id));
+   		commentDto.setHint(hintService.getHint(id));
    		commentService.createComment(commentDto);
-   	} else {
+   	} else {  		
+   		model.addAttribute("blogHint", hintService.getHint(id));
+        model.addAttribute("comments", commentService.getCommentsForHint(id));
+   		
    		model.addAttribute("commentDto", commentDto);
    		
    		return "blog";

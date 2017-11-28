@@ -5,3 +5,11 @@ input{
 .errormessage {
     color: #FF0000;
 }
+
+.comment-li {
+	margin: 10px;
+}
+
+.comment {
+	font-style: italic;	
+}
