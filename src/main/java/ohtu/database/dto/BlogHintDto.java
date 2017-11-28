@@ -1,33 +1,36 @@
 package ohtu.database.dto;
 
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class BlogHintDto extends HintDto{
+/**
+ * The blog hint data transfer object for communication between processes. It
+ * has all required data for remote call including the blog's author and url.
+ */
+public class BlogHintDto extends HintDto {
 
-	@NotEmpty(message = "Author can not be empty")
-	@NotNull
-	private String author;
-	
-	@NotEmpty(message = "url can not be empty")
-	@NotNull
-	private String url;
+    @NotEmpty(message = "Author can not be empty")
+    @NotNull
+    private String author;
 
-	public String getAuthor() {
-		return author;
-	}
+    @NotEmpty(message = "url can not be empty")
+    @NotNull
+    private String url;
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public String getAuthor() {
+        return author;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
 }
