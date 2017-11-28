@@ -3,7 +3,6 @@ package ohtu.configuration;
 import ohtu.database.dto.BlogHintDto;
 import ohtu.database.dto.BookHintDto;
 import ohtu.database.dto.HintDto;
-import ohtu.model.Hint;
 import ohtu.service.HintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +23,7 @@ public class DevelopmentConfiguration {
 
     @PostConstruct
     public void createDefaultHints() {
-        for (int i=1; i<25; i++) {
+        for (int i = 1; i < 25; i++) {
             hintService.createHint(createBook(i));
             hintService.createHint(createBlog(i));
         }

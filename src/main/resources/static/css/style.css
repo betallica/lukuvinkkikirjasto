@@ -13,3 +13,7 @@ input{
 .comment {
 	font-style: italic;	
 }
+
+.isReadButton {
+    margin-bottom: 50px;
+}

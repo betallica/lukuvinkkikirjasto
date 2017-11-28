@@ -17,6 +17,8 @@ public abstract class Hint implements Serializable {
 
     private String type;
     
+    private boolean isRead;
+    
     public long getId() {
 		return id;
 	}
@@ -39,6 +41,14 @@ public abstract class Hint implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+    
+    public boolean getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(boolean isRead) {
+        this.isRead = isRead;
     }
 
 }

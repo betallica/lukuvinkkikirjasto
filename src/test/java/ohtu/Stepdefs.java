@@ -12,6 +12,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 public class Stepdefs {
 
@@ -79,11 +81,8 @@ public class Stepdefs {
     
     @Then("^page with blog information is presented$")
     public void page_with_blog_information_is_presented() throws Throwable {
-    	System.out.println(driver.getPageSource());
-        assertTrue(driver.getPageSource().contains("Blog"));
-    }
-    
-    
+        assertTrue(driver.getPageSource().contains("Blogi"));
+    }    
 
     @When("^valid name \"([^\"]*)\" and valid author \"([^\"]*)\" and valid isbn \"([^\"]*)\" are entered$")
     public void valid_name_and_valid_author_and_valid_isbn_are_entered(String name, String author, String isbn) throws Throwable {
@@ -100,20 +99,16 @@ public class Stepdefs {
 
     @Then("^user is redirected to front page$")
     public void user_is_redirected_to_front_page() throws Throwable {
-        System.out.println(driver.getPageSource());
         assertTrue(driver.getPageSource().contains("Vinkit"));
     }
     
     @Then("^a new book is listed with the name \"([^\"]*)\"$")
-    public void a_new_book_is_listed_with_the_name(String title) throws Throwable {
+    public void a_new_book_is_listed_with_the_isbn(String title) throws Throwable {
         assertTrue(driver.getPageSource().contains(title));
-    }   
-    
-    @Then("^a new book is listed with the isbn \"([^\"]*)\"$")
-    public void a_new_book_is_listed_with_the_isbn(String isbn) throws Throwable {
-    	assertTrue(driver.getPageSource().contains(isbn));
     }
-
+    
+    
+    
 
     @When("^empty name \"([^\"]*)\" and valid author \"([^\"]*)\" and valid isbn \"([^\"]*)\" are entered$")
     public void empty_name_and_valid_author_and_valid_isbn_are_entered(String name, String author, String isbn) throws Throwable {
@@ -174,13 +169,20 @@ public class Stepdefs {
 
     @When("^next page is selected$")
     public void next_page_is_selected() throws Throwable {
-        clickLinkWithText("Next »");
+        clickLinkWithText("Seuraava »");
     }
-    
-    @Given("^the page of the new book with the name \"([^\"]*)\" is entered$")
-    public void the_page_of_the_new_book_with_the_name_is_entered(String name) throws Throwable {
-    	driver.get(BASE_URL);
-        clickLinkWithText(name);
+
+    @Given("^a blog with a name \"([^\"]*)\" and author \"([^\"]*)\" and url \"([^\"]*)\" is added$")
+    public void a_blog_with_a_name_and_author_and_url_is_added(String name, String author, String url) throws Throwable {
+        driver.get(BASE_URL);
+        clickLinkWithText("Lisää blogi");
+        addBlogWith(name, author, url);
+    }
+
+    @Given("^the page of the new blog with the name \"([^\"]*)\" is entered$")
+    public void the_page_of_the_new_blog_with_the_name_is_entered(String name) throws Throwable {
+        driver.get(BASE_URL);
+    	clickLinkWithText(name);
     }
 
     @When("^a comment with text \"([^\"]*)\" is added$")
@@ -198,25 +200,18 @@ public class Stepdefs {
 
     @When("^an empty comment is added$")
     public void an_empty_comment_is_added() throws Throwable {
-        WebElement element = driver.findElement(By.name("addComment"));
+    	WebElement element = driver.findElement(By.name("addComment"));
         element.click();
     }
 
     @Then("^an error message \"([^\"]*)\" will be shown$")
     public void an_error_message_will_be_shown(String error) throws Throwable {
-    	assertTrue(driver.getPageSource().contains(error));
-    }
-    
-    @Given("^a blog with a name \"([^\"]*)\" and author \"([^\"]*)\" and url \"([^\"]*)\" is added$")
-    public void a_blog_with_a_name_and_author_and_url_is_added(String name, String author, String url) throws Throwable {
-    	driver.get(BASE_URL);
-        clickLinkWithText("Lisää blogi");
-        addBlogWith(name, author, url);
+        assertTrue(driver.getPageSource().contains(error));
     }
 
-    @Given("^the page of the new blog with the name \"([^\"]*)\" is entered$")
-    public void the_page_of_the_new_blog_with_the_name_is_entered(String name) throws Throwable {
-    	driver.get(BASE_URL);
+    @Given("^the page of the new book with the name \"([^\"]*)\" is entered$")
+    public void the_page_of_the_new_book_with_the_name_is_entered(String name) throws Throwable {
+        driver.get(BASE_URL);
         clickLinkWithText(name);
     }
 

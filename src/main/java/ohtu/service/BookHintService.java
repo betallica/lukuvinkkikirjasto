@@ -1,11 +1,11 @@
 package ohtu.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import ohtu.database.dto.BookHintDto;
 import ohtu.database.repository.BookHintRepository;
+import ohtu.model.BlogHint;
 import ohtu.model.BookHint;
 
 @Service
@@ -20,6 +20,7 @@ public class BookHintService {
 		bh.setName(bookHintDto.getName());
 		bh.setIsbn(bookHintDto.getIsbn());
 		bh.setType("Book");
+                bh.setIsRead(false);
 		
 		bookHintRepository.save(bh);
 		
@@ -29,5 +30,9 @@ public class BookHintService {
 	public BookHint getBookHint(Long id) {
 		return bookHintRepository.findOne(id);
 	}
+        
+        public BookHint saveBookHint(BookHint bookHint) {
+            return bookHintRepository.save(bookHint);
+        }
 	
 }
