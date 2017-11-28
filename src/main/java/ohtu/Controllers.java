@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import ohtu.database.dto.BookHintDto;
+import ohtu.database.dto.CommentDto;
 import ohtu.database.repository.BookHintRepository;
 import ohtu.model.Hint;
 import ohtu.service.BookHintService;
+import ohtu.service.CommentService;
 import ohtu.service.HintService;
 
 @Controller
@@ -23,6 +23,9 @@ public class Controllers {
 
     @Autowired
     private HintService hintService;
+
+    @Autowired
+    private CommentService commentService;
 
     @Autowired
     private BookHintRepository bhRep;
@@ -33,6 +36,7 @@ public class Controllers {
      * Request is made to home address and all book hints are added to model.
      *
      * @param model
+     * @param request
      * @return View of home file is sent.
      */
     @GetMapping("/")
@@ -91,6 +95,13 @@ public class Controllers {
         }
     }
 
+    /**
+     * A request is made to the hint/add address and a blog hint is added to the
+     * model.
+     *
+     * @param model
+     * @return Creates a view of add_blog sends it.
+     */
     @GetMapping("/blog/add")
     public String addBlog(Model model) {
         BlogHintDto bhDto = new BlogHintDto();
@@ -121,9 +132,21 @@ public class Controllers {
         }
     }
 
+    /**
+     * A request is made to the books/{id} address and a specific book hint is
+     * added to the model.
+     *
+     * @param model
+     * @param id of the book hint
+     * @return Creates a view of the info of the book hint sends it.
+     */
     @GetMapping("/books/{id}")
     public String getHint(Model model, @PathVariable long id) {
         model.addAttribute("bookHint", hintService.getHint(id));
+        model.addAttribute("comments", commentService.getCommentsForHint(id));
+
+        CommentDto commentDto = new CommentDto();
+        model.addAttribute("commentDto", commentDto);
         return "book";
     }
 
@@ -139,9 +162,35 @@ public class Controllers {
         return "redirect:/books/" + id;
     }
 
+    @PostMapping(value = "/books/{id}", params = "text")
+    public String addCommentForBook(Model model, @ModelAttribute @Valid CommentDto commentDto, @PathVariable long id, BindingResult result) {
+        if (!result.hasErrors()) {
+            commentDto.setHint(hintService.getHint(id));
+            commentService.createComment(commentDto);
+        } else {
+            model.addAttribute("commentDto", commentDto);
+
+            return "book";
+        }
+
+        return "redirect:/books/" + id;
+    }
+
+    /**
+     * A request is made to the books/{id} address and a specific book hint is
+     * added to the model
+     *
+     * @param model
+     * @param id of the blog hint
+     * @return Creates a view of the info of the blog hint sends it.
+     */
     @GetMapping("/blogs/{id}")
     public String getBlog(Model model, @PathVariable long id) {
         model.addAttribute("blogHint", hintService.getHint(id));
+        model.addAttribute("comments", commentService.getCommentsForHint(id));
+
+        CommentDto commentDto = new CommentDto();
+        model.addAttribute("commentDto", commentDto);
         return "blog";
     }
 
@@ -154,6 +203,22 @@ public class Controllers {
             hint.setIsRead(true);
         }
         hintService.saveHint(hint);
+        
+        return "redirect:/blogs/"+id;
+    }
+
+    @PostMapping(value = "/blogs/{id}", params = "text")
+    public String addCommentForBlog(Model model, @ModelAttribute
+            @Valid CommentDto commentDto, @PathVariable long id, BindingResult result) {
+        if (!result.hasErrors()) {
+            commentDto.setHint(hintService.getHint(id));
+            commentService.createComment(commentDto);
+        } else {
+            model.addAttribute("commentDto", commentDto);
+
+            return "blog";
+        }
+
         return "redirect:/blogs/" + id;
     }
 

@@ -19,8 +19,18 @@
     </table>
     <form th:method="POST" th:action="@{/books/{id} (id=${bookHint.id})}">
         <div th:switch="${bookHint.isRead}">
-            <input th:case="false" type="submit" value="Merkitse luetuksi" name="isRead"/>
-            <input th:case="true" type="submit" value="Merkitse lukemattomaksi" name="isRead"/>
+            <input th:case="false" type="submit" value="Merkitse luetuksi" name="isRead" class="isReadButton"/>
+            <input th:case="true" type="submit" value="Merkitse lukemattomaksi" name="isRead" class="isReadButton"/>
         </div>
     </form>
+    <form th:method="POST" th:action="@{/books/{id} (id=${bookHint.id})}" th:object="${commentDto}">
+        <textarea rows="3" cols="50" th:field="*{text}">Kirjoita kommentti...</textarea>
+        <input type="submit" value="Kommentoi"/>
+    </form>
+
+    <ul>
+        <li th:each="comment : ${comments}">
+            <span th:text="${comment.text}">Kommentti</span>	
+        </li>
+    </ul>
 </div>

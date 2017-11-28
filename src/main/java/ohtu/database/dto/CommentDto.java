@@ -9,11 +9,9 @@ import ohtu.model.Hint;
 public class CommentDto {
 
 	@NotNull
-	@NotEmpty
+	@NotEmpty(message = "Et voi kommentoida tyhjää kommenttia")
 	private String text;
 	
-	@NotNull
-	@NotEmpty
 	private Hint hint;
 
 	public String getText() {

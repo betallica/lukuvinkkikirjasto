@@ -1,5 +1,5 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
-    <h1 class="title">Blog</h1>
+    <h1 class="title">Blogi</h1>
 
     <table class="table is-striped is-fullwidth">
         <tbody>
@@ -19,10 +19,20 @@
             </tr>
         </tbody>
     </table>
-    <form th:method="POST" th:action="@{/blogs/{id} (id=${blogHint.id})}">
+    <form th:method="POST" th:action="@{/blogs/{id} (id=${blogHint.id})}" class="isReadButton">
         <div th:switch="${blogHint.isRead}">
-            <input th:case="false" type="submit" value="Merkitse luetuksi" name="isRead"/>
-            <input th:case="true" type="submit" value="Merkitse lukemattomaksi" name="isRead"/>
+            <input th:case="false" type="submit" value="Merkitse luetuksi" name="isRead" class="isReadButton"/>
+            <input th:case="true" type="submit" value="Merkitse lukemattomaksi" name="isRead" class="isReadButton"/>
         </div>
     </form>
+    <form th:method="POST" th:action="@{/blogs/{id} (id=${blogHint.id})}" th:object="${commentDto}">
+        <textarea rows="3" cols="50" th:field="*{text}">Kirjoita kommentti...</textarea>
+        <input type="submit" value="Kommentoi"/>
+    </form>
+
+    <ul>
+        <li th:each="comment : ${comments}">
+            <span th:text="${comment.text}">Kommentti</span>	
+        </li>
+    </ul>
 </div>
