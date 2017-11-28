@@ -11,7 +11,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import ohtu.database.dto.BookHintDto;
+import ohtu.database.dto.CommentDto;
 import ohtu.database.repository.BookHintRepository;
+import ohtu.service.BookHintService;
+import ohtu.service.CommentService;
 import ohtu.service.HintService;
 
 @Controller
@@ -19,6 +22,9 @@ public class Controllers {
 
     @Autowired
     private HintService hintService;
+
+    @Autowired
+    private CommentService commentService;
 
     @Autowired
     private BookHintRepository bhRep;
@@ -91,6 +97,7 @@ public class Controllers {
     /**
      * A request is made to the hint/add address and a blog hint is added to the
      * model.
+     *
      * @param model
      * @return Creates a view of add_blog sends it.
      */
@@ -125,8 +132,9 @@ public class Controllers {
     }
 
     /**
-     * A request is made to the books/{id} address and a specific book hint is added to the
-     * model.
+     * A request is made to the books/{id} address and a specific book hint is
+     * added to the model.
+     *
      * @param model
      * @param id of the book hint
      * @return Creates a view of the info of the book hint sends it.
@@ -134,12 +142,31 @@ public class Controllers {
     @GetMapping("/books/{id}")
     public String getHint(Model model, @PathVariable long id) {
         model.addAttribute("bookHint", hintService.getHint(id));
+        model.addAttribute("comments", commentService.getCommentsForHint(id));
+
+        CommentDto commentDto = new CommentDto();
+        model.addAttribute("commentDto", commentDto);
         return "book";
     }
 
+    @PostMapping(value = "/books/{id}", params = "text")
+    public String addCommentForBook(Model model, @ModelAttribute @Valid CommentDto commentDto, @PathVariable long id, BindingResult result) {
+        if (!result.hasErrors()) {
+            commentDto.setHint(hintService.getHint(id));
+            commentService.createComment(commentDto);
+        } else {
+            model.addAttribute("commentDto", commentDto);
+
+            return "book";
+        }
+
+        return "redirect:/books/" + id;
+    }
+
     /**
-     * A request is made to the books/{id} address and a specific book hint is added to the
-     * model
+     * A request is made to the books/{id} address and a specific book hint is
+     * added to the model
+     *
      * @param model
      * @param id of the blog hint
      * @return Creates a view of the info of the blog hint sends it.
@@ -147,7 +174,26 @@ public class Controllers {
     @GetMapping("/blogs/{id}")
     public String getBlog(Model model, @PathVariable long id) {
         model.addAttribute("blogHint", hintService.getHint(id));
+        model.addAttribute("comments", commentService.getCommentsForHint(id));
+
+        CommentDto commentDto = new CommentDto();
+        model.addAttribute("commentDto", commentDto);
         return "blog";
+    }
+
+    @PostMapping(value = "/blogs/{id}", params = "text")
+    public String addCommentForBlog(Model model, @ModelAttribute
+            @Valid CommentDto commentDto, @PathVariable long id, BindingResult result) {
+        if (!result.hasErrors()) {
+            commentDto.setHint(hintService.getHint(id));
+            commentService.createComment(commentDto);
+        } else {
+            model.addAttribute("commentDto", commentDto);
+
+            return "blog";
+        }
+
+        return "redirect:/blogs/" + id;
     }
 
     private int newPageNumber(String pageParameter, String action) {

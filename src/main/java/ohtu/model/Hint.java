@@ -1,6 +1,7 @@
 package ohtu.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.persistence.*;
 
