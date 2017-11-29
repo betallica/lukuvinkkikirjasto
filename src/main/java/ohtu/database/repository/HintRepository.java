@@ -15,5 +15,8 @@ import org.springframework.stereotype.Component;
 public interface HintRepository extends JpaRepository<Hint, Long> {
 	
 	public Page<Hint> findAllByOrderByIdDesc(Pageable pageable);
+
+	public Page<Hint> findByIsReadOrderByIdDesc(Boolean isRead, Pageable pageable);
+
 	
 }
