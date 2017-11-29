@@ -43,17 +43,19 @@ public class Controllers {
 	public String home(Model model, HttpServletRequest request) {
 
 		String action = request.getParameter("action");
-		int page;
+		Boolean isRead = isReadFromString(request.getParameter("isread"));
 
-		if (action == null) {
-			page = 0;
-		} else {
+		int page = 0;
+		if (action != null) {
 			page = newPageNumber(request.getParameter("page"), action);
 		}
 
+		hintService.getHintsInPage(page, HINTS_PER_PAGE, isRead);
+
+
 		model.addAttribute("page", page);
 		model.addAttribute("totalPages", totalNumberOfPages());
-		model.addAttribute("hints", hintService.getHintsInPage(page, HINTS_PER_PAGE));
+		model.addAttribute("hints", hintService.getHintsInPage(page, HINTS_PER_PAGE, isRead));
 
 		return "home";
 	}
@@ -243,5 +245,17 @@ public class Controllers {
 	private int totalNumberOfPages() {
 		int totalHints = bhRep.findAll().size();
 		return (totalHints - 1) / HINTS_PER_PAGE;
+	}
+
+	private Boolean isReadFromString(String paramString) {
+		if (paramString == null) {
+			return (Boolean) null;
+		} else if (paramString.equals("read")) {
+			return true;
+		} else if (paramString.equals("unread")) {
+			return false;
+		} else {
+			return (Boolean) null;
+		}
 	}
 }

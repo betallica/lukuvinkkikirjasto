@@ -36,9 +36,14 @@ public class HintService {
         return null;
     }
 
-    public List<Hint> getHintsInPage(int pageNumber, int numberOfHints) {
+    public List<Hint> getHintsInPage(int pageNumber, int numberOfHints, Boolean isRead) {
         Pageable pageable = new PageRequest(pageNumber, numberOfHints);
-        Page<Hint> pages = hintRepository.findAllByOrderByIdDesc(pageable);
+        Page<Hint> pages;
+        if (isRead != null) {
+            pages = hintRepository.findByIsReadOrderByIdDesc(isRead, pageable);
+        } else {
+            pages = hintRepository.findAllByOrderByIdDesc(pageable);
+        }
         return pages.getContent();
     }
 
