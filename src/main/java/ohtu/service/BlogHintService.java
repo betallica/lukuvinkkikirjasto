@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import ohtu.database.dto.BlogHintDto;
 import ohtu.database.repository.BlogHintRepository;
 import ohtu.model.BlogHint;
-import ohtu.model.BookHint;
 
 @Service
 public class BlogHintService {
