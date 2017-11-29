@@ -48,9 +48,9 @@ public class DevelopmentConfiguration {
     
     private HintDto createVideo(int index) {
         VideoHintDto video = new VideoHintDto();
-        video.setName("5. Agile Software Development");
+        video.setName("Video title " + index);
         video.setAuthor("Video maker " + index);
-        video.setUrl("https://www.youtube.com/watch?v=UxMpn92vGXs");
+        video.setUrl("https://www.youtube.com");
         return video;
     }
 
