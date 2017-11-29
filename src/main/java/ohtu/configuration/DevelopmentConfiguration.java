@@ -1,5 +1,6 @@
 package ohtu.configuration;
 
+import ohtu.database.dto.VideoHintDto;
 import ohtu.database.dto.BlogHintDto;
 import ohtu.database.dto.BookHintDto;
 import ohtu.database.dto.HintDto;
@@ -7,7 +8,6 @@ import ohtu.service.HintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-
 import javax.annotation.PostConstruct;
 
 @Configuration
@@ -26,6 +26,7 @@ public class DevelopmentConfiguration {
         for (int i = 1; i < 25; i++) {
             hintService.createHint(createBook(i));
             hintService.createHint(createBlog(i));
+            hintService.createHint(createVideo(i));
         }
     }
 
@@ -43,6 +44,14 @@ public class DevelopmentConfiguration {
         blog.setName("Blog title " + index);
         blog.setUrl("https://www.google.com");
         return blog;
+    }
+    
+    private HintDto createVideo(int index) {
+        VideoHintDto video = new VideoHintDto();
+        video.setName("5. Agile Software Development");
+        video.setAuthor("Video maker " + index);
+        video.setUrl("https://www.youtube.com/watch?v=UxMpn92vGXs");
+        return video;
     }
 
 }
