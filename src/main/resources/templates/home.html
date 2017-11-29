@@ -1,6 +1,45 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
   <h1 class="title">Vinkit</h1>
 
+  <form th:action="@{/}" th:method="get">
+
+    <div class="field is-horizontal">
+
+      <div class="field-label">
+        <label class="label">Luettu</label>
+      </div>
+
+      <div class="field-body">
+
+        <div class="field">
+          <div class="control"
+               th:with="read=${param.isread != null ? param.isread[0] == 'read' : false}, unread=${param.isread != null ? param.isread[0] == 'unread' : false}">
+            <label class="radio">
+              <input type="radio" name="isread" value="read" th:checked="${read}"/>
+              Luetut
+            </label>
+            <label class="radio">
+              <input type="radio" name="isread" value="unread" th:checked="${unread}"/>
+              Lukemattomat
+            </label>
+            <label class="radio">
+              <input type="radio" name="isread" value="all" th:checked="${!read and !unread}"/>
+              Kaikki
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="field is-grouped">
+      <div class="control">
+        <button type="submit" class="button is-link">Filtteroi</button>
+      </div>
+    </div>
+  </form>
+
     <table class="table is-striped is-fullwidth">
       <thead>
       <tr>
@@ -25,12 +64,11 @@
       </tbody>
     </table>
 
-
     <nav class="pagination">
-      <a th:disabled="${page == 0}" th:href="@{/(page=${page}, action='prev')}" class="pagination-previous">
+      <a th:disabled="${page == 0}" th:href="@{/(page=${page}, action='prev', isread=${param.isread})}" class="pagination-previous">
         &laquo; Edellinen
       </a>
-      <a th:disabled="${page >= totalPages}" th:href="@{/(page=${page}, action='next')}" class="pagination-next">
+      <a th:disabled="${page >= totalPages}" th:href="@{/(page=${page}, action='next', isread=${param.isread})}" class="pagination-next">
         Seuraava &raquo;
       </a>
       <ul class="pagination-list">
