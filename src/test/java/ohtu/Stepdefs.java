@@ -22,6 +22,9 @@ public class Stepdefs {
     
     private final String BASE_URL = "http://localhost:8080";
 
+    private final String ADD_BOOK_LINK = "Kirja";
+    private final String ADD_BLOG_LINK = "Blogi";
+
     public Stepdefs() {
         File file;
         if (System.getProperty("os.name").matches("Mac OS X")) {
@@ -43,13 +46,13 @@ public class Stepdefs {
     @Given("^command add book is selected$")
     public void command_add_book_is_selected() throws Throwable {
         driver.get(BASE_URL);
-        clickLinkWithText("Lisää kirja");
+        clickLinkWithText(ADD_BOOK_LINK);
     }
     
     @Given("^command add blog is selected$")
     public void command_add_blog_is_selected() throws Throwable {
         driver.get(BASE_URL);
-        clickLinkWithText("Lisää blogi");
+        clickLinkWithText(ADD_BLOG_LINK);
     }
     
     @Given("^user is at home page$")
@@ -60,7 +63,7 @@ public class Stepdefs {
     @Given("^blog with valid name \"([^\"]*)\" and valid author \"([^\"]*)\" and valid url \"([^\"]*)\" is entered")
     public void a_blog_has_been_entered(String name, String author, String url) throws Throwable {
         driver.get(BASE_URL);
-        clickLinkWithText("Lisää blogi");
+        clickLinkWithText(ADD_BLOG_LINK);
         addBlogWith(name, author, url);
     }
     
@@ -150,7 +153,7 @@ public class Stepdefs {
     @Given("^a book with a name \"([^\"]*)\" and author \"([^\"]*)\" and isbn \"([^\"]*)\" is added$")
     public void a_book_with_a_name_and_author_and_isbn_is_added(String name, String author, String isbn) throws Throwable {
         driver.get(BASE_URL);
-        clickLinkWithText("Lisää kirja");
+        clickLinkWithText(ADD_BOOK_LINK);
         addBookWith(name, author, isbn);
     }
 
@@ -163,7 +166,7 @@ public class Stepdefs {
     public void ten_books_are_created_with_same_name_same_author_and_same_isbn(String name, String author, String isbn) throws Throwable {
         for(int i = 0; i < 10; i++) {
         	driver.get(BASE_URL);
-        	clickLinkWithText("Lisää kirja");
+        	clickLinkWithText(ADD_BOOK_LINK);
         	addBookWith(name, author, isbn);
         }
     }
@@ -176,7 +179,7 @@ public class Stepdefs {
     @Given("^a blog with a name \"([^\"]*)\" and author \"([^\"]*)\" and url \"([^\"]*)\" is added$")
     public void a_blog_with_a_name_and_author_and_url_is_added(String name, String author, String url) throws Throwable {
         driver.get(BASE_URL);
-        clickLinkWithText("Lisää blogi");
+        clickLinkWithText(ADD_BLOG_LINK);
         addBlogWith(name, author, url);
     }
 
