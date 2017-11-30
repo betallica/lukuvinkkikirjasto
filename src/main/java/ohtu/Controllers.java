@@ -20,6 +20,8 @@ import ohtu.service.BookHintService;
 import ohtu.service.CommentService;
 import ohtu.service.HintService;
 
+import java.util.List;
+
 @Controller
 public class Controllers {
 
@@ -50,17 +52,16 @@ public class Controllers {
 		String action = request.getParameter("action");
 		Boolean isRead = isReadFromString(request.getParameter("isread"));
 
-		int page = 0;
+		int pageNumber = 1;
+		int totalHints = hintService.totalNumberOfHints(isRead);
+
 		if (action != null) {
-			page = newPageNumber(request.getParameter("page"), action);
+			pageNumber = newPageNumber(request.getParameter("page"), action, totalHints);
 		}
 
-		hintService.getHintsInPage(page, HINTS_PER_PAGE, isRead);
-
-
-		model.addAttribute("page", page);
-		model.addAttribute("totalPages", totalNumberOfPages());
-		model.addAttribute("hints", hintService.getHintsInPage(page, HINTS_PER_PAGE, isRead));
+		model.addAttribute("page", pageNumber);
+		model.addAttribute("totalPages", totalNumberOfPages(totalHints));
+		model.addAttribute("hints", hintService.getHintsInPage(pageNumber, HINTS_PER_PAGE, isRead));
 
 		return "home";
 	}
@@ -253,18 +254,17 @@ public class Controllers {
 		return "redirect:/";
 	}
 
-	private int newPageNumber(String pageParameter, String action) {
+	private int newPageNumber(String pageParameter, String action, int totalPages) {
 		int page = Integer.parseInt(pageParameter);
 		if (action.equals("prev")) {
 			return Math.max(0, page - 1);
 		} else {
-			return Math.min(totalNumberOfPages(), page + 1);
+			return Math.min(totalPages, page + 1);
 		}
 	}
 
-	private int totalNumberOfPages() {
-		int totalHints = bhRep.findAll().size();
-		return (totalHints - 1) / HINTS_PER_PAGE;
+	private int totalNumberOfPages(int totalHints) {
+		return ((totalHints - 1) / HINTS_PER_PAGE) + 1;
 	}
 
 	private Boolean isReadFromString(String paramString) {

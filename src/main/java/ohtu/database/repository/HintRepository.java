@@ -18,5 +18,7 @@ public interface HintRepository extends JpaRepository<Hint, Long> {
 
 	public Page<Hint> findByIsReadOrderByIdDesc(Boolean isRead, Pageable pageable);
 
+	public List<Hint> findByIsRead(Boolean isRead);
+
 	
 }
