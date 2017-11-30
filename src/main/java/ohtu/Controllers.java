@@ -1,15 +1,17 @@
 package ohtu;
 
+import javax.naming.Binding;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import ohtu.database.dto.BlogHintDto;
 
+import ohtu.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
+import ohtu.database.dto.TagDto;
 import ohtu.database.dto.BookHintDto;
 import ohtu.database.dto.CommentDto;
 import ohtu.database.repository.BookHintRepository;
@@ -29,6 +31,9 @@ public class Controllers {
 
 	@Autowired
 	private BookHintRepository bhRep;
+
+	@Autowired
+	private TagService tagService;
 
 	final private int HINTS_PER_PAGE = 10;
 
@@ -72,7 +77,7 @@ public class Controllers {
 		BookHintDto bhDto = new BookHintDto();
 
 		model.addAttribute("bookHintDto", bhDto);
-
+		model.addAttribute("allTags", tagService.getAllTags());
 		return "add_book";
 	}
 
@@ -91,8 +96,8 @@ public class Controllers {
 
 			return "redirect:/";
 		} else {
+			model.addAttribute("allTags", tagService.getAllTags());
 			model.addAttribute("bookHintDto", bookHintDto);
-
 			return "add_book";
 		}
 	}
@@ -109,6 +114,7 @@ public class Controllers {
 		BlogHintDto bhDto = new BlogHintDto();
 
 		model.addAttribute("blogHintDto", bhDto);
+		model.addAttribute("allTags", tagService.getAllTags());
 
 		return "add_blog";
 	}
@@ -129,7 +135,7 @@ public class Controllers {
 			return "redirect:/";
 		} else {
 			model.addAttribute("blogHintDto", blogHintDto);
-
+			model.addAttribute("allTags", tagService.getAllTags());
 			return "add_blog";
 		}
 	}
@@ -231,6 +237,20 @@ public class Controllers {
 		hintService.saveHint(hint);
 
 		return "redirect:/blogs/" + id;
+	}
+
+	@GetMapping("/tags/add")
+	public String addTag(@ModelAttribute TagDto tagDto) {
+		return "add_tag";
+	}
+
+	@PostMapping("/tags/add")
+	public String saveTag(Model model, @ModelAttribute @Valid TagDto tagDto, BindingResult result) {
+		if (result.hasErrors()) {
+			return "add_tag";
+		}
+		tagService.createTag(tagDto);
+		return "redirect:/";
 	}
 
 	private int newPageNumber(String pageParameter, String action) {
