@@ -20,8 +20,8 @@ public class BookHintService {
 		bh.setName(bookHintDto.getName());
 		bh.setIsbn(bookHintDto.getIsbn());
 		bh.setType("Book");
-                bh.setIsRead(false);
-		
+		bh.setIsRead(false);
+		bh.setTags(bookHintDto.getTags());
 		bookHintRepository.save(bh);
 		
 		return bh;
@@ -31,7 +31,7 @@ public class BookHintService {
 		return bookHintRepository.findOne(id);
 	}
         
-        public BookHint saveBookHint(BookHint bookHint) {
+	public BookHint saveBookHint(BookHint bookHint) {
             return bookHintRepository.save(bookHint);
         }
 	

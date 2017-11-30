@@ -15,6 +15,8 @@ import java.util.List;
 import ohtu.model.BlogHint;
 import ohtu.model.BookHint;
 
+import javax.transaction.Transactional;
+
 @Service
 public class HintService {
 
