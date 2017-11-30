@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * Class for checking and validating that the given String does not yet exist in the tag repository.
  */
-public class TagNameValidation implements ConstraintValidator<TagNameUnique, String>{
+public class TagNameValidation implements ConstraintValidator<TagNameUnique, String> {
 
     @Autowired
     private TagService tagService;
@@ -20,6 +20,6 @@ public class TagNameValidation implements ConstraintValidator<TagNameUnique, Str
 
     @Override
     public boolean isValid(String name, ConstraintValidatorContext context) {
-        return tagService.tagNameExists(name) == false;
+        return !tagService.tagNameExists(name);
     }
 }
