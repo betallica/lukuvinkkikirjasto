@@ -15,6 +15,14 @@
                 <th>ISBN</th>
                 <td th:text="${bookHint.isbn}"></td>
             </tr>
+            <tr>
+                <th>Tagit</th>
+                <td>
+                    <div class="tags">
+                        <span class="tag is-primary" th:each="tag : ${bookHint.tags}" th:text="${tag.name}"/>
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
     <form th:method="POST" th:action="@{/books/{id} (id=${bookHint.id})}">

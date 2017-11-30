@@ -20,6 +20,7 @@ public class BlogHintService {
         bh.setUrl(blogHintDto.getUrl());
         bh.setType("Blog");
         bh.setIsRead(false);
+        bh.setTags(blogHintDto.getTags());
         blogHintRepository.save(bh);
 
         return bh;

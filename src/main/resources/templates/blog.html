@@ -17,6 +17,14 @@
                     <a th:href="${blogHint.url}" th:text="${blogHint.url}"></a>
                 </td>
             </tr>
+            <tr>
+                <th>Tagit</th>
+                <td>
+                    <div class="tags">
+                        <span class="tag is-primary" th:each="tag : ${blogHint.tags}" th:text="${tag.name}"/>
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
     <form th:method="POST" th:action="@{/blogs/{id} (id=${blogHint.id})}" class="isReadButton">
