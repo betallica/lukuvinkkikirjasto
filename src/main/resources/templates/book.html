@@ -34,6 +34,7 @@
 
     <ul>
     	<li th:each="comment : ${comments}" class="comment-li">
+    		<span th:text="${comment.formattedDate}">Julkaisuaika</span>
     		<span th:text="${comment.text}" class="comment">Kommentti</span>	
     	</li>
     </ul>

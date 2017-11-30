@@ -1,6 +1,8 @@
 package ohtu.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +18,8 @@ public class Comment implements Serializable{
 	private long id;
 	
 	private String text;
+	
+	private Date publishDate;
 	
 	@ManyToOne
 	private Hint hint;
@@ -34,6 +38,24 @@ public class Comment implements Serializable{
 
 	public void setHint(Hint hint) {
 		this.hint = hint;
+	}
+
+	public Date getPublishDate() {
+		return publishDate;
+	}
+
+	public void setPublishDate(Date publishDate) {
+		this.publishDate = publishDate;
+	}
+	
+	public String getFormattedDate() {
+		if(publishDate == null) {
+			return "N/A";
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+		
+		return sdf.format(publishDate);
 	}
 	
 }

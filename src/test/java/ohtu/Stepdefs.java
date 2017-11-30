@@ -6,6 +6,9 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -188,6 +191,8 @@ public class Stepdefs {
         driver.get(BASE_URL);
     	clickLinkWithText(name);
     }
+    
+    private Date publishTime;
 
     @When("^a comment with text \"([^\"]*)\" is added$")
     public void a_comment_with_text_is_added(String text) throws Throwable {
@@ -195,10 +200,12 @@ public class Stepdefs {
         element.sendKeys(text);
         element = driver.findElement(By.name("addComment"));
         element.click();
+        
+        publishTime = new Date();
     }
 
     @Then("^the new comment with text \"([^\"]*)\" is shown$")
-    public void the_new_comment_with_text_is_shown(String text) throws Throwable {
+    public void the_new_comment_with_text_is_shown_with_the_right_publish_time(String text) throws Throwable {
         assertTrue(driver.getPageSource().contains(text));
     }
 

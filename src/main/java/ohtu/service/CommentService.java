@@ -23,6 +23,7 @@ public class CommentService {
 		Comment comment = new Comment();
 		comment.setHint(commentDto.getHint());
 		comment.setText(commentDto.getText());
+		comment.setPublishDate(commentDto.getPublishDate());
 		
 		commentRepository.save(comment);
 		
