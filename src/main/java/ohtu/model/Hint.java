@@ -1,7 +1,8 @@
 package ohtu.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.*;
 
@@ -16,7 +17,10 @@ public abstract class Hint implements Serializable {
     private String name;
 
     private String type;
-    
+
+    @ManyToMany
+    private Set<Tag> tags;
+
     private boolean isRead;
     
     public long getId() {
@@ -49,6 +53,17 @@ public abstract class Hint implements Serializable {
 
     public void setIsRead(boolean isRead) {
         this.isRead = isRead;
+    }
+
+    public Set<Tag> getTags() {
+        if (this.tags == null) {
+            this.tags = new TreeSet<>();
+        }
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 
 }
