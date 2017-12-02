@@ -24,6 +24,7 @@ public class Stepdefs {
 
     private final String ADD_BOOK_LINK = "Kirja";
     private final String ADD_BLOG_LINK = "Blogi";
+    private final String ADD_VIDEO_LINK = "Video";
 
     public Stepdefs() {
         File file;
@@ -53,6 +54,12 @@ public class Stepdefs {
     public void command_add_blog_is_selected() throws Throwable {
         driver.get(BASE_URL);
         clickLinkWithText(ADD_BLOG_LINK);
+    }
+    
+    @Given("^command add video is selected$")
+    public void command_add_video_is_selected() throws Throwable {
+        driver.get(BASE_URL);
+        clickLinkWithText(ADD_VIDEO_LINK);
     }
     
     @Given("^user is at home page$")
@@ -98,6 +105,13 @@ public class Stepdefs {
         addBlogWith(name, author, url);
     }
     
+    // VIDEOADD
+    
+    @When("^valid name \"([^\"]*)\" and valid vidauthor \"([^\"]*)\" and valid url \"([^\"]*)\" are entered$")
+    public void valid_name_and_valid_vidauthor_and_valid_url_are_entered(String name, String author, String url) throws Throwable {
+        addVideoWith(name, author, url);
+    }
+    
     
     
 
@@ -123,6 +137,11 @@ public class Stepdefs {
     public void empty_name_and_valid_author_and_valid_url_are_entered(String name, String author, String url) throws Throwable {
         addBlogWith(name, author, url);
     }
+    
+    @When("^empty name \"([^\"]*)\" and valid vidauthor \"([^\"]*)\" and valid url \"([^\"]*)\" are entered$")
+    public void empty_name_and_valid_vidauthor_and_valid_url_are_entered(String name, String author, String url) throws Throwable {
+        addVideoWith(name, author, url);
+    }
 
 
     @Then("^error message \"([^\"]*)\" is shown$")
@@ -139,6 +158,11 @@ public class Stepdefs {
     public void valid_name_and_empty_author_and_valid_url_are_entered(String name, String author, String url) throws Throwable {
         addBlogWith(name, author, url);
     }
+    
+    @When("^valid name \"([^\"]*)\" and empty vidauthor \"([^\"]*)\" and valid url \"([^\"]*)\" are entered$")
+    public void valid_name_and_empty_vidauthor_and_valid_url_are_entered(String name, String author, String url) throws Throwable {
+        addVideoWith(name, author, url);
+    }
 
     @When("^valid name \"([^\"]*)\" and empty author \"([^\"]*)\" and invalid isbn \"([^\"]*)\" are entered$")
     public void valid_name_and_empty_author_and_invalid_isbn_are_entered(String name, String author, String isbn) throws Throwable {
@@ -148,6 +172,11 @@ public class Stepdefs {
     @When("^valid name \"([^\"]*)\" and valid author \"([^\"]*)\" and empty url \"([^\"]*)\" are entered$")
     public void valid_name_and_valid_author_and_empty_url_are_entered(String name, String author, String url) throws Throwable {
         addBlogWith(name, author, url);
+    }
+    
+    @When("^valid name \"([^\"]*)\" and valid vidauthor \"([^\"]*)\" and empty url \"([^\"]*)\" are entered$")
+    public void valid_name_and_valid_vidauthor_and_empty_url_are_entered(String name, String author, String url) throws Throwable {
+        addVideoWith(name, author, url);
     }
     
     @Given("^a book with a name \"([^\"]*)\" and author \"([^\"]*)\" and isbn \"([^\"]*)\" is added$")
@@ -267,6 +296,19 @@ public class Stepdefs {
     }
     
     private void addBlogWith(String name, String author, String url) {
+        WebElement element = driver.findElement(By.name("name"));
+        element.sendKeys(name);
+        element = driver.findElement(By.name("author"));
+        element.sendKeys(author);
+        element = driver.findElement(By.name("url"));
+        element.sendKeys(url);
+        element = driver.findElement(By.name("submit"));
+        element.click();
+    }
+    
+    // VIDEOADD
+    
+    private void addVideoWith(String name, String author, String url) {
         WebElement element = driver.findElement(By.name("name"));
         element.sendKeys(name);
         element = driver.findElement(By.name("author"));
