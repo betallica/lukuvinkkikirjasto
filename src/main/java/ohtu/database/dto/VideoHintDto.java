@@ -6,6 +6,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class VideoHintDto extends HintDto {
     
+    @NotEmpty(message = "Author can not be empty")
+    @NotNull
     private String author;
 
     @NotEmpty(message = "url can not be empty")
