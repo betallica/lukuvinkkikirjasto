@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ohtu.database.dto.BlogHintDto;
 import ohtu.database.repository.BlogHintRepository;
 import ohtu.model.BlogHint;
+import ohtu.model.VideoHint;
 
 @Service
 public class BlogHintService {
@@ -32,4 +33,6 @@ public class BlogHintService {
     public BlogHint saveBlogHint(BlogHint blogHint) {
         return blogHintRepository.save(blogHint);
     }
+
+    
 }

@@ -15,6 +15,7 @@ import ohtu.database.repository.HintRepository;
 import java.util.List;
 import ohtu.model.BlogHint;
 import ohtu.model.BookHint;
+import ohtu.model.VideoHint;
 
 import javax.transaction.Transactional;
 
@@ -72,6 +73,8 @@ public class HintService {
             bookHintService.saveBookHint((BookHint) hint);
         } else if (hint instanceof BlogHint) {
             blogHintService.saveBlogHint((BlogHint) hint);
+        } else if (hint instanceof VideoHint) {
+            videoHintService.saveVideoHint((VideoHint) hint);
         }
     }
 }

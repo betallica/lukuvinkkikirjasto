@@ -11,3 +11,9 @@ Feature: User can view a specific hint
             And user is at home page
             When blog name is clicked
             Then page with blog information is presented
+
+        Scenario: User can view the information of an added video
+            Given video with valid name "What is Agile?" and valid vidauthor "Mark Shead" and valid url "https://www.youtube.com/watch?v=Z9QbYZh1YXY" is entered
+            And user is at home page
+            When video name is clicked
+            Then page with video information is presented
