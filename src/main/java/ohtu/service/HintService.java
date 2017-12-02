@@ -1,5 +1,6 @@
 package ohtu.service;
 
+import ohtu.database.dto.VideoHintDto;
 import ohtu.model.Hint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,12 +26,16 @@ public class HintService {
     private BookHintService bookHintService;
     @Autowired
     private BlogHintService blogHintService;
+    @Autowired
+    private VideoHintService videoHintService;
 
     public Hint createHint(HintDto hintDto) {
         if (hintDto instanceof BookHintDto) {
             return bookHintService.createBookHint((BookHintDto) hintDto);
         } else if (hintDto instanceof BlogHintDto) {
             return blogHintService.createBlogHint((BlogHintDto) hintDto);
+        } else if (hintDto instanceof VideoHintDto) {
+            return videoHintService.createBlogHint((VideoHintDto) hintDto);
         }
 
         return null;
