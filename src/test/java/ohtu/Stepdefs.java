@@ -94,6 +94,23 @@ public class Stepdefs {
     public void page_with_blog_information_is_presented() throws Throwable {
         assertTrue(driver.getPageSource().contains("Blogi"));
     }    
+    
+    @Given("^video with valid name \"([^\"]*)\" and valid vidauthor \"([^\"]*)\" and valid url \"([^\"]*)\" is entered")
+    public void video_with_valid_name_and_valid_vidauthor_and_valid_url_is_entered(String name, String author, String url) throws Throwable {
+        driver.get(BASE_URL);
+        clickLinkWithText(ADD_VIDEO_LINK);
+        addVideoWith(name, author, url);
+    }
+    
+    @When("^video name is clicked$")
+    public void video_name_is_clicked() throws Throwable {
+        clickLinkWithText("What is Agile?");
+    }
+    
+    @Then("^page with video information is presented$")
+    public void page_with_video_information_is_presented() throws Throwable {
+        assertTrue(driver.getPageSource().contains("Video"));
+    }  
 
     @When("^valid name \"([^\"]*)\" and valid author \"([^\"]*)\" and valid isbn \"([^\"]*)\" are entered$")
     public void valid_name_and_valid_author_and_valid_isbn_are_entered(String name, String author, String isbn) throws Throwable {

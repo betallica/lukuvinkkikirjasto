@@ -23,5 +23,9 @@ public class VideoHintService {
 
         return vh;
     }
+
+    VideoHint saveVideoHint(VideoHint videoHint) {
+        return videoHintRepository.save(videoHint); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
