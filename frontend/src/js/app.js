@@ -1,3 +1,4 @@
+require("font-awesome-webpack");
 require('../sass/app.scss');
 
 document.addEventListener('DOMContentLoaded', function () {
