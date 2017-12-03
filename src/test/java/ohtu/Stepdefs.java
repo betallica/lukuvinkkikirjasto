@@ -216,6 +216,15 @@ public class Stepdefs {
         	addBookWith(name, author, isbn);
         }
     }
+    
+    @Given("^ten blogs are created with same name \"([^\"]*)\" same author \"([^\"]*)\" and same url \"([^\"]*)\"$")
+    public void ten_blogs_are_created_with_same_name_same_author_and_same_url(String name, String author, String url) throws Throwable {
+        for(int i = 0; i < 10; i++) {
+        	driver.get(BASE_URL);
+        	clickLinkWithText(ADD_BLOG_LINK);
+        	addBlogWith(name, author, url);
+        }
+    }
 
     @When("^next page is selected$")
     public void next_page_is_selected() throws Throwable {
@@ -227,6 +236,11 @@ public class Stepdefs {
         driver.get(BASE_URL);
         clickLinkWithText(ADD_BLOG_LINK);
         addBlogWith(name, author, url);
+    }
+    
+    @Then("^a new blog is listed with the name \"([^\"]*)\"$")
+    public void a_new_blog_is_listed_with_the_name(String title) throws Throwable {
+        assertTrue(driver.getPageSource().contains(title));
     }
 
     @Given("^the page of the new blog with the name \"([^\"]*)\" is entered$")

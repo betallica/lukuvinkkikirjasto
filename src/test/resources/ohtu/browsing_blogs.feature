@@ -1,19 +1,19 @@
 Feature: User can browse videos in home page
 
-        Scenario: User can see one added book
-                Given a book with a name "Clean Code" and author "Robert C. Martin" and isbn "978-0132350884" is added
+        Scenario: User can see one added blog
+                Given a blog with a name "A Simple Way to Run a Sprint Retrospective" and author "Mike Cohn" and url "https://www.mountaingoatsoftware.com/blog/a-simple-way-to-run-a-sprint-retrospective" is added
                 When at the home page
-                Then a new book is listed with the name "Clean Code"
+                Then a new blog is listed with the name "A Simple Way to Run a Sprint Retrospective"
 
-        Scenario: User can see two added books
-                Given a book with a name "Clean Code" and author "Robert C. Martin" and isbn "978-0132350884" is added
-                And a book with a name "Testing Computer Software" and author "Cem Kaner" and isbn "978-0-471-35846-6" is added
+        Scenario: User can see two added blogs
+                Given a blog with a name "A Simple Way to Run a Sprint Retrospective" and author "Mike Cohn" and url "https://www.mountaingoatsoftware.com/blog/a-simple-way-to-run-a-sprint-retrospective" is added
+                And a blog with a name "Vincit blog" and author "Vincit" and url "www.vincit.com/blog" is added
                 When at the home page
-                Then a new book is listed with the name "Clean Code"
-                And a new book is listed with the name "Testing Computer Software"
+                Then a new blog is listed with the name "A Simple Way to Run a Sprint Retrospective"
+                And a new blog is listed with the name "Vincit blog"
                 
-        Scenario: User can change between pages of books
-        	Given ten books are created with same name "Clean Code" same author "Robert C. Martin" and same isbn "978-0132350884"
-        	And a book with a name "Testing Computer Software" and author "Cem Kaner" and isbn "978-0-471-35846-6" is added
+        Scenario: User can change between pages of blogs
+        	Given ten blogs are created with same name "Vincit blog" same author "Vincit" and same url "www.vincit.com/blog"
+        	And a blog with a name "A Simple Way to Run a Sprint Retrospective" and author "Mike Cohn" and url "https://www.mountaingoatsoftware.com/blog/a-simple-way-to-run-a-sprint-retrospective" is added
         	When next page is selected
-        	Then a new book is listed with the name "Testing Computer Software"
+        	Then a new book is listed with the name "A Simple Way to Run a Sprint Retrospective"
