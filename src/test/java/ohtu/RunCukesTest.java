@@ -8,7 +8,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(plugin = {"pretty"})
+@CucumberOptions(plugin = {"progress"}, monochrome=false)
 public class RunCukesTest {
     @ClassRule
     public static ServerRule server = new ServerRule(8080);
