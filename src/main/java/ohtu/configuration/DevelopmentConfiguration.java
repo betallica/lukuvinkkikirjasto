@@ -48,7 +48,7 @@ public class DevelopmentConfiguration {
         for (int i = 1; i < howMany; i++) {
             hintService.createHint(createBook(i, tags));
             hintService.createHint(createBlog(i, tags));
-            hintService.createHint(createVideo(i));
+            hintService.createHint(createVideo(i, tags));
         }
     }
 
@@ -70,7 +70,7 @@ public class DevelopmentConfiguration {
         return blog;
     }
 
-    private HintDto createVideo(int index) {
+    private HintDto createVideo(int index, Set<Tag> tags) {
         VideoHintDto video = new VideoHintDto();
         video.setName("Video title " + index);
         video.setAuthor("Video maker " + index);

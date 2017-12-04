@@ -16,8 +16,11 @@ import java.util.List;
 import ohtu.model.BlogHint;
 import ohtu.model.BookHint;
 import ohtu.model.VideoHint;
+<<<<<<< HEAD
 
 import javax.transaction.Transactional;
+=======
+>>>>>>> 2bc3937333619634b48067995cf3d6f2001a6551
 
 @Service
 public class HintService {
