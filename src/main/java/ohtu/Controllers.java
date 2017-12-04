@@ -1,5 +1,6 @@
 package ohtu;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.naming.Binding;
@@ -23,6 +24,7 @@ import ohtu.database.dto.CommentDto;
 import ohtu.database.dto.VideoHintDto;
 import ohtu.database.repository.BookHintRepository;
 import ohtu.model.Hint;
+import ohtu.model.Tag;
 import ohtu.service.CommentService;
 import ohtu.service.HintService;
 
@@ -57,6 +59,7 @@ public class Controllers {
 
         String action = request.getParameter("action");
         Boolean isRead = isReadFromString(request.getParameter("isread"));
+        String[] tags = request.getParameterValues("tags");
 
         int pageNumber = 1;
         int totalHints = hintService.totalNumberOfHints(isRead);
@@ -67,7 +70,8 @@ public class Controllers {
 
         model.addAttribute("page", pageNumber);
         model.addAttribute("totalPages", totalNumberOfPages(totalHints));
-        model.addAttribute("hints", hintService.getHintsInPage(pageNumber, HINTS_PER_PAGE, isRead));
+        model.addAttribute("hints", hintService.getHintsInPage(pageNumber, HINTS_PER_PAGE, isRead, tagService.getTagsByNames(tags)));
+        model.addAttribute("tags", tagService.getAllTags());
 
         return "home";
     }
