@@ -1,0 +1,55 @@
+<nav class="navbar is-link is-uppercase" role="navigation" aria-label="main navigation" th:fragment="header">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item has-text-weight-bold" href="/">
+                Lukuvinkkikirjasto
+            </a>
+
+            <div class="navbar-burger burger" data-target="main-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <div class="navbar-menu" id="main-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">
+                        <span class="icon">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        </span>
+                        Lisää vinkki
+                    </a>
+
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item" href="/book/add">
+                            <span class="icon">
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                            </span>
+                            Kirja
+                        </a>
+
+                        <a class="navbar-item" href="/blog/add">
+                            <span class="icon">
+                                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                            </span>
+                            Blogi
+                        </a>
+                    </div>
+                </div>
+
+                <a class="navbar-item" href="/tags/add">
+                    <span class="icon">
+                        <i class="fa fa-tag" aria-hidden="true"></i>
+                    </span>
+                    Lisää Tagi
+                </a>
+
+                <a class="navbar-item" style="display:none">
+                    Kirjaudu
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
