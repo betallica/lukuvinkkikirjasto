@@ -1,4 +1,4 @@
-<div th:fragment="comments(action)">
+<div class="restrict-width" th:fragment="comments(action)">
     <form th:method="POST" th:action="${action}" th:object="${commentDto}">
         <div class="field">
             <p class="errormessage" th:each="error : ${#fields.errors('text')}" th:text="${error}">Validation error</p>

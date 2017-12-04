@@ -27,3 +27,27 @@ body {
     width: 250px;
     opacity: 0.3;
 }
+
+.restrict-width {
+    max-width: 700px;
+}
+
+input{
+	display: block;
+}
+
+.errormessage {
+    color: #FF0000;
+}
+
+.comment-li {
+	margin: 10px;
+}
+
+.comment {
+	font-style: italic;	
+}
+
+.isReadButton {
+    margin-bottom: 50px;
+}
