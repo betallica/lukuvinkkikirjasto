@@ -46,6 +46,7 @@
         <th>Nimi</th>
         <th>Tekijä</th>
         <th>Tyyppi</th>
+        <th>Luettu</th>
       </tr>
       </thead>
       <tbody>
@@ -66,6 +67,14 @@
         </td>
         <td>
           <span th:text="${hint.type}"></span>
+        </td>
+        <td th:switch="${hint.isRead}">
+          <span th:case="false" class="icon has-text-gray">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </span>
+          <span th:case="true" class="icon has-text-success">
+            <i class="fa fa-check-square"></i>
+          </span>
         </td>
       </tr>
       </tbody>
