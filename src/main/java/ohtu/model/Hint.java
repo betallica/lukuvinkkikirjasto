@@ -1,11 +1,8 @@
 package ohtu.model;
 
 import java.io.Serializable;
-<<<<<<< HEAD
 import java.util.Set;
 import java.util.TreeSet;
-=======
->>>>>>> 2bc3937333619634b48067995cf3d6f2001a6551
 
 import javax.persistence.*;
 
