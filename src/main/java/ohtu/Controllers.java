@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import ohtu.database.dto.TagDto;
 import ohtu.database.dto.BookHintDto;
@@ -143,12 +145,16 @@ public class Controllers {
      * @return Redirects to home or creates view of add_blog and sends it.
      */
     @PostMapping("/blog/add")
-    public String saveBlog(Model model, @ModelAttribute @Valid VideoHintDto blogHintDto, BindingResult result) {
+    public String saveBlog(Model model, @ModelAttribute @Valid BlogHintDto blogHintDto, BindingResult result) {
         if (!result.hasErrors()) {
             hintService.createHint(blogHintDto);
 
             return "redirect:/";
         } else {
+        	for (ObjectError error : result.getAllErrors()) {
+				FieldError fError = (FieldError) error;
+				System.out.println(fError.getField() + " : " + fError.getCode());
+			}
             model.addAttribute("blogHintDto", blogHintDto);
             model.addAttribute("allTags", tagService.getAllTags());
             return "add_blog";
