@@ -1,11 +1,11 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
-    <h1 class="title">Blogi</h1>
+    <h1 class="title" th:text="${blogHint.name}"></h1>
 
     <table class="table is-striped is-fullwidth">
         <tbody>
             <tr>
-                <th>Otsikko</th>
-                <td th:text="${blogHint.name}"></td>
+                <th>Tyyppi</th>
+                <td>Blogi</td>
             </tr>
             <tr>
                 <th>Kirjoittaja</th>
@@ -27,25 +27,51 @@
             </tr>
         </tbody>
     </table>
+
     <form th:method="POST" th:action="@{/blogs/{id} (id=${blogHint.id})}" class="isReadButton">
         <div th:switch="${blogHint.isRead}">
-            <input th:case="false" type="submit" value="Merkitse luetuksi" name="isRead" class="isReadButton"/>
-            <input th:case="true" type="submit" value="Merkitse lukemattomaksi" name="isRead" class="isReadButton"/>
+            <input th:case="false" type="submit" value="Merkitse luetuksi" name="isRead" class="button is-link isReadButton"/>
+            <input th:case="true" type="submit" value="Merkitse lukemattomaksi" name="isRead" class="button is-link isReadButton"/>
         </div>
     </form>
+
     <form th:method="POST" th:action="@{/blogs/{id} (id=${blogHint.id})}" th:object="${commentDto}">
-		<div>
+		<div class="field">
 	    	<p class="errormessage" th:each="error : ${#fields.errors('text')}"
 	           th:text="${error}">Validation error</p>
-	    	<textarea rows="3" cols="50" th:field="*{text}">Kirjoita kommentti...</textarea>
-	    </div>
-    	<input name="addComment" type="submit" value="Kommentoi"/>
+            <textarea class="textarea" rows="5" cols="50" th:field="*{text}" placeholder="Kirjoita kommentti..."></textarea>
+        </div>
+
+        <div class="field">
+            <input class="button is-link" name="addComment" type="submit" value="Kommentoi"/>
+        </div>
     </form>
 
-    <ul>
-    	<li th:each="comment : ${comments}" class="comment-li">
-    		<span th:text="${comment.formattedDate}">Julkaisuaika</span>
-    		<span th:text="${comment.text}" class="comment">Kommentti</span>	
-    	</li>
-    </ul>
+    <section class="section">
+        <div class="box" th:each="comment : ${comments}">
+            <article class="media">
+                <div class="media-left">
+                    <figure class="image is-64x64">
+                        <i class="fa fa-3x fa-user"></i>
+                    </figure>
+                </div>
+
+                <div class="media-content">
+                    <p>
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">
+                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            </span>
+
+                            <span class="tag" th:text="${comment.formattedDate}">
+                                Julkaisuaika
+                            </span>
+                        </div>
+                    </p>
+
+                    <p th:text="${comment.text}">Kommentti</p>
+                </div>
+            </article>
+        </div>
+    </section>
 </div>
