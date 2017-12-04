@@ -1,0 +1,42 @@
+<div layout:decorator="layouts/default" layout:fragment="content">
+    <h1 class="title">Video</h1>
+
+    <table class="table is-striped is-fullwidth">
+        <tbody>
+            <tr>
+                <th>Otsikko</th>
+                <td th:text="${videoHint.name}"></td>
+            </tr>
+            <tr>
+                <th>Tekijä</th>
+                <td th:text="${videoHint.author}"></td>
+            </tr>
+            <tr>
+                <th>Linkki</th>
+                <td>
+                    <a th:href="${videoHint.url}" th:text="${videoHint.url}"></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <form th:method="POST" th:action="@{/videos/{id} (id=${videoHint.id})}" class="isReadButton">
+        <div th:switch="${videoHint.isRead}">
+            <input th:case="false" type="submit" value="Merkitse luetuksi" name="isRead" class="isReadButton"/>
+            <input th:case="true" type="submit" value="Merkitse lukemattomaksi" name="isRead" class="isReadButton"/>
+        </div>
+    </form>
+    <form th:method="POST" th:action="@{/videos/{id} (id=${videoHint.id})}" th:object="${commentDto}">
+		<div>
+	    	<p class="errormessage" th:each="error : ${#fields.errors('text')}"
+	           th:text="${error}">Validation error</p>
+	    	<textarea rows="3" cols="50" th:field="*{text}">Kirjoita kommentti...</textarea>
+	    </div>
+    	<input name="addComment" type="submit" value="Kommentoi"/>
+    </form>
+
+    <ul>
+    	<li th:each="comment : ${comments}" class="comment-li">
+    		<span th:text="${comment.text}" class="comment">Kommentti</span>	
+    	</li>
+    </ul>
+</div>

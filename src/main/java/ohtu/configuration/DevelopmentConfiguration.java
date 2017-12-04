@@ -1,5 +1,6 @@
 package ohtu.configuration;
 
+import ohtu.database.dto.VideoHintDto;
 import ohtu.database.dto.BlogHintDto;
 import ohtu.database.dto.BookHintDto;
 import ohtu.database.dto.HintDto;
@@ -10,7 +11,6 @@ import ohtu.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-
 import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +23,6 @@ public class DevelopmentConfiguration {
     private final TagService tagService;
     private final int NUM_OF_HINTS = 25;
     private final int NUM_OF_TAGS = 40;
-
 
     @Autowired
     public DevelopmentConfiguration(HintService hintService, TagService tagService) {
@@ -38,7 +37,7 @@ public class DevelopmentConfiguration {
     }
 
     private void createDefaultTags(int howMany) {
-        for (int i=1; i < howMany; i++){
+        for (int i = 1; i < howMany; i++) {
             TagDto tagDto = new TagDto();
             tagDto.setName("tag " + i);
             tagService.createTag(tagDto);
@@ -49,6 +48,7 @@ public class DevelopmentConfiguration {
         for (int i = 1; i < howMany; i++) {
             hintService.createHint(createBook(i, tags));
             hintService.createHint(createBlog(i, tags));
+            hintService.createHint(createVideo(i, tags));
         }
     }
 
@@ -68,6 +68,14 @@ public class DevelopmentConfiguration {
         blog.setUrl("https://www.google.com");
         blog.setTags(tags);
         return blog;
+    }
+
+    private HintDto createVideo(int index, Set<Tag> tags) {
+        VideoHintDto video = new VideoHintDto();
+        video.setName("Video title " + index);
+        video.setAuthor("Video maker " + index);
+        video.setUrl("https://www.youtube.com");
+        return video;
     }
 
 }
