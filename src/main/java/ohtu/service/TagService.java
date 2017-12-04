@@ -39,7 +39,9 @@ public class TagService {
 
     	for(int i = 0; i < names.length; i++) {
     		String name = names[i];
-    		tags.add(tagRepository.findByName(name));
+    		if(tagRepository.findByName(name)!=null) {
+    			tags.add(tagRepository.findByName(name));
+    		}
     	}
     	
     	return tags;
