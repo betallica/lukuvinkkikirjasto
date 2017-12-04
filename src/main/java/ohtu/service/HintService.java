@@ -53,12 +53,12 @@ public class HintService {
         Page<Hint> pages;
         if (isRead != null) {
         	if(tags != null && !tags.isEmpty()) {
-        		pages = hintRepository.findByIsReadAndTagsInOrderByIdDesc(isRead, tags, pageable);
+        		pages = hintRepository.findDistinctByIsReadAndTagsInOrderByIdDesc(isRead, tags, pageable);
         	} else {
         		pages = hintRepository.findByIsReadOrderByIdDesc(isRead, pageable);
         	}
         } else if(tags != null && !tags.isEmpty()) {
-        	pages = hintRepository.findByTagsInOrderByIdDesc(tags, pageable);
+        	pages = hintRepository.findDistinctByTagsInOrderByIdDesc(tags, pageable);
         } else {
             pages = hintRepository.findAllByOrderByIdDesc(pageable);
         }
