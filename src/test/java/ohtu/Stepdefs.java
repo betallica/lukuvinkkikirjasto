@@ -342,8 +342,31 @@ public class Stepdefs {
         WebElement element = driver.findElement(By.name("isRead"));
         element.click();
     }
+    //filtering_by_read_status_5_below
 
+    @When("^hints are filtered by being unread$")
+    public void hints_are_filtered_by_being_unread() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
 
+    @Then("^the book with the name \"([^\"]*)\" is visible$")
+    public void the_book_with_the_name_is_visible(String arg1) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @When("^hints are filtered by being read$")
+    public void hints_are_filtered_by_being_read() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @When("^hints are filtered by all$")
+    public void hints_are_filtered_by_all() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
     
     private void addBookWith(String name, String author, String isbn) {
         WebElement element = driver.findElement(By.name("name"));

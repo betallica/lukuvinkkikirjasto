@@ -11,3 +11,4 @@ Feature: User can mark book as read in individual book hint page
                 And the book with name "Clean Code" is marked as read
                 When the mark as unread button is clicked
                 Then the button's text changes to mark as read
+                

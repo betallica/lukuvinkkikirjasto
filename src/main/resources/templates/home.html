@@ -34,15 +34,15 @@
           <div class="control"
                th:with="read=${param.isread != null ? param.isread[0] == 'read' : false}, unread=${param.isread != null ? param.isread[0] == 'unread' : false}">
             <label class="radio">
-              <input type="radio" name="isread" value="read" th:checked="${read}"/>
+              <input id="filter_read" type="radio" name="isread" value="read" th:checked="${read}"/>
               Luetut
             </label>
             <label class="radio">
-              <input type="radio" name="isread" value="unread" th:checked="${unread}"/>
+              <input id="filter_unread" type="radio" name="isread" value="unread" th:checked="${unread}"/>
               Lukemattomat
             </label>
             <label class="radio">
-              <input type="radio" name="isread" value="all" th:checked="${!read and !unread}"/>
+              <input id="filter_all" type="radio" name="isread" value="all" th:checked="${!read and !unread}"/>
               Kaikki
             </label>
           </div>
