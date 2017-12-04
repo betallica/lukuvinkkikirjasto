@@ -1,6 +1,8 @@
 require("font-awesome-webpack");
 require('../sass/app.scss');
 
+var $ = require("jquery");
+
 document.addEventListener('DOMContentLoaded', function () {
     // Get all "navbar-burger" elements
     var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
