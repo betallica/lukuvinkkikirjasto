@@ -1,4 +1,4 @@
-package ohtu.database.dto;
+	package ohtu.database.dto;
 
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;

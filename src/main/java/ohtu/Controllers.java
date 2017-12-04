@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import ohtu.database.dto.TagDto;
 import ohtu.database.dto.BookHintDto;
@@ -127,6 +129,16 @@ public class Controllers {
 
         return "add_blog";
     }
+    
+    @GetMapping("/video/add")
+    public String addVideo(Model model) {
+        VideoHintDto vhDto = new VideoHintDto();
+
+        model.addAttribute("videoHintDto", vhDto);
+        model.addAttribute("allTags", tagService.getAllTags());
+
+        return "add_video";
+    }
 
     /**
      * Checks if that the book hint is added successfully.
@@ -143,9 +155,26 @@ public class Controllers {
 
             return "redirect:/";
         } else {
+        	for (ObjectError error : result.getAllErrors()) {
+				FieldError fError = (FieldError) error;
+				System.out.println(fError.getField() + " : " + fError.getCode());
+			}
             model.addAttribute("blogHintDto", blogHintDto);
             model.addAttribute("allTags", tagService.getAllTags());
             return "add_blog";
+        }
+    }
+    
+    @PostMapping("/video/add")
+    public String saveVideo(Model model, @ModelAttribute @Valid VideoHintDto videoHintDto, BindingResult result) {
+        if (!result.hasErrors()) {
+            hintService.createHint(videoHintDto);
+
+            return "redirect:/";
+        } else {
+            model.addAttribute("videoHintDto", videoHintDto);
+            model.addAttribute("allTags", tagService.getAllTags());
+            return "add_video";
         }
     }
 
@@ -166,6 +195,7 @@ public class Controllers {
         model.addAttribute("commentDto", commentDto);
         return "book";
     }
+    
 
     @PostMapping(value = "/books/{id}", params = "text")
     public String addCommentForBook(Model model, @ModelAttribute @Valid CommentDto commentDto, BindingResult result,
@@ -215,6 +245,7 @@ public class Controllers {
         model.addAttribute("commentDto", commentDto);
         return "blog";
     }
+    
 
     @PostMapping(value = "/blogs/{id}", params = "text")
     public String addCommentForBlog(Model model, @ModelAttribute @Valid CommentDto commentDto, BindingResult result,
