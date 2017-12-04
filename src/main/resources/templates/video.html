@@ -25,18 +25,6 @@
             <input th:case="true" type="submit" value="Merkitse lukemattomaksi" name="isRead" class="isReadButton"/>
         </div>
     </form>
-    <form th:method="POST" th:action="@{/videos/{id} (id=${videoHint.id})}" th:object="${commentDto}">
-		<div>
-	    	<p class="errormessage" th:each="error : ${#fields.errors('text')}"
-	           th:text="${error}">Validation error</p>
-	    	<textarea rows="3" cols="50" th:field="*{text}">Kirjoita kommentti...</textarea>
-	    </div>
-    	<input name="addComment" type="submit" value="Kommentoi"/>
-    </form>
 
-    <ul>
-    	<li th:each="comment : ${comments}" class="comment-li">
-    		<span th:text="${comment.text}" class="comment">Kommentti</span>	
-    	</li>
-    </ul>
+    <div th:replace="fragments/comments :: comments(@{/videos/{id} (id=${videoHint.id})})"></div>
 </div>

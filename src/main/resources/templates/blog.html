@@ -35,43 +35,5 @@
         </div>
     </form>
 
-    <form th:method="POST" th:action="@{/blogs/{id} (id=${blogHint.id})}" th:object="${commentDto}">
-		<div class="field">
-	    	<p class="errormessage" th:each="error : ${#fields.errors('text')}"
-	           th:text="${error}">Validation error</p>
-            <textarea class="textarea" rows="5" cols="50" th:field="*{text}" placeholder="Kirjoita kommentti..."></textarea>
-        </div>
-
-        <div class="field">
-            <input class="button is-link" name="addComment" type="submit" value="Kommentoi"/>
-        </div>
-    </form>
-
-    <section class="section">
-        <div class="box" th:each="comment : ${comments}">
-            <article class="media">
-                <div class="media-left">
-                    <figure class="image is-64x64">
-                        <i class="fa fa-3x fa-user"></i>
-                    </figure>
-                </div>
-
-                <div class="media-content">
-                    <p>
-                        <div class="tags has-addons">
-                            <span class="tag is-dark">
-                                <i class="fa fa-clock-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="tag" th:text="${comment.formattedDate}">
-                                Julkaisuaika
-                            </span>
-                        </div>
-                    </p>
-
-                    <p th:text="${comment.text}">Kommentti</p>
-                </div>
-            </article>
-        </div>
-    </section>
+    <div th:replace="fragments/comments :: comments(@{/blogs/{id} (id=${blogHint.id})})"></div>
 </div>
