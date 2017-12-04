@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ohtu.model.Tag;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,6 +30,19 @@ public class TagService {
 
     public List<Tag> getAllTags() {
         return tagRepository.findAll();
+    }
+    
+    public Set<Tag> getTagsByNames(String[] names) {
+    	if(names == null) return null;
+    	
+    	HashSet<Tag> tags = new HashSet();
+
+    	for(int i = 0; i < names.length; i++) {
+    		String name = names[i];
+    		tags.add(tagRepository.findByName(name));
+    	}
+    	
+    	return tags;
     }
 
 }

@@ -2,6 +2,8 @@ package ohtu.service;
 
 import ohtu.database.dto.VideoHintDto;
 import ohtu.model.Hint;
+import ohtu.model.Tag;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,11 +14,13 @@ import ohtu.database.dto.BookHintDto;
 import ohtu.database.dto.HintDto;
 import ohtu.database.repository.HintRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 import ohtu.model.BlogHint;
 import ohtu.model.BookHint;
 import ohtu.model.VideoHint;
-import javax.transaction.Transactional;
 
 @Service
 public class HintService {
@@ -43,12 +47,18 @@ public class HintService {
         return null;
     }
 
-    public List<Hint> getHintsInPage(int pageNumber, int numberOfHints, Boolean isRead) {
+    public List<Hint> getHintsInPage(int pageNumber, int numberOfHints, Boolean isRead, Set<Tag> tags) {
         final int pageIndex = pageNumber - 1;
         Pageable pageable = new PageRequest(pageIndex, numberOfHints);
         Page<Hint> pages;
         if (isRead != null) {
-            pages = hintRepository.findByIsReadOrderByIdDesc(isRead, pageable);
+        	if(tags != null && !tags.isEmpty()) {
+        		pages = hintRepository.findByIsReadAndTagsInOrderByIdDesc(isRead, tags, pageable);
+        	} else {
+        		pages = hintRepository.findByIsReadOrderByIdDesc(isRead, pageable);
+        	}
+        } else if(tags != null && !tags.isEmpty()) {
+        	pages = hintRepository.findByTagsInOrderByIdDesc(tags, pageable);
         } else {
             pages = hintRepository.findAllByOrderByIdDesc(pageable);
         }
