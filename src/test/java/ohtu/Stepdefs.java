@@ -252,10 +252,10 @@ public class Stepdefs {
     
     // BELOW IS FAILING THE TEST and preventing browsing videos feature to be implemented
     
-//    @Then("^a new video is listed with the name \"([^\"]*)\"$")
-//    public void a_new_video_is_listed_with_the_name(String title) throws Throwable {
-//        assertTrue(driver.getPageSource().contains(title));
-//    }
+    @Then("^a new video is listed with the name \"([^\"]*)\"$")
+    public void a_new_video_is_listed_with_the_name(String title) throws Throwable {
+        assertTrue(driver.getPageSource().contains(title));
+    }
 
 
     @Given("^the page of the new blog with the name \"([^\"]*)\" is entered$")
