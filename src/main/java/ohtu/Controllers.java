@@ -123,6 +123,16 @@ public class Controllers {
 
         return "add_blog";
     }
+    
+    @GetMapping("/video/add")
+    public String addVideo(Model model) {
+        VideoHintDto vhDto = new VideoHintDto();
+
+        model.addAttribute("videoHintDto", vhDto);
+        model.addAttribute("allTags", tagService.getAllTags());
+
+        return "add_video";
+    }
 
     /**
      * Checks if that the book hint is added successfully.
@@ -133,7 +143,7 @@ public class Controllers {
      * @return Redirects to home or creates view of add_blog and sends it.
      */
     @PostMapping("/blog/add")
-    public String saveBlog(Model model, @ModelAttribute @Valid BlogHintDto blogHintDto, BindingResult result) {
+    public String saveBlog(Model model, @ModelAttribute @Valid VideoHintDto blogHintDto, BindingResult result) {
         if (!result.hasErrors()) {
             hintService.createHint(blogHintDto);
 
@@ -142,6 +152,19 @@ public class Controllers {
             model.addAttribute("blogHintDto", blogHintDto);
             model.addAttribute("allTags", tagService.getAllTags());
             return "add_blog";
+        }
+    }
+    
+    @PostMapping("/video/add")
+    public String saveVideo(Model model, @ModelAttribute @Valid VideoHintDto videoHintDto, BindingResult result) {
+        if (!result.hasErrors()) {
+            hintService.createHint(videoHintDto);
+
+            return "redirect:/";
+        } else {
+            model.addAttribute("videoHintDto", videoHintDto);
+            model.addAttribute("allTags", tagService.getAllTags());
+            return "add_video";
         }
     }
 
@@ -162,6 +185,7 @@ public class Controllers {
         model.addAttribute("commentDto", commentDto);
         return "book";
     }
+    
 
     @PostMapping(value = "/books/{id}", params = "text")
     public String addCommentForBook(Model model, @ModelAttribute @Valid CommentDto commentDto, BindingResult result,
@@ -211,6 +235,7 @@ public class Controllers {
         model.addAttribute("commentDto", commentDto);
         return "blog";
     }
+    
 
     @PostMapping(value = "/blogs/{id}", params = "text")
     public String addCommentForBlog(Model model, @ModelAttribute @Valid CommentDto commentDto, BindingResult result,
