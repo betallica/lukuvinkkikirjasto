@@ -11,7 +11,7 @@ import ohtu.model.Hint;
 public class CommentDto {
 
 	@NotNull
-	@NotEmpty(message = "Et voi kommentoida tyhjää kommenttia")
+	@NotEmpty(message = "Et voi lisätä tyhjää kommenttia")
 	private String text;
 	
 	private Date publishDate;

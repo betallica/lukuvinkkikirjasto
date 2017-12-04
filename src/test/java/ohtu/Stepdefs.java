@@ -6,18 +6,12 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.remote.server.handler.ClickElement;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 public class Stepdefs {
 
@@ -46,6 +40,20 @@ public class Stepdefs {
     public void tearDown() {
         driver.quit();
     }
+    
+    @Given("^the page of the new video with the name \"([^\"]*)\" is entered$")
+    public void the_page_of_the_new_video_with_the_name_is_entered(String name) throws Throwable {
+        driver.get(BASE_URL);
+        clickLinkWithText(name);
+    }
+    
+    @Given("^ten videos are created with same name \"([^\"]*)\" same author \"([^\"]*)\" and same url \"([^\"]*)\"$")
+    public void ten_videos_are_created_with_same_name_same_author_and_same_url(String name, String author, String url) throws Throwable {
+        for (int i = 0; i < 10; i++) {
+            a_video_with_a_name_and_author_and_url_is_added(name, author, url);
+        }
+    }
+
     
     @Given("^command add book is selected$")
     public void command_add_book_is_selected() throws Throwable {
