@@ -52,8 +52,6 @@ public class DevelopmentConfiguration {
         }
     }
 
-    
-
     private HintDto createBook(int index, Set<Tag> tags) {
         BookHintDto book = new BookHintDto();
         book.setAuthor("Author " + index);

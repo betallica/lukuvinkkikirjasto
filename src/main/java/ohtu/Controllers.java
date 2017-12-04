@@ -3,6 +3,8 @@ package ohtu;
 import java.util.Date;
 
 import javax.naming.Binding;
+import java.util.Set;
+import java.util.TreeSet;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import ohtu.database.dto.BlogHintDto;
@@ -291,7 +293,7 @@ public class Controllers {
 
         return "add_video";
     }
-    
+
     @PostMapping("/video/add")
     public String saveVideo(Model model, @ModelAttribute @Valid VideoHintDto videoHintDto, BindingResult result) {
         if (!result.hasErrors()) {
@@ -305,7 +307,7 @@ public class Controllers {
         }
     }
 
-    
+
     @GetMapping("/videos/{id}")
     public String getVideo(Model model, @PathVariable long id) {
         model.addAttribute("videoHint", hintService.getHint(id));
@@ -315,7 +317,7 @@ public class Controllers {
         model.addAttribute("commentDto", commentDto);
         return "video";
     }
-    
+
     @PostMapping(value = "/videos/{id}", params = "text")
     public String addCommentForVideo(Model model, @ModelAttribute @Valid CommentDto commentDto, BindingResult result,
             @PathVariable long id) {
@@ -332,7 +334,7 @@ public class Controllers {
         }
         return "redirect:/videos/" + id;
     }
-    
+
     // Nyt video on "luettu", mikä muoto olisi parempi?
     @PostMapping(value = "/videos/{id}", params = "isRead")
     public String markVideoAsRead(Model model, @PathVariable long id) {

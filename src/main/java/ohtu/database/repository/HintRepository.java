@@ -1,5 +1,6 @@
 package ohtu.database.repository;
 
+import java.util.List;
 import ohtu.model.Hint;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
