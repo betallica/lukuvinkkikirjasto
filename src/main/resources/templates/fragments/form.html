@@ -1,0 +1,30 @@
+<div class="field is-horizontal" th:fragment="row(label, formField)">
+    <div class="field-label is-large">
+        <label class="label" th:text="${label}"></label>
+    </div>
+
+    <div class="field-body">
+        <div class="field">
+            <input class="input is-large" th:classappend="${#fields.hasErrors(formField)} ? is-danger" type="text" th:field="*{__${formField}__}" />
+
+            <p class="help is-danger" th:each="error : ${#fields.errors(formField)}" th:text="${error}">
+                Validation error
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="field is-horizontal" th:fragment="tags">
+    <div class="field-label is-large">
+        <label class="label">Tagit</label>
+    </div>
+
+    <div class="field-body" id="tagsBlock" th:replace="tags :: tagsList(${allTags})"></div>
+</div>
+
+<div class="field is-horizontal" th:fragment="submit">
+    <div class="field-label"></div>
+    <div class="field-body">
+        <input class="button is-link is-large" type="submit" value="Lisää" name="submit" />
+    </div>
+</div>
