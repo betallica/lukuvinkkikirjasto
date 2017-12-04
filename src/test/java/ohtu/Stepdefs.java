@@ -7,6 +7,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import java.io.File;
 import java.util.Date;
+
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +24,7 @@ public class Stepdefs {
     private final String ADD_BOOK_LINK = "Kirja";
     private final String ADD_BLOG_LINK = "Blogi";
     private final String ADD_VIDEO_LINK = "Video";
+    private final String ADD_TAG_LINK = "Lisää Tagi";
 
     public Stepdefs() {
         File file;
@@ -261,8 +264,6 @@ public class Stepdefs {
         assertTrue(driver.getPageSource().contains(title));
     }
     
-    // BELOW IS FAILING THE TEST and preventing browsing videos feature to be implemented
-    
     @Then("^a new video is listed with the name \"([^\"]*)\"$")
     public void a_new_video_is_listed_with_the_name(String title) throws Throwable {
         assertTrue(driver.getPageSource().contains(title));
@@ -343,7 +344,44 @@ public class Stepdefs {
         element.click();
     }
 
+    @Given("^a tag \"([^\"]*)\" is added$")
+    public void a_tag_is_added(String name) throws Throwable {
+        driver.get(BASE_URL);
+        clickLinkWithText(ADD_TAG_LINK);
+        addTagWithName(name);
+    }
 
+    @Given("^a new book with name \"([^\"]*)\" and author \"([^\"]*)\" and isbn \"([^\"]*)\" and the newest tag is added$")
+    public void a_new_book_with_name_and_author_and_isbn_and_the_newest_tag_is_added(String name, String author, String isbn) throws Throwable {
+        driver.get(BASE_URL);
+        clickLinkWithText(ADD_BOOK_LINK);
+        addBookWithNewestTag(name, author, isbn);
+    }
+
+    @Given("^a new book with a name \"([^\"]*)\" and author \"([^\"]*)\" and isbn \"([^\"]*)\" is added$")
+    public void a_new_book_with_a_name_and_author_and_isbn_is_added(String name, String author, String isbn) throws Throwable {
+    	driver.get(BASE_URL);
+        clickLinkWithText(ADD_BOOK_LINK);
+        addBookWith(name, author, isbn);
+    }
+
+    @When("^the hints are filtered by the newest tag$")
+    public void the_hints_are_filtered_by_the_newest_tag() throws Throwable {
+        WebElement element = driver.findElement(By.className("tag-checkbox"));
+        element.click();
+        element = driver.findElement(By.id("filter"));
+        element.click();
+    }
+
+    @Then("^a book with the name \"([^\"]*)\" is shown$")
+    public void a_book_with_the_name_is_shown(String name) throws Throwable {
+        assertTrue(driver.getPageSource().contains(name));
+    }
+
+    @Then("^a book with the name \"([^\"]*)\" is not shown$")
+    public void a_book_with_the_name_is_not_shown(String name) throws Throwable {
+    	assertFalse(driver.getPageSource().contains(name));
+    }
     
     private void addBookWith(String name, String author, String isbn) {
         WebElement element = driver.findElement(By.name("name"));
@@ -352,6 +390,19 @@ public class Stepdefs {
         element.sendKeys(author);
         element = driver.findElement(By.name("isbn"));
         element.sendKeys(isbn);
+        element = driver.findElement(By.name("submit"));
+        element.click();
+    }
+    
+    private void addBookWithNewestTag(String name, String author, String isbn) {
+        WebElement element = driver.findElement(By.name("name"));
+        element.sendKeys(name);
+        element = driver.findElement(By.name("author"));
+        element.sendKeys(author);
+        element = driver.findElement(By.name("isbn"));
+        element.sendKeys(isbn);
+        element = driver.findElement(By.id("tags1"));
+        element.click();
         element = driver.findElement(By.name("submit"));
         element.click();
     }
@@ -380,6 +431,13 @@ public class Stepdefs {
         element.click();
     }
 
+    private void addTagWithName(String name) {
+    	WebElement element = driver.findElement(By.name("name"));
+    	element.sendKeys(name);
+    	element = driver.findElement(By.name("submit"));
+    	element.click();
+    }
+    
     private void clickLinkWithText(String text) {
         int trials = 0;
         while( trials++<5 ) {
