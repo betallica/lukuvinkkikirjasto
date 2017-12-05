@@ -1,7 +1,7 @@
 <div th:fragment="tagsList(allTags)" th:unless="${#lists.isEmpty(allTags)}" id="tagsBlock" class="field-body">
     <div class="field is-grouped is-grouped-multiline tags">
         <div class="tags has-addons control" th:each="tag : ${allTags}">
-            <span class="tag is-dark">
+            <span class="tag is-link">
                 <input class="checkbox" type="checkbox" th:field="*{tags}" th:value="${tag.id}" />
             </span>
             <span class="tag is-link" th:text="${tag.name}"></span>
