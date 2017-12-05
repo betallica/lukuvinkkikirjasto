@@ -15,6 +15,7 @@ import ohtu.database.dto.HintDto;
 import ohtu.database.repository.HintRepository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -65,12 +66,9 @@ public class HintService {
         return pages.getContent();
     }
 
-    public int totalNumberOfHints(Boolean isRead) {
-        if (isRead != null) {
-            return hintRepository.findByIsRead(isRead).size();
-        } else {
-            return hintRepository.findAll().size();
-        }
+    public int totalNumberOfHints(Boolean isRead, Set<Tag> tags) {
+        int totalHints = Math.max(hintRepository.findAll().size(), 1);
+        return getHintsInPage(1, totalHints, isRead, tags).size();
     }
 
     public Hint getHint(Long id) {

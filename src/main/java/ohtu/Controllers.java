@@ -62,7 +62,7 @@ public class Controllers {
         String[] tags = request.getParameterValues("tags");
 
         int pageNumber = 1;
-        int totalHints = hintService.totalNumberOfHints(isRead);
+        int totalHints = hintService.totalNumberOfHints(isRead, tagService.getTagsByNames(tags));
 
         if (action != null) {
             pageNumber = newPageNumber(request.getParameter("page"), action, totalHints);
