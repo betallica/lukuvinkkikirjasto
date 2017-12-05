@@ -25,3 +25,19 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+var $radioButtons = $(".filter input:radio, .tags input:checkbox");
+
+function updateButtons() {
+    $radioButtons.each(function() {
+        $(this).parent().toggleClass('is-link', this.checked);
+    });
+}
+
+$( document ).ready(function() {
+    updateButtons();
+});
+
+$radioButtons.click(function() {
+    updateButtons();
+});
