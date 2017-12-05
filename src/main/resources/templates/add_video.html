@@ -1,4 +1,6 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
+	<h1 class="title">Lisää videovinkki</h1>
+	
 	<form th:action="@{/video/add}" th:method="POST" th:object="${videoHintDto}">
 		<div class="field is-horizontal">
 			<div class="field-label is-large">

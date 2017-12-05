@@ -1,4 +1,6 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
+    <h1 class="title">Lisää tagi</h1>
+    
     <form th:action="@{/tags/add}" th:method="POST" th:object="${tagDto}">
         <div th:replace="fragments/form :: row('Nimi', 'name')"></div>
         <div th:replace="fragments/form :: submit"></div>
