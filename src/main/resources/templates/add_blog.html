@@ -1,4 +1,6 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
+	<h1 class="title">Lisää blogivinkki</h1>
+
 	<form th:action="@{/blog/add}" th:method="POST" th:object="${blogHintDto}">
 		<div th:replace="fragments/form :: row('Otsikko', 'name')"></div>
 		<div th:replace="fragments/form :: row('Kirjoittaja', 'author')"></div>

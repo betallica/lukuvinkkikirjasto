@@ -1,5 +1,5 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
-    <h1 class="title hintTitle">Kirja</h1>
+    <h1 class="title hintTitle" th:text="${bookHint.name}">Kirja</h1>
 
     <div class="readIndicator" th:switch="${bookHint.isRead}">
         <span th:case="false" class="icon has-text-gray">
@@ -13,8 +13,8 @@
     <table class="table is-striped is-fullwidth">
         <tbody>
             <tr>
-                <th>Otsikko</th>
-                <td th:text="${bookHint.name}"></td>
+                <th>Tyyppi</th>
+                <td>Kirja</td>
             </tr>
             <tr>
                 <th>Kirjoittaja</th>
@@ -28,7 +28,7 @@
                 <th>Tagit</th>
                 <td>
                     <div class="tags">
-                        <span class="tag is-primary" th:each="tag : ${bookHint.tags}" th:text="${tag.name}"/>
+                        <span class="tag is-link" th:each="tag : ${bookHint.tags}" th:text="${tag.name}"/>
                     </div>
                 </td>
             </tr>
@@ -37,8 +37,8 @@
 
     <form th:method="POST" th:action="@{/books/{id} (id=${bookHint.id})}">
         <div th:switch="${bookHint.isRead}">
-            <input th:case="false" type="submit" value="Merkitse luetuksi" name="isRead" class="isReadButton"/>
-            <input th:case="true" type="submit" value="Merkitse lukemattomaksi" name="isRead" class="isReadButton"/>
+            <input th:case="false" type="submit" value="Merkitse luetuksi" name="isRead" class="button is-link isReadButton"/>
+            <input th:case="true" type="submit" value="Merkitse lukemattomaksi" name="isRead" class="button is-link isReadButton"/>
         </div>
     </form>
 

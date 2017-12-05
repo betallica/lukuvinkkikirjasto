@@ -1,6 +1,8 @@
 require("font-awesome-webpack");
 require('../sass/app.scss');
 
+var $ = require("jquery");
+
 document.addEventListener('DOMContentLoaded', function () {
     // Get all "navbar-burger" elements
     var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
@@ -22,4 +24,20 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+});
+
+var $radioButtons = $(".filter input:radio, .filter .tags input:checkbox");
+
+function updateButtons() {
+    $radioButtons.each(function() {
+        $(this).parent().toggleClass('is-link', this.checked);
+    });
+}
+
+$( document ).ready(function() {
+    updateButtons();
+});
+
+$radioButtons.click(function() {
+    updateButtons();
 });

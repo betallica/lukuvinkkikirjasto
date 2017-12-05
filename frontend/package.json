@@ -16,6 +16,7 @@
     "file-loader": "^1.1.5",
     "font-awesome": "^4.7.0",
     "font-awesome-webpack": "0.0.5-beta.2",
+    "jquery": "^3.2.1",
     "less": "^2.7.3",
     "node-sass": "^4.6.1",
     "sass-loader": "^6.0.6",
