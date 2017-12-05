@@ -202,7 +202,6 @@ public class Controllers {
             @PathVariable long id) {
         if (!result.hasErrors()) {
             commentDto.setHint(hintService.getHint(id));
-            commentDto.setPublishDate(new Date());
             commentService.createComment(commentDto);
         } else {
             model.addAttribute("bookHint", hintService.getHint(id));
@@ -252,7 +251,6 @@ public class Controllers {
             @PathVariable long id) {
         if (!result.hasErrors()) {
             commentDto.setHint(hintService.getHint(id));
-            commentDto.setPublishDate(new Date());
             commentService.createComment(commentDto);
         } else {
             model.addAttribute("blogHint", hintService.getHint(id));

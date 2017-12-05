@@ -1,6 +1,7 @@
 package ohtu.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class CommentService {
 		Comment comment = new Comment();
 		comment.setHint(commentDto.getHint());
 		comment.setText(commentDto.getText());
-		comment.setPublishDate(commentDto.getPublishDate());
+		comment.setPublishDate(new Date());
 		
 		commentRepository.save(comment);
 		
