@@ -38,8 +38,8 @@
     </table>
     <form th:method="POST" th:action="@{/videos/{id} (id=${videoHint.id})}" class="isReadButton">
         <div th:switch="${videoHint.isRead}">
-            <input th:case="false" type="submit" value="Merkitse luetuksi" name="isRead" class="button is-link isReadButton"/>
-            <input th:case="true" type="submit" value="Merkitse lukemattomaksi" name="isRead" class="button is-link isReadButton"/>
+            <input th:case="false" type="submit" value="Merkitse katsotuksi" name="isRead" class="button is-link isReadButton"/>
+            <input th:case="true" type="submit" value="Merkitse katsomattomaksi" name="isRead" class="button is-link isReadButton"/>
         </div>
     </form>
 

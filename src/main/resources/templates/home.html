@@ -11,13 +11,13 @@
         <div class="field has-addons" th:with="read=${param.isread != null ? param.isread[0] == 'read' : false}, unread=${param.isread != null ? param.isread[0] == 'unread' : false}">
           <p class="control">
             <label class="button">
-              <input id="filter_read" type="radio" name="isread" value="read" th:checked="${read}" /> Luetut
+              <input id="filter_read" type="radio" name="isread" value="read" th:checked="${read}" /> Käytetyt
             </label>
           </p>
 
           <p class="control">
             <label class="button">
-              <input id="filter_unread" type="radio" name="isread" value="unread" th:checked="${unread}" /> Lukemattomat
+              <input id="filter_unread" type="radio" name="isread" value="unread" th:checked="${unread}" /> Käyttämättömät
             </label>
           </p>
 
