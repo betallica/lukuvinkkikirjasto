@@ -329,16 +329,10 @@ public class Stepdefs {
         
     }
 
-    @Then("^the button's text changes to mark as unread$")
-    public void the_button_s_text_changes_to_mark_as_unread() throws Throwable {
+    @Then("^the button's text changes to \"([^\"]*)\"$")
+    public void the_buttons_text_changes_to(String text) throws Throwable {
         WebElement element = driver.findElement(By.name("isRead"));
-        assertTrue(element.getAttribute("value").equals("Merkitse lukemattomaksi"));
-    }
-
-    @Then("^the button's text changes to mark as read$")
-    public void the_button_s_text_changes_to_mark_as_read() throws Throwable {
-        WebElement element = driver.findElement(By.name("isRead"));
-        assertTrue(element.getAttribute("value").equals("Merkitse luetuksi"));
+        assertTrue(element.getAttribute("value").equals(text));
     }
 
     @When("^the mark as unread button is clicked$")
