@@ -19,6 +19,7 @@ public class VideoHintService {
         vh.setUrl(videoHintDto.getUrl());
         vh.setType("Video");
         vh.setIsRead(false);
+        vh.setTags(videoHintDto.getTags());
         videoHintRepository.save(vh);
 
         return vh;
