@@ -1,5 +1,7 @@
 package ohtu;
 
+import com.gargoylesoftware.htmlunit.SilentCssErrorHandler;
+import com.gargoylesoftware.htmlunit.WebClient;
 import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
@@ -7,6 +9,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import java.io.File;
 import java.util.Date;
+import java.util.logging.Level;
+import org.apache.commons.logging.LogFactory;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -16,6 +20,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class Stepdefs {
+    
+    private class SilentHtmlUnitDriver extends HtmlUnitDriver {
+        SilentHtmlUnitDriver() {
+            super();
+            this.getWebClient().setCssErrorHandler(new SilentCssErrorHandler());
+        }
+    }
 
     WebDriver driver;
     
@@ -36,7 +47,7 @@ public class Stepdefs {
         final String absolutePath = file.getAbsolutePath();
         System.setProperty("webdriver.gecko.driver", absolutePath);
 
-        driver = new HtmlUnitDriver();
+        driver = new SilentHtmlUnitDriver();
     }
 
     @After
