@@ -2,12 +2,12 @@
   <h1 class="title">Vinkit</h1>
 
   <form th:action="@{/}" th:method="get">
-    <nav class="panel">
+    <nav class="panel filter">
       <p class="panel-heading">
         Suodatus
       </p>
 
-      <div class="panel-block filter">
+      <div class="panel-block">
         <div class="field has-addons" th:with="read=${param.isread != null ? param.isread[0] == 'read' : false}, unread=${param.isread != null ? param.isread[0] == 'unread' : false}">
           <p class="control">
             <label class="button">

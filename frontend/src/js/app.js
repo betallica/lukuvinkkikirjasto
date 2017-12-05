@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-var $radioButtons = $(".filter input:radio, .tags input:checkbox");
+var $radioButtons = $(".filter input:radio, .filter .tags input:checkbox");
 
 function updateButtons() {
     $radioButtons.each(function() {
