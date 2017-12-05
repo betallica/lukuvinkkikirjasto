@@ -11,19 +11,19 @@
         <div class="field has-addons" th:with="read=${param.isread != null ? param.isread[0] == 'read' : false}, unread=${param.isread != null ? param.isread[0] == 'unread' : false}">
           <p class="control">
             <label class="button">
-              <input type="radio" name="isread" value="read" th:checked="${read}" /> Luetut
+              <input id="filter_read" type="radio" name="isread" value="read" th:checked="${read}" /> Luetut
             </label>
           </p>
 
           <p class="control">
             <label class="button">
-              <input type="radio" name="isread" value="unread" th:checked="${unread}" /> Lukemattomat
+              <input id="filter_unread" type="radio" name="isread" value="unread" th:checked="${unread}" /> Lukemattomat
             </label>
           </p>
 
           <p class="control">
             <label class="button">
-              <input type="radio" name="isread" value="all" th:checked="${!read and !unread}" /> Kaikki
+              <input id="filter_all" type="radio" name="isread" value="all" th:checked="${!read and !unread}" /> Kaikki
             </label>
           </p>
         </div>
@@ -39,7 +39,7 @@
       </div>
 
       <div class="panel-block">
-        <button type="submit" class="button is-link">
+        <button id="filter" type="submit" class="button is-link">
           <span class="icon">
             <i class="fa fa-filter" aria-hidden="true"></i>
           </span>
