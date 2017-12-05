@@ -26,6 +26,14 @@
                     <a th:href="${videoHint.url}" th:text="${videoHint.url}"></a>
                 </td>
             </tr>
+            <tr>
+                <th>Tagit</th>
+                <td>
+                    <div class="tags">
+                        <span class="tag is-link" th:each="tag : ${videoHint.tags}" th:text="${tag.name}"/>
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
     <form th:method="POST" th:action="@{/videos/{id} (id=${videoHint.id})}" class="isReadButton">

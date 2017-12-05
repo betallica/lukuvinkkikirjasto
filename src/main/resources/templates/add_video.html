@@ -50,11 +50,7 @@
 			</div>
 		</div>
 
-		<div class="field is-horizontal">
-			<div class="field-label"></div>
-			<div class="field-body">
-				<input class="button is-link is-large" type="submit" value="Lisää" name="submit" />
-			</div>
-		</div>
+		<div th:replace="fragments/form :: tags"></div>
+		<div th:replace="fragments/form :: submit"></div>
 	</form>
 </div>
