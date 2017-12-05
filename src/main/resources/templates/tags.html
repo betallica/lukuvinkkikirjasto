@@ -1,24 +1,10 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" lang="en">
-
-<head>
-</head>
-
-<body>
-
-    <div th:fragment="tagsList(allTags)" th:unless="${#lists.isEmpty(allTags)}" id="tagsBlock" class="field-body">
-        <div class="field is-grouped is-grouped-multiline tags">
-            <div class="tags has-addons control" th:each="tag : ${allTags}">
-                            <span class="tag">
-                                <input class="checkbox" type="checkbox" th:field="*{tags}" th:value="${tag.id}" />
-                            </span>
-                <span class="tag is-primary" th:text="${tag.name}"></span>
-            </div>
+<div th:fragment="tagsList(allTags)" th:unless="${#lists.isEmpty(allTags)}" id="tagsBlock" class="field-body">
+    <div class="field is-grouped is-grouped-multiline tags">
+        <div class="tags has-addons control" th:each="tag : ${allTags}">
+            <span class="tag is-dark">
+                <input class="checkbox" type="checkbox" th:field="*{tags}" th:value="${tag.id}" />
+            </span>
+            <span class="tag is-link" th:text="${tag.name}"></span>
         </div>
     </div>
-
-</body>
-
-
-</html>
+</div>
