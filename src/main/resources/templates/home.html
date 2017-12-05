@@ -92,10 +92,10 @@
   </table>
 
   <nav class="pagination">
-    <a th:disabled="${page == 1}" th:href="@{/(page=${page}, action='prev', isread=${param.isread})}" class="pagination-previous">
+    <a th:disabled="${page == 1}" th:href="@{/(page=${page}, action='prev', isread=${param.isread}, tags=${param.tags})}" class="pagination-previous">
       &laquo; Edellinen
     </a>
-    <a th:disabled="${page >= totalPages}" th:href="@{/(page=${page}, action='next', isread=${param.isread})}" class="pagination-next">
+    <a th:disabled="${page >= totalPages}" th:href="@{/(page=${page}, action='next', isread=${param.isread}, tags=${param.tags})}" class="pagination-next">
       Seuraava &raquo;
     </a>
     <ul class="pagination-list">
