@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.validation.Valid;
 
 @Controller
@@ -79,7 +78,6 @@ public class VideoController {
         return "redirect:/videos/" + id;
     }
 
-    // Nyt video on "luettu", mikä muoto olisi parempi?
     @PostMapping(value = "/videos/{id}", params = "isRead")
     public String markVideoAsRead(Model model, @PathVariable long id) {
         Hint hint = hintService.getHint(id);
