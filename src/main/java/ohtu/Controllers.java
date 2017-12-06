@@ -42,24 +42,6 @@ public class Controllers {
     @Autowired
     private TagService tagService;
 
-
-    /**
-     * A request is made to the hint/add address and a blog hint is added to the
-     * model.
-     *
-     * @param model
-     * @return Creates a view of add_blog sends it.
-     */
-    @GetMapping("/blog/add")
-    public String addBlog(Model model) {
-        BlogHintDto bhDto = new BlogHintDto();
-
-        model.addAttribute("blogHintDto", bhDto);
-        model.addAttribute("allTags", tagService.getAllTags());
-
-        return "add_blog";
-    }
-    
     @GetMapping("/video/add")
     public String addVideo(Model model) {
         VideoHintDto vhDto = new VideoHintDto();
@@ -68,31 +50,6 @@ public class Controllers {
         model.addAttribute("allTags", tagService.getAllTags());
 
         return "add_video";
-    }
-
-    /**
-     * Checks if that the book hint is added successfully.
-     *
-     * @param model
-     * @param blogHintDto
-     * @param result
-     * @return Redirects to home or creates view of add_blog and sends it.
-     */
-    @PostMapping("/blog/add")
-    public String saveBlog(Model model, @ModelAttribute @Valid BlogHintDto blogHintDto, BindingResult result) {
-        if (!result.hasErrors()) {
-            hintService.createHint(blogHintDto);
-
-            return "redirect:/";
-        } else {
-        	for (ObjectError error : result.getAllErrors()) {
-				FieldError fError = (FieldError) error;
-				System.out.println(fError.getField() + " : " + fError.getCode());
-			}
-            model.addAttribute("blogHintDto", blogHintDto);
-            model.addAttribute("allTags", tagService.getAllTags());
-            return "add_blog";
-        }
     }
     
     @PostMapping("/video/add")
@@ -106,49 +63,6 @@ public class Controllers {
             model.addAttribute("allTags", tagService.getAllTags());
             return "add_video";
         }
-    }
-
-
-    @GetMapping("/blogs/{id}")
-    public String getBlog(Model model, @PathVariable long id) {
-        model.addAttribute("blogHint", hintService.getHint(id));
-        model.addAttribute("comments", commentService.getCommentsForHint(id));
-
-        CommentDto commentDto = new CommentDto();
-        model.addAttribute("commentDto", commentDto);
-        return "blog";
-    }
-    
-
-    @PostMapping(value = "/blogs/{id}", params = "text")
-    public String addCommentForBlog(Model model, @ModelAttribute @Valid CommentDto commentDto, BindingResult result,
-            @PathVariable long id) {
-        if (!result.hasErrors()) {
-            commentDto.setHint(hintService.getHint(id));
-            commentService.createComment(commentDto);
-        } else {
-            model.addAttribute("blogHint", hintService.getHint(id));
-            model.addAttribute("comments", commentService.getCommentsForHint(id));
-
-            model.addAttribute("commentDto", commentDto);
-
-            return "blog";
-        }
-
-        return "redirect:/blogs/" + id;
-    }
-
-    @PostMapping(value = "/blogs/{id}", params = "isRead")
-    public String markBlogAsRead(Model model, @PathVariable long id) {
-        Hint hint = hintService.getHint(id);
-        if (hint.getIsRead()) {
-            hint.setIsRead(false);
-        } else {
-            hint.setIsRead(true);
-        }
-        hintService.saveHint(hint);
-
-        return "redirect:/blogs/" + id;
     }
 
     @GetMapping("/tags/add")
