@@ -14,8 +14,6 @@ import ohtu.database.dto.BookHintDto;
 import ohtu.database.dto.HintDto;
 import ohtu.database.repository.HintRepository;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 

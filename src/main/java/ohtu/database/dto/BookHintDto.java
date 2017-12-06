@@ -6,10 +6,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import ohtu.validation.IsbnValid;
 
-import java.util.Set;
-
-import ohtu.model.Tag;
-
 /**
  * The book hint data transfer object for communication between processes. It
  * has all required data for remote call including the book's author and ISBN
