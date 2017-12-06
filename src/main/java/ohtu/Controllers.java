@@ -40,41 +40,7 @@ public class Controllers {
     private CommentService commentService;
 
     @Autowired
-    private BookHintRepository bhRep;
-
-    @Autowired
     private TagService tagService;
-
-    final private int HINTS_PER_PAGE = 10;
-
-    /**
-     * Request is made to home address and all book hints are added to model.
-     *
-     * @param model
-     * @param request
-     * @return View of home file is sent.
-     */
-    @GetMapping("/")
-    public String home(Model model, HttpServletRequest request) {
-
-        String action = request.getParameter("action");
-        Boolean isRead = isReadFromString(request.getParameter("isread"));
-        String[] tags = request.getParameterValues("tags");
-
-        int pageNumber = 1;
-        int totalHints = hintService.totalNumberOfHints(isRead, tagService.getTagsByNames(tags));
-
-        if (action != null) {
-            pageNumber = newPageNumber(request.getParameter("page"), action, totalHints);
-        }
-
-        model.addAttribute("page", pageNumber);
-        model.addAttribute("totalPages", totalNumberOfPages(totalHints));
-        model.addAttribute("hints", hintService.getHintsInPage(pageNumber, HINTS_PER_PAGE, isRead, tagService.getTagsByNames(tags)));
-        model.addAttribute("tags", tagService.getAllTags());
-
-        return "home";
-    }
 
     /**
      * A request is made to the hint/add address and a book hint is added to the
@@ -291,31 +257,6 @@ public class Controllers {
         return "redirect:/";
     }
 
-    private int newPageNumber(String pageParameter, String action, int totalPages) {
-        int page = Integer.parseInt(pageParameter);
-        if (action.equals("prev")) {
-            return Math.max(0, page - 1);
-        } else {
-            return Math.min(totalPages, page + 1);
-        }
-    }
-
-    private int totalNumberOfPages(int totalHints) {
-        return ((totalHints - 1) / HINTS_PER_PAGE) + 1;
-    }
-
-    private Boolean isReadFromString(String paramString) {
-        if (paramString == null) {
-            return (Boolean) null;
-        } else if (paramString.equals("read")) {
-            return true;
-        } else if (paramString.equals("unread")) {
-            return false;
-        } else {
-            return (Boolean) null;
-        }
-    }
-
     @GetMapping("/videos/{id}")
     public String getVideo(Model model, @PathVariable long id) {
         model.addAttribute("videoHint", hintService.getHint(id));
@@ -355,20 +296,6 @@ public class Controllers {
         hintService.saveHint(hint);
 
         return "redirect:/videos/" + id;
-    }
-
-    private int newPageNumber(String pageParameter, String action) {
-        int page = Integer.parseInt(pageParameter);
-        if (action.equals("prev")) {
-            return Math.max(0, page - 1);
-        } else {
-            return Math.min(totalNumberOfPages(), page + 1);
-        }
-    }
-
-    private int totalNumberOfPages() {
-        int totalHints = bhRep.findAll().size();
-        return (totalHints - 1) / HINTS_PER_PAGE;
     }
 
 }
