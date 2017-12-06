@@ -42,29 +42,6 @@ public class Controllers {
     @Autowired
     private TagService tagService;
 
-    @GetMapping("/video/add")
-    public String addVideo(Model model) {
-        VideoHintDto vhDto = new VideoHintDto();
-
-        model.addAttribute("videoHintDto", vhDto);
-        model.addAttribute("allTags", tagService.getAllTags());
-
-        return "add_video";
-    }
-    
-    @PostMapping("/video/add")
-    public String saveVideo(Model model, @ModelAttribute @Valid VideoHintDto videoHintDto, BindingResult result) {
-        if (!result.hasErrors()) {
-            hintService.createHint(videoHintDto);
-
-            return "redirect:/";
-        } else {
-            model.addAttribute("videoHintDto", videoHintDto);
-            model.addAttribute("allTags", tagService.getAllTags());
-            return "add_video";
-        }
-    }
-
     @GetMapping("/tags/add")
     public String addTag(@ModelAttribute TagDto tagDto) {
         return "add_tag";
@@ -77,47 +54,6 @@ public class Controllers {
         }
         tagService.createTag(tagDto);
         return "redirect:/";
-    }
-
-    @GetMapping("/videos/{id}")
-    public String getVideo(Model model, @PathVariable long id) {
-        model.addAttribute("videoHint", hintService.getHint(id));
-        model.addAttribute("comments", commentService.getCommentsForHint(id));
-
-        CommentDto commentDto = new CommentDto();
-        model.addAttribute("commentDto", commentDto);
-        return "video";
-    }
-
-    @PostMapping(value = "/videos/{id}", params = "text")
-    public String addCommentForVideo(Model model, @ModelAttribute @Valid CommentDto commentDto, BindingResult result,
-            @PathVariable long id) {
-        if (!result.hasErrors()) {
-            commentDto.setHint(hintService.getHint(id));
-            commentService.createComment(commentDto);
-        } else {
-            model.addAttribute("videoHint", hintService.getHint(id));
-            model.addAttribute("comments", commentService.getCommentsForHint(id));
-
-            model.addAttribute("commentDto", commentDto);
-
-            return "video";
-        }
-        return "redirect:/videos/" + id;
-    }
-
-    // Nyt video on "luettu", mikä muoto olisi parempi?
-    @PostMapping(value = "/videos/{id}", params = "isRead")
-    public String markVideoAsRead(Model model, @PathVariable long id) {
-        Hint hint = hintService.getHint(id);
-        if (hint.getIsRead()) {
-            hint.setIsRead(false);
-        } else {
-            hint.setIsRead(true);
-        }
-        hintService.saveHint(hint);
-
-        return "redirect:/videos/" + id;
     }
 
 }
