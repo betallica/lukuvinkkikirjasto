@@ -49,46 +49,20 @@ public class Stepdefs {
         stepsBase.goToBaseUrl();
     }
 
-
     @When("^next page is selected$")
     public void next_page_is_selected() throws Throwable {
         stepsBase.clickLinkWithText("Seuraava »");
     }
 
-    
     @Then("^a new blog is listed with the name \"([^\"]*)\"$")
     public void a_new_blog_is_listed_with_the_name(String title) throws Throwable {
         assertTrue(driver.getPageSource().contains(title));
     }
 
-
     @Given("^the page of the new blog with the name \"([^\"]*)\" is entered$")
     public void the_page_of_the_new_blog_with_the_name_is_entered(String name) throws Throwable {
         stepsBase.goToBaseUrl();
     	stepsBase.clickLinkWithText(name);
-    }
-    
-    private Date publishTime;
-
-    @When("^a comment with text \"([^\"]*)\" is added$")
-    public void a_comment_with_text_is_added(String text) throws Throwable {
-        WebElement element = driver.findElement(By.name("text"));
-        element.sendKeys(text);
-        element = driver.findElement(By.name("addComment"));
-        element.click();
-        
-        publishTime = new Date();
-    }
-
-    @Then("^the new comment with text \"([^\"]*)\" is shown$")
-    public void the_new_comment_with_text_is_shown_with_the_right_publish_time(String text) throws Throwable {
-        assertTrue(driver.getPageSource().contains(text));
-    }
-
-    @When("^an empty comment is added$")
-    public void an_empty_comment_is_added() throws Throwable {
-    	WebElement element = driver.findElement(By.name("addComment"));
-        element.click();
     }
 
     @Then("^an error message \"([^\"]*)\" will be shown$")
@@ -107,7 +81,6 @@ public class Stepdefs {
     public void the_mark_as_read_button_is_clicked() throws Throwable {
         WebElement element = driver.findElement(By.name("isRead"));
         element.click();
-        
     }
 
     @Then("^the button's text changes to \"([^\"]*)\"$")
