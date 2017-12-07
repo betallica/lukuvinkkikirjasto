@@ -30,11 +30,6 @@ public class StepsMainPageBrowsing {
         assertTrue(driver.getPageSource().contains("Vinkit"));
     }
 
-    @Then("^page with video information is presented$")
-    public void page_with_video_information_is_presented() throws Throwable {
-        assertTrue(driver.getPageSource().contains("Video"));
-    }
-
     @Then("^error message \"([^\"]*)\" is shown$")
     public void error_message_is_shown(String error_message) throws Throwable {
         assertTrue(driver.getPageSource().contains(error_message));

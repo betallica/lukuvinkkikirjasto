@@ -85,6 +85,11 @@ public class StepsVideos {
         assertTrue(driver.getPageSource().contains(title));
     }
 
+    @Then("^page with video information is presented$")
+    public void page_with_video_information_is_presented() throws Throwable {
+        assertTrue(driver.getPageSource().contains("Video"));
+    }
+
     private void addVideoWith(String name, String author, String url) {
         WebElement element = driver.findElement(By.name("name"));
         element.sendKeys(name);
