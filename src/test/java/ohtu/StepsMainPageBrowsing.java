@@ -55,12 +55,6 @@ public class StepsMainPageBrowsing {
         assertTrue(driver.getPageSource().contains(error));
     }
 
-    @Given("^the page of the new book with the name \"([^\"]*)\" is entered$")
-    public void the_page_of_the_new_book_with_the_name_is_entered(String name) throws Throwable {
-        stepsBase.goToBaseUrl();
-        stepsBase.clickLinkWithText(name);
-    }
-
     @When("^hints are filtered by being unread$")
     public void hints_are_filtered_by_being_unread() throws Throwable {
         stepsBase.goToBaseUrl();

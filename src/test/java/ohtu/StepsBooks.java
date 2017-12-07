@@ -113,6 +113,13 @@ public class StepsBooks {
         element.click();
     }
 
+    @Given("^the page of the new book with the name \"([^\"]*)\" is entered$")
+    public void the_page_of_the_new_book_with_the_name_is_entered(String name) throws Throwable {
+        stepsBase.goToBaseUrl();
+        stepsBase.clickLinkWithText(name);
+    }
+
+
     private void addBookWithNewestTag(String name, String author, String isbn) {
         WebElement element = driver.findElement(By.name("name"));
         element.sendKeys(name);
