@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class Stepdefs {
+public class StepsMainPageBrowsing {
 
     private StepsBase stepsBase;
     private WebDriver driver;
@@ -17,7 +17,7 @@ public class Stepdefs {
     private final String ADD_TAG_LINK = "Lisää Tagi";
 
     @Autowired
-    public Stepdefs(StepsBase stepBase) {
+    public StepsMainPageBrowsing(StepsBase stepBase) {
         this.stepsBase = stepBase;
         this.driver = stepBase.getDriver();
     }
