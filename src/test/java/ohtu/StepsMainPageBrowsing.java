@@ -62,8 +62,7 @@ public class StepsMainPageBrowsing {
         stepsBase.goToBaseUrl();
         stepsBase.clickLinkWithText(name);
     }
-    
-    //marking a book and blog as read start from here
+
     @When("^the mark as read button is clicked$")
     public void the_mark_as_read_button_is_clicked() throws Throwable {
         WebElement element = driver.findElement(By.name("isRead"));
@@ -82,7 +81,6 @@ public class StepsMainPageBrowsing {
         element.click();
     }
 
-    //filtering_by_read_status_5_below
     @When("^hints are filtered by being unread$")
     public void hints_are_filtered_by_being_unread() throws Throwable {
         stepsBase.goToBaseUrl();
