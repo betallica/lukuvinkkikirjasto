@@ -61,24 +61,6 @@ public class StepsMainPageBrowsing {
         stepsBase.clickLinkWithText(name);
     }
 
-    @When("^the mark as read button is clicked$")
-    public void the_mark_as_read_button_is_clicked() throws Throwable {
-        WebElement element = driver.findElement(By.name("isRead"));
-        element.click();
-    }
-
-    @Then("^the button's text changes to \"([^\"]*)\"$")
-    public void the_buttons_text_changes_to(String text) throws Throwable {
-        WebElement element = driver.findElement(By.name("isRead"));
-        assertTrue(element.getAttribute("value").equals(text));
-    }
-
-    @When("^the mark as unread button is clicked$")
-    public void the_mark_as_unread_button_is_clicked() throws Throwable {
-        WebElement element = driver.findElement(By.name("isRead"));
-        element.click();
-    }
-
     @When("^hints are filtered by being unread$")
     public void hints_are_filtered_by_being_unread() throws Throwable {
         stepsBase.goToBaseUrl();
