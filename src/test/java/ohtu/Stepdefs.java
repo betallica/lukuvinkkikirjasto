@@ -16,7 +16,6 @@ public class Stepdefs {
     private StepsBase stepsBase;
     private WebDriver driver;
 
-    private final String ADD_BLOG_LINK = "Blogi";
     private final String ADD_TAG_LINK = "Lisää Tagi";
 
     @Autowired
@@ -25,39 +24,14 @@ public class Stepdefs {
         this.driver = stepBase.getDriver();
     }
 
-    @Given("^command add blog is selected$")
-    public void command_add_blog_is_selected() throws Throwable {
-        stepsBase.goToBaseUrl();
-        stepsBase.clickLinkWithText(ADD_BLOG_LINK);
-    }
-
     @Given("^user is at home page$")
     public void user_is_at_home_page() throws Throwable {
         stepsBase.goToBaseUrl();
-    }
-    
-    @Given("^blog with valid name \"([^\"]*)\" and valid author \"([^\"]*)\" and valid url \"([^\"]*)\" is entered")
-    public void a_blog_has_been_entered(String name, String author, String url) throws Throwable {
-        stepsBase.goToBaseUrl();
-        stepsBase.clickLinkWithText(ADD_BLOG_LINK);
-        addBlogWith(name, author, url);
-    }
-
-    
-    @When("^blog name is clicked$")
-    public void blog_name_is_clicked() throws Throwable {
-        stepsBase.clickLinkWithText("A Simple Way to Run a Sprint Retrospective");
     }
 
     @Then("^page with video information is presented$")
     public void page_with_video_information_is_presented() throws Throwable {
         assertTrue(driver.getPageSource().contains("Video"));
-    }  
-
-    
-    @When("^valid name \"([^\"]*)\" and valid author \"([^\"]*)\" and valid url \"([^\"]*)\" are entered$")
-    public void valid_name_and_valid_author_and_valid_url_are_entered(String name, String author, String url) throws Throwable {
-        addBlogWith(name, author, url);
     }
 
     @Then("^user is redirected to front page$")
@@ -65,29 +39,9 @@ public class Stepdefs {
         assertTrue(driver.getPageSource().contains("Vinkit"));
     }
 
-    @When("^empty name \"([^\"]*)\" and valid author \"([^\"]*)\" and valid url \"([^\"]*)\" are entered$")
-    public void empty_name_and_valid_author_and_valid_url_are_entered(String name, String author, String url) throws Throwable {
-        addBlogWith(name, author, url);
-    }
-
-    @Then("^page with blog information is presented$")
-    public void page_with_blog_information_is_presented() throws Throwable {
-        assertTrue(driver.getPageSource().contains("Blogi"));
-    }
-
     @Then("^error message \"([^\"]*)\" is shown$")
     public void error_message_is_shown(String error_message) throws Throwable {
         assertTrue(driver.getPageSource().contains(error_message));
-    }
-
-    @When("^valid name \"([^\"]*)\" and empty author \"([^\"]*)\" and valid url \"([^\"]*)\" are entered$")
-    public void valid_name_and_empty_author_and_valid_url_are_entered(String name, String author, String url) throws Throwable {
-        addBlogWith(name, author, url);
-    }
-
-    @When("^valid name \"([^\"]*)\" and valid author \"([^\"]*)\" and empty url \"([^\"]*)\" are entered$")
-    public void valid_name_and_valid_author_and_empty_url_are_entered(String name, String author, String url) throws Throwable {
-        addBlogWith(name, author, url);
     }
 
     @When("^at the home page$")
@@ -95,26 +49,12 @@ public class Stepdefs {
         stepsBase.goToBaseUrl();
     }
 
-    @Given("^ten blogs are created with same name \"([^\"]*)\" same author \"([^\"]*)\" and same url \"([^\"]*)\"$")
-    public void ten_blogs_are_created_with_same_name_same_author_and_same_url(String name, String author, String url) throws Throwable {
-        for(int i = 0; i < 10; i++) {
-        	stepsBase.goToBaseUrl();
-        	stepsBase.clickLinkWithText(ADD_BLOG_LINK);
-        	addBlogWith(name, author, url);
-        }
-    }
 
     @When("^next page is selected$")
     public void next_page_is_selected() throws Throwable {
         stepsBase.clickLinkWithText("Seuraava »");
     }
 
-    @Given("^a blog with a name \"([^\"]*)\" and author \"([^\"]*)\" and url \"([^\"]*)\" is added$")
-    public void a_blog_with_a_name_and_author_and_url_is_added(String name, String author, String url) throws Throwable {
-        stepsBase.goToBaseUrl();
-        stepsBase.clickLinkWithText(ADD_BLOG_LINK);
-        addBlogWith(name, author, url);
-    }
     
     @Then("^a new blog is listed with the name \"([^\"]*)\"$")
     public void a_new_blog_is_listed_with_the_name(String title) throws Throwable {
@@ -217,23 +157,11 @@ public class Stepdefs {
         addTagWithName(name);
     }
 
-
     @When("^the hints are filtered by the newest tag$")
     public void the_hints_are_filtered_by_the_newest_tag() throws Throwable {
         WebElement element = driver.findElement(By.className("tag-checkbox"));
         element.click();
         element = driver.findElement(By.id("filter"));
-        element.click();
-    }
-
-    private void addBlogWith(String name, String author, String url) {
-        WebElement element = driver.findElement(By.name("name"));
-        element.sendKeys(name);
-        element = driver.findElement(By.name("author"));
-        element.sendKeys(author);
-        element = driver.findElement(By.name("url"));
-        element.sendKeys(url);
-        element = driver.findElement(By.name("submit"));
         element.click();
     }
 
