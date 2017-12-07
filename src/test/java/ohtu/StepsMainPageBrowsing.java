@@ -14,8 +14,6 @@ public class StepsMainPageBrowsing {
     private StepsBase stepsBase;
     private WebDriver driver;
 
-    private final String ADD_TAG_LINK = "Lisää Tagi";
-
     @Autowired
     public StepsMainPageBrowsing(StepsBase stepBase) {
         this.stepsBase = stepBase;
@@ -27,14 +25,14 @@ public class StepsMainPageBrowsing {
         stepsBase.goToBaseUrl();
     }
 
-    @Then("^page with video information is presented$")
-    public void page_with_video_information_is_presented() throws Throwable {
-        assertTrue(driver.getPageSource().contains("Video"));
-    }
-
     @Then("^user is redirected to front page$")
     public void user_is_redirected_to_front_page() throws Throwable {
         assertTrue(driver.getPageSource().contains("Vinkit"));
+    }
+
+    @Then("^page with video information is presented$")
+    public void page_with_video_information_is_presented() throws Throwable {
+        assertTrue(driver.getPageSource().contains("Video"));
     }
 
     @Then("^error message \"([^\"]*)\" is shown$")
@@ -107,13 +105,6 @@ public class StepsMainPageBrowsing {
         element = driver.findElement(By.id("filter"));
         element.click();
     }
-        
-    @Given("^a tag \"([^\"]*)\" is added$")
-    public void a_tag_is_added(String name) throws Throwable {
-        stepsBase.goToBaseUrl();
-        stepsBase.clickLinkWithText(ADD_TAG_LINK);
-        addTagWithName(name);
-    }
 
     @When("^the hints are filtered by the newest tag$")
     public void the_hints_are_filtered_by_the_newest_tag() throws Throwable {
@@ -121,13 +112,6 @@ public class StepsMainPageBrowsing {
         element.click();
         element = driver.findElement(By.id("filter"));
         element.click();
-    }
-
-    private void addTagWithName(String name) {
-    	WebElement element = driver.findElement(By.name("name"));
-    	element.sendKeys(name);
-    	element = driver.findElement(By.name("submit"));
-    	element.click();
     }
 
 }
