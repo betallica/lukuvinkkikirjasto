@@ -46,11 +46,13 @@ public class HintService {
         return null;
     }
 
-    public List<Hint> getHintsInPage(int pageNumber, int numberOfHints, Boolean isRead, Set<Tag> tags) {
+    public List<Hint> getHintsInPage(int pageNumber, int numberOfHints, Boolean isRead, Set<Tag> tags, String keyword) {
         final int pageIndex = pageNumber - 1;
         Pageable pageable = new PageRequest(pageIndex, numberOfHints);
         Page<Hint> pages;
-        if (isRead != null) {
+        if(!keyword.isEmpty()) {
+        	pages = hintRepository.findByKeyword(keyword, pageable);
+        } else if (isRead != null) {
         	if(tags != null && !tags.isEmpty()) {
         		pages = hintRepository.findDistinctByIsReadAndTagsInOrderByIdDesc(isRead, tags, pageable);
         	} else {
@@ -64,9 +66,9 @@ public class HintService {
         return pages.getContent();
     }
 
-    public int totalNumberOfHints(Boolean isRead, Set<Tag> tags) {
+    public int totalNumberOfHints(Boolean isRead, Set<Tag> tags, String keyword) {
         int totalHints = Math.max(hintRepository.findAll().size(), 1);
-        return getHintsInPage(1, totalHints, isRead, tags).size();
+        return getHintsInPage(1, totalHints, isRead, tags, keyword).size();
     }
 
     public Hint getHint(Long id) {

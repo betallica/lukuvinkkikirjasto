@@ -1,6 +1,7 @@
 package ohtu.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -20,6 +21,9 @@ public abstract class Hint implements Serializable {
 
     @ManyToMany
     private Set<Tag> tags;
+    
+    @OneToMany(mappedBy="hint")
+    private List<Comment> comments;
 
     private boolean isRead;
     
