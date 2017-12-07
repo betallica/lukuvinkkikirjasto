@@ -54,17 +54,6 @@ public class Stepdefs {
         stepsBase.clickLinkWithText("Seuraava »");
     }
 
-    @Then("^a new blog is listed with the name \"([^\"]*)\"$")
-    public void a_new_blog_is_listed_with_the_name(String title) throws Throwable {
-        assertTrue(driver.getPageSource().contains(title));
-    }
-
-    @Given("^the page of the new blog with the name \"([^\"]*)\" is entered$")
-    public void the_page_of_the_new_blog_with_the_name_is_entered(String name) throws Throwable {
-        stepsBase.goToBaseUrl();
-    	stepsBase.clickLinkWithText(name);
-    }
-
     @Then("^an error message \"([^\"]*)\" will be shown$")
     public void an_error_message_will_be_shown(String error) throws Throwable {
         assertTrue(driver.getPageSource().contains(error));

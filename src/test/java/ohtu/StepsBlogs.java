@@ -81,6 +81,17 @@ public class StepsBlogs {
         stepsBase.clickLinkWithText("A Simple Way to Run a Sprint Retrospective");
     }
 
+    @Then("^a new blog is listed with the name \"([^\"]*)\"$")
+    public void a_new_blog_is_listed_with_the_name(String title) throws Throwable {
+        assertTrue(driver.getPageSource().contains(title));
+    }
+
+    @Given("^the page of the new blog with the name \"([^\"]*)\" is entered$")
+    public void the_page_of_the_new_blog_with_the_name_is_entered(String name) throws Throwable {
+        stepsBase.goToBaseUrl();
+        stepsBase.clickLinkWithText(name);
+    }
+
     private void addBlogWith(String name, String author, String url) {
         WebElement element = driver.findElement(By.name("name"));
         element.sendKeys(name);
