@@ -16,4 +16,4 @@ Feature: User can browse videos in home page
         	Given ten blogs are created with same name "Vincit blog" same author "Vincit" and same url "www.vincit.com/blog"
         	And a blog with a name "A Simple Way to Run a Sprint Retrospective" and author "Mike Cohn" and url "https://www.mountaingoatsoftware.com/blog/a-simple-way-to-run-a-sprint-retrospective" is added
         	When next page is selected
-        	Then a new book is listed with the name "A Simple Way to Run a Sprint Retrospective"
+        	Then a new blog is listed with the name "A Simple Way to Run a Sprint Retrospective"
