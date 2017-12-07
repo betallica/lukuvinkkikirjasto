@@ -244,5 +244,4 @@ public class Stepdefs {
     	element.click();
     }
 
-    
 }
