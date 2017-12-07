@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+
 @Component
 public class StepsBase {
 
@@ -21,6 +23,14 @@ public class StepsBase {
     public final String BASE_URL = "http://localhost:8080";
 
     public StepsBase() {
+        File file;
+        if (System.getProperty("os.name").matches("Mac OS X")) {
+                file = new File("lib/macgeckodriver");
+            } else {
+                file = new File("lib/geckodriver");
+            }
+        final String absolutePath = file.getAbsolutePath();
+        System.setProperty("webdriver.gecko.driver", absolutePath);
         driver = new SilentHtmlUnitDriver();
     }
 
