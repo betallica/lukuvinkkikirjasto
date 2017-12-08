@@ -42,7 +42,7 @@
         </div>
     </form>
     
-    <a class="button" href="/book/edit">Editoi Kirjaa</a>
+    <a class="button" th:href="@{/books/{id}/edit (id=${bookHint.id})}">Editoi Kirjaa</a>
 
     <div th:replace="fragments/comments :: comments(@{/books/{id} (id=${bookHint.id})})"></div>
 </div>

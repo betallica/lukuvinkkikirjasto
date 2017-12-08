@@ -43,7 +43,7 @@
         </div>
     </form>
     
-    <a class="button" href="/video/edit">Editoi Video</a>
+    <a class="button" th:href="@{/videos/{id}/edit (id=${videoHint.id})}">Editoi Video</a>
 
     <div th:replace="fragments/comments :: comments(@{/videos/{id} (id=${videoHint.id})})"></div>
 </div>
