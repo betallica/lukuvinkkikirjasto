@@ -88,7 +88,7 @@ public class BlogController {
             }
             model.addAttribute("blogHintDto", blogHintDto);
             model.addAttribute("allTags", tagService.getAllTags());
-            return "add_blog";
+            return "edit_blog";
         }
 }
 
