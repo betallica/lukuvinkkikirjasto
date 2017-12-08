@@ -24,6 +24,17 @@ public class BlogHintService {
 
         return bh;
     }
+    
+    public BlogHint editBlogHint(Long id, BlogHintDto blogHintDto) {
+        BlogHint bh = this.getBlogHint(id);
+        bh.setName(blogHintDto.getName());
+        bh.setAuthor(blogHintDto.getAuthor());
+        bh.setUrl(blogHintDto.getUrl());
+        bh.setTags(blogHintDto.getTags());
+        blogHintRepository.save(bh);
+        
+        return bh;
+}
 
     public BlogHint getBlogHint(Long id) {
         return blogHintRepository.findOne(id);

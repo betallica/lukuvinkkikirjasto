@@ -45,6 +45,15 @@ public class HintService {
 
         return null;
     }
+    
+    public Hint editHint(Long id, HintDto hintDto) {
+        Hint hint= this.getHint(id);
+        if (hint instanceof BlogHint) {
+            return blogHintService.editBlogHint(id, (BlogHintDto) hintDto);
+        }
+
+        return null;
+}
 
     public List<Hint> getHintsInPage(int pageNumber, int numberOfHints, Boolean isRead, Set<Tag> tags) {
         final int pageIndex = pageNumber - 1;
