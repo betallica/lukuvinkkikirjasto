@@ -40,16 +40,6 @@ public class BlogController {
 
         return "add_blog";
     }
-    
-    @GetMapping("/blog/edit")
-    public String editBlog(Model model) {
-        BlogHintDto bhDto = new BlogHintDto();
-
-        model.addAttribute("blogHintDto", bhDto);
-        model.addAttribute("allTags", tagService.getAllTags());
-
-        return "edit_blog";
-    }
 
     @PostMapping("/blog/add")
     public String saveBlog(Model model, @ModelAttribute @Valid BlogHintDto blogHintDto, BindingResult result) {
