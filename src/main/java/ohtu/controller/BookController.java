@@ -38,9 +38,9 @@ public class BookController {
      */
     @GetMapping("/book/add")
     public String addBook(Model model) {
-        BookHintDto bhDto = new BookHintDto();
+        BookHintDto bookHintDto = new BookHintDto();
 
-        model.addAttribute("bookHintDto", bhDto);
+        model.addAttribute("bookHintDto", bookHintDto);
         model.addAttribute("allTags", tagService.getAllTags());
         return "add_book";
     }

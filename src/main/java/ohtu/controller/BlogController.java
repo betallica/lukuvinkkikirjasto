@@ -33,9 +33,9 @@ public class BlogController {
 
     @GetMapping("/blog/add")
     public String addBlog(Model model) {
-        BlogHintDto bhDto = new BlogHintDto();
+        BlogHintDto blockHintDto = new BlogHintDto();
 
-        model.addAttribute("blogHintDto", bhDto);
+        model.addAttribute("blogHintDto", blockHintDto);
         model.addAttribute("allTags", tagService.getAllTags());
 
         return "add_blog";
