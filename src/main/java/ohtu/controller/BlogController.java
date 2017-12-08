@@ -75,7 +75,7 @@ public class BlogController {
         return "edit_blog";
     }
     
-    @PostMapping("/blog/{id}/edit")
+    @PostMapping("/blogs/{id}/edit")
     public String saveBlogEdit (Model model, @ModelAttribute @Valid BlogHintDto blogHintDto, BindingResult result, @PathVariable long id) {
         if (!result.hasErrors()) {
             hintService.editHint(id, blogHintDto);

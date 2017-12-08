@@ -1,11 +1,11 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
 	<h1 class="title">Editoi blogivinkki</h1>
 
-<!--	<form th:action="@{/blog/add}" th:method="POST" th:object="${blogHintDto}">
+	<form th:action="@{/blogs/{id}/edit (id=${blogHint.id})}" th:method="POST" th:object="${blogHintDto}">
 		<div th:replace="fragments/form :: row('Otsikko', 'name')"></div>
 		<div th:replace="fragments/form :: row('Kirjoittaja', 'author')"></div>
 		<div th:replace="fragments/form :: row('URL', 'url')"></div>
 		<div th:replace="fragments/form :: tags"></div>
 		<div th:replace="fragments/form :: submit"></div>
-	</form>-->
+	</form>
 </div>
