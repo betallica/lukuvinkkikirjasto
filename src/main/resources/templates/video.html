@@ -42,6 +42,8 @@
             <input th:case="true" type="submit" value="Merkitse katsomattomaksi" name="isRead" class="button is-link isReadButton"/>
         </div>
     </form>
+    
+    <a class="button" href="/video/edit">Editoi Video</a>
 
     <div th:replace="fragments/comments :: comments(@{/videos/{id} (id=${videoHint.id})})"></div>
 </div>

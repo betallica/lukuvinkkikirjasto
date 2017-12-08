@@ -37,6 +37,16 @@ public class VideoController {
 
         return "add_video";
     }
+    
+    @GetMapping("/video/edit")
+    public String editVideo(Model model) {
+        VideoHintDto vhDto = new VideoHintDto();
+
+        model.addAttribute("videoHintDto", vhDto);
+        model.addAttribute("allTags", tagService.getAllTags());
+
+        return "edit_video";
+    }
 
     @PostMapping("/video/add")
     public String saveVideo(Model model, @ModelAttribute @Valid VideoHintDto videoHintDto, BindingResult result) {

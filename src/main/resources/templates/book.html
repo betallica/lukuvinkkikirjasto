@@ -41,6 +41,8 @@
             <input th:case="true" type="submit" value="Merkitse lukemattomaksi" name="isRead" class="button is-link isReadButton"/>
         </div>
     </form>
+    
+    <a class="button" href="/book/edit">Editoi Kirjaa</a>
 
     <div th:replace="fragments/comments :: comments(@{/books/{id} (id=${bookHint.id})})"></div>
 </div>

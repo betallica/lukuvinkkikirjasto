@@ -1,0 +1,11 @@
+<div layout:decorator="layouts/default" layout:fragment="content">
+	<h1 class="title">Editoi kirjavinkki</h1>
+	
+	<form th:action="@{/book/add}" th:method="POST" th:object="${bookHintDto}">
+		<div th:replace="fragments/form :: row('Otsikko', 'name')"></div>
+		<div th:replace="fragments/form :: row('Kirjoittaja', 'author')"></div>
+		<div th:replace="fragments/form :: row('ISBN', 'isbn')"></div>
+		<div th:replace="fragments/form :: tags"></div>
+		<div th:replace="fragments/form :: submit"></div>
+	</form>
+</div>

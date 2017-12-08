@@ -44,6 +44,15 @@ public class BookController {
         model.addAttribute("allTags", tagService.getAllTags());
         return "add_book";
     }
+    
+    @GetMapping("/book/edit")
+    public String editBook(Model model) {
+        BookHintDto bhDto = new BookHintDto();
+
+        model.addAttribute("bookHintDto", bhDto);
+        model.addAttribute("allTags", tagService.getAllTags());
+        return "edit_book";
+    }
 
     /**
      * Checks if that the book hint is added successfully.
