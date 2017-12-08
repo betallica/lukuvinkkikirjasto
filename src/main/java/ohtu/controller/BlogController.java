@@ -71,10 +71,7 @@ public class BlogController {
     @GetMapping("/blogs/{id}/edit")
     public String editBlog(Model model, @PathVariable long id) {
         model.addAttribute("blogHint", hintService.getHint(id));
-        model.addAttribute("comments", commentService.getCommentsForHint(id));
-
-        CommentDto commentDto = new CommentDto();
-        model.addAttribute("commentDto", commentDto);
+        model.addAttribute("allTags", tagService.getAllTags());
         return "edit_blog";
     }
     
