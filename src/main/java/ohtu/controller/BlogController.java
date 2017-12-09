@@ -69,13 +69,16 @@ public class BlogController {
     }
     
     @GetMapping("/blogs/{id}/edit")
-    public String editBlog(Model model, @PathVariable long id) {
+    public String editBlog(Model model, @ModelAttribute @Valid BlogHintDto blogHintDto, BindingResult result, @PathVariable long id) {
+        
         model.addAttribute("blogHint", hintService.getHint(id));
         model.addAttribute("allTags", tagService.getAllTags());
+        
         return "edit_blog";
     }
     
     @PostMapping("/blogs/{id}/edit")
+    
     public String saveBlogEdit (Model model, @ModelAttribute @Valid BlogHintDto blogHintDto, BindingResult result, @PathVariable long id) {
         if (!result.hasErrors()) {
             hintService.editHint(id, blogHintDto);
