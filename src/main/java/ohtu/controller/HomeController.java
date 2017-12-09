@@ -38,6 +38,7 @@ public class HomeController {
         String action = request.getParameter("action");
         Boolean isRead = isReadFromString(request.getParameter("isread"));
         String[] tags = request.getParameterValues("tags");
+        String filter = request.getParameter("filter");
 
         int pageNumber = 1;
         int totalHints = hintService.totalNumberOfHints(isRead, tagService.getTagsByNames(tags));
@@ -50,6 +51,7 @@ public class HomeController {
         model.addAttribute("totalPages", totalNumberOfPages(totalHints));
         model.addAttribute("hints", hintService.getHintsInPage(pageNumber, HINTS_PER_PAGE, isRead, tagService.getTagsByNames(tags)));
         model.addAttribute("tags", tagService.getAllTags());
+        model.addAttribute("filter", filter);
 
         return "home";
     }
