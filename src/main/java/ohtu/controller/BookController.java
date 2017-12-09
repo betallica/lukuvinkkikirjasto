@@ -45,12 +45,14 @@ public class BookController {
         return "add_book";
     }
     
-    @GetMapping("/book/edit")
-    public String editBook(Model model) {
-        BookHintDto bhDto = new BookHintDto();
+    @GetMapping("/books/{id}/edit")
+    public String editBook(Model model, @ModelAttribute @Valid BookHintDto bookHintDto, BindingResult result, @PathVariable long id) {
+        
 
-        model.addAttribute("bookHintDto", bhDto);
+        model.addAttribute("bookHint", hintService.getHint(id));
         model.addAttribute("allTags", tagService.getAllTags());
+        
+        
         return "edit_book";
     }
 
@@ -74,6 +76,20 @@ public class BookController {
             return "add_book";
         }
     }
+    
+    @PostMapping("/books/{id}/edit")
+    public String saveBookEdit (Model model, @ModelAttribute @Valid BookHintDto bookHintDto, BindingResult result, @PathVariable long id) {
+        if (!result.hasErrors()) {
+            hintService.editHint(id, bookHintDto);
+
+            return "redirect:/books/{id}";
+        } else {
+            
+            model.addAttribute("bookHintDto", bookHintDto);
+            model.addAttribute("allTags", tagService.getAllTags());
+            return "edit_book";
+        }
+}
 
     /**
      * A request is made to the books/{id} address and a specific book hint is

@@ -50,6 +50,8 @@ public class HintService {
         Hint hint= this.getHint(id);
         if (hint instanceof BlogHint) {
             return blogHintService.editBlogHint(id, (BlogHintDto) hintDto);
+        } else if (hint instanceof BookHint) {
+            return bookHintService.editBookHint(id, (BookHintDto) hintDto);
         }
 
         return null;
