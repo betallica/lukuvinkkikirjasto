@@ -40,7 +40,7 @@ public class HintService {
         } else if (hintDto instanceof BlogHintDto) {
             return blogHintService.createBlogHint((BlogHintDto) hintDto);
         } else if (hintDto instanceof VideoHintDto) {
-            return videoHintService.createBlogHint((VideoHintDto) hintDto);
+            return videoHintService.createVideoHint((VideoHintDto) hintDto);
         }
 
         return null;
@@ -52,6 +52,8 @@ public class HintService {
             return blogHintService.editBlogHint(id, (BlogHintDto) hintDto);
         } else if (hint instanceof BookHint) {
             return bookHintService.editBookHint(id, (BookHintDto) hintDto);
+        } else if (hint instanceof VideoHint) {
+            return videoHintService.editVideoHint(id, (VideoHintDto) hintDto);
         }
 
         return null;

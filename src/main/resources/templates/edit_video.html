@@ -1,7 +1,7 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
 	<h1 class="title">Editoi videovinkki</h1>
 	
-	<form th:action="@{/video/add}" th:method="POST" th:object="${videoHintDto}">
+	<form th:action="@{/videos/{id}/edit (id=${videoHint.id})}" th:method="POST" th:object="${videoHintDto}">
 		<div class="field is-horizontal">
 			<div class="field-label is-large">
 				<label class="label">Otsikko</label>
@@ -50,7 +50,7 @@
 			</div>
 		</div>
 
-		<div th:replace="fragments/form :: tags"></div>
-		<div th:replace="fragments/form :: submit"></div>
+		<div th:replace="fragments/form_edit :: tags"></div>
+		<div th:replace="fragments/form_edit :: submit"></div>
 	</form>
 </div>

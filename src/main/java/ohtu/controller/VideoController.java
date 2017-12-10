@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 
 @Controller
 public class VideoController {
@@ -38,14 +40,32 @@ public class VideoController {
         return "add_video";
     }
     
-    @GetMapping("/video/edit")
-    public String editVideo(Model model) {
-        VideoHintDto vhDto = new VideoHintDto();
+    @GetMapping("/videos/{id}/edit")
+    public String editVideo(Model model, @ModelAttribute @Valid VideoHintDto videoHintDto, BindingResult result, @PathVariable long id) {
 
-        model.addAttribute("videoHintDto", vhDto);
+        model.addAttribute("videoHint", hintService.getHint(id));
         model.addAttribute("allTags", tagService.getAllTags());
 
         return "edit_video";
+    }
+    
+    @PostMapping("/videos/{id}/edit")
+    public String saveVideoEdit(Model model, @ModelAttribute @Valid VideoHintDto videoHintDto, BindingResult result, @PathVariable long id) {
+        if (!result.hasErrors()) {
+            hintService.editHint(id, videoHintDto);
+
+            return "redirect:/videos/{id}";
+        } else {
+            
+            for (ObjectError error : result.getAllErrors()) {
+                FieldError fError = (FieldError) error;
+                System.out.println(fError.getField() + " : " + fError.getCode());
+            }
+            
+            model.addAttribute("videoHintDto", videoHintDto);
+            model.addAttribute("allTags", tagService.getAllTags());
+            return "edit_video";
+        }
     }
 
     @PostMapping("/video/add")
