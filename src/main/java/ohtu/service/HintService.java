@@ -51,17 +51,21 @@ public class HintService {
         Pageable pageable = new PageRequest(pageIndex, numberOfHints);
         Page<Hint> pages;
         if (isRead != null) {
-        	if(tags != null && !tags.isEmpty()) {
+        	if(tagsNotEmpty(tags)) {
         		pages = hintRepository.findDistinctByIsReadAndTagsInOrderByIdDesc(isRead, tags, pageable);
         	} else {
         		pages = hintRepository.findByIsReadOrderByIdDesc(isRead, pageable);
         	}
-        } else if(tags != null && !tags.isEmpty()) {
+        } else if(tagsNotEmpty(tags)) {
         	pages = hintRepository.findDistinctByTagsInOrderByIdDesc(tags, pageable);
         } else {
             pages = hintRepository.findAllByOrderByIdDesc(pageable);
         }
         return pages.getContent();
+    }
+
+    private static boolean tagsNotEmpty(Set<Tag> tags) {
+        return tags != null && !tags.isEmpty();
     }
 
     public int totalNumberOfHints(Boolean isRead, Set<Tag> tags) {
