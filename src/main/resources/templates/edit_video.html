@@ -49,8 +49,27 @@
 				</div>
 			</div>
 		</div>
+            
+            
+            <div class="field is-horizontal" th:fragment="tags">
+                <div class="field-label is-large">
+                    <label class="label">Tagit</label>
+                </div>
 
-		<div th:replace="fragments/form_edit :: tags"></div>
+                <div th:fragment="tagsList(allTags)" th:unless="${#lists.isEmpty(allTags)}" id="tagsBlock" class="field-body">
+                    <div class="field is-grouped is-grouped-multiline tags">
+                        <div class="tags has-addons control" th:each="tag : ${allTags}">
+                            <span class="tag">
+                                <input class="checkbox" type="checkbox" th:field="*{tags}" th:value="${tag.id}"/>
+                            </span>
+                            <span class="tag is-link" th:text="${tag.name}"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            
 		<div th:replace="fragments/form_edit :: submit"></div>
 	</form>
 </div>

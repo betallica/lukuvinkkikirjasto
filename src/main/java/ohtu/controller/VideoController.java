@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
+import ohtu.database.dto.BlogHintDto;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
@@ -41,7 +42,11 @@ public class VideoController {
     }
     
     @GetMapping("/videos/{id}/edit")
-    public String editVideo(Model model, @ModelAttribute @Valid VideoHintDto videoHintDto, BindingResult result, @PathVariable long id) {
+    public String editVideo(Model model, @PathVariable long id) {
+        
+        VideoHintDto vhDto = new VideoHintDto();
+
+        model.addAttribute("videoHintDto", vhDto);
 
         model.addAttribute("videoHint", hintService.getHint(id));
         model.addAttribute("allTags", tagService.getAllTags());

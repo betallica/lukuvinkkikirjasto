@@ -69,8 +69,11 @@ public class BlogController {
     }
     
     @GetMapping("/blogs/{id}/edit")
-    public String editBlog(Model model, @ModelAttribute @Valid BlogHintDto blogHintDto, BindingResult result, @PathVariable long id) {
-        
+    public String editBlog(Model model, @PathVariable long id) {
+
+        BlogHintDto bhDto = new BlogHintDto();
+
+        model.addAttribute("blogHintDto", bhDto);
         model.addAttribute("blogHint", hintService.getHint(id));
         model.addAttribute("allTags", tagService.getAllTags());
         

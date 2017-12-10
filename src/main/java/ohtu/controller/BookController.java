@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import ohtu.database.dto.BlogHintDto;
 
 @Controller
 public class BookController {
@@ -46,9 +47,11 @@ public class BookController {
     }
     
     @GetMapping("/books/{id}/edit")
-    public String editBook(Model model, @ModelAttribute @Valid BookHintDto bookHintDto, BindingResult result, @PathVariable long id) {
+    public String editBook(Model model, @PathVariable long id) {
         
-
+        BookHintDto bhDto = new BookHintDto();
+        
+        model.addAttribute("bookHintDto", bhDto);
         model.addAttribute("bookHint", hintService.getHint(id));
         model.addAttribute("allTags", tagService.getAllTags());
         
