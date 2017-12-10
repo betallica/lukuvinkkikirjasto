@@ -2,9 +2,53 @@
 	<h1 class="title">Editoi blogivinkki</h1>
 
 	<form th:action="@{/blogs/{id}/edit (id=${blogHint.id})}" th:method="POST" th:object="${blogHintDto}">
-		<div th:replace="fragments/form_edit :: row('Otsikko', 'name')"></div>
-		<div th:replace="fragments/form_edit :: row('Kirjoittaja', 'author')"></div>
-		<div th:replace="fragments/form_edit :: row('URL', 'url')"></div>
+		<div class="field is-horizontal">
+			<div class="field-label is-large">
+				<label class="label">Otsikko</label>
+			</div>
+
+			<div class="field-body">
+				<div class="field">
+					<input class="input is-large" th:classappend="${#fields.hasErrors('name')} ? is-danger" th:value ="${blogHint.name}" id="name" name="name"/>
+
+					<p class="help is-danger" th:each="error : ${#fields.errors('name')}" th:text="${error}">
+						Validation error
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="field is-horizontal">
+			<div class="field-label is-large">
+				<label class="label">Tekijä</label>
+			</div>
+
+			<div class="field-body">
+				<div class="field">
+                                    <input class="input is-large" th:classappend="${#fields.hasErrors('author')} ? is-danger" type="text" th:value ="${blogHint.author}" id="author" name="author"/>
+
+					<p class="help is-danger" th:each="error : ${#fields.errors('author')}" th:text="${error}">
+						Validation error
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="field is-horizontal">
+			<div class="field-label is-large">
+				<label class="label">URL</label>
+			</div>
+
+			<div class="field-body">
+				<div class="field">
+					<input class="input is-large" th:classappend="${#fields.hasErrors('url')} ? is-danger" type="text" th:value ="${blogHint.url}" id="url" name="url"/>
+
+					<p class="help is-danger" th:each="error : ${#fields.errors('url')}" th:text="${error}">
+						Validation error
+					</p>
+				</div>
+			</div>
+		</div>
 		<div th:replace="fragments/form_edit :: tags"></div>
 		<div th:replace="fragments/form_edit :: submit"></div>
 	</form>

@@ -1,21 +1,3 @@
-<div class="field is-horizontal" th:fragment="row(label, formField)">
-    <div class="field-label is-large">
-        <label class="label" th:text="${label}"></label>
-    </div>
-
-    <div class="field-body">
-        <div class="field">
-            <input class="input is-large" th:classappend="${#fields.hasErrors(formField)} ? is-danger" type="text" th:field="*{__${formField}__}" />
-
-<!--            seuraava rivit 12-14 automaattisesti trigerraa error teksit-->
-            
-            <p class="help is-danger" th:each="error : ${#fields.errors(formField)}" th:text="${error}">
-                Validation error
-            </p>
-        </div>
-    </div>
-</div>
-
 <div class="field is-horizontal" th:fragment="tags">
     <div class="field-label is-large">
         <label class="label">Tagit</label>
