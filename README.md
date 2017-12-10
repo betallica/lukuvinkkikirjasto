@@ -1,4 +1,4 @@
-# Lukuvinkkikirjasto
+﻿# Lukuvinkkikirjasto
 
 [![Build Status](https://travis-ci.org/betallica/lukuvinkkikirjasto.svg?branch=master)](https://travis-ci.org/betallica/lukuvinkkikirjasto)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/14c41217b02346a285fc51be8267b262)](https://www.codacy.com/app/V-Kopio/lukuvinkkikirjasto?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=betallica/lukuvinkkikirjasto&amp;utm_campaign=Badge_Grade)
@@ -41,3 +41,4 @@ Projektissa on käytössä [Bulma](https://bulma.io/)-css-framework, jonka kaikk
 
 ## Definition of Done
 User storyn mukainen toiminnallisuus on koodattu niin, että se toimii. Se on myös testattu, dokumentoitu ja integroitu (koodi on githubissa master-branchissa).
+
