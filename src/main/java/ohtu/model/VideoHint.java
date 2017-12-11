@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 @Entity
 public class VideoHint extends Hint {
     
-    private String author;
     private String url;
 
     public VideoHint() {

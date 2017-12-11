@@ -9,8 +9,7 @@ import javax.persistence.Entity;
 @Entity
 public class BookHint extends Hint {
 
-    private String author;
-    private String isbn;
+	private String isbn;
 
     public BookHint() {
         setType("Book");

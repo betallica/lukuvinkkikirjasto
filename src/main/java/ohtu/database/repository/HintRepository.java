@@ -21,6 +21,7 @@ public interface HintRepository extends JpaRepository<Hint, Long> {
 			+ "WHERE (h.isRead=:isRead OR :isRead IS NULL) "
 			+ "AND ((SELECT t FROM Tag t RIGHT JOIN t.hints th WHERE th=h) IN :tags OR :tags IS NULL) "
 			+ "AND (LOWER(h.name) LIKE LOWER(CONCAT('%',:keyword, '%')) "		// Find By Keyword
+			+ "OR LOWER(h.author) LIKE LOWER(CONCAT('%',:keyword, '%'))"
 			+ "OR LOWER(c.text) LIKE LOWER(CONCAT('%',:keyword, '%'))) ORDER BY h.id DESC")			
 	public Page<Hint> findByFilters(@Param("isRead") Boolean isRead, @Param("tags") Set<Tag> tags, @Param("keyword") String keyword, Pageable pageable);
 

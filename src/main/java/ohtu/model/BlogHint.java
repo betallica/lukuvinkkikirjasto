@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 @Entity
 public class BlogHint extends Hint {
 
-    private String author;
     private String url;
 
     public BlogHint() {
