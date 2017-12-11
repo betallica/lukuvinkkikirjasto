@@ -20,6 +20,7 @@ import java.util.Set;
 import ohtu.model.BlogHint;
 import ohtu.model.BookHint;
 import ohtu.model.VideoHint;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 @Service
 public class HintService {
@@ -84,6 +85,15 @@ public class HintService {
 
     public Hint getHint(Long id) {
         return hintRepository.findOne(id);
+    }
+
+    public HintDto getHintDto(Long id) throws Exception {
+        Hint hint = getHint(id);
+        if (hint instanceof VideoHint) {
+            return videoHintService.getVideoHintDto((VideoHint) hint);
+        } else {
+            throw new NotImplementedException();
+        }
     }
 
     public void saveHint(Hint hint) {
