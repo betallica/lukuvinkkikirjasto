@@ -2,9 +2,11 @@
   <h1 class="title">Vinkit</h1>
 
   <form th:action="@{/}" th:method="get">
+    <input type="hidden" name="filter" value="true" />
+
     <nav class="panel filter">
       <p class="panel-heading">
-        Suodatus
+        Suodatus&nbsp;&nbsp;<i id="expand" class="is-size-7 fa fa-chevron-up"></i>
       </p>
 
       <div class="panel-block">
@@ -50,7 +52,7 @@
 
         &nbsp;&nbsp;
 
-        <a class="button is-link is-outlined" href="/">
+        <a class="button is-link is-outlined" href="/?filter=true">
           <i class="fa fa-undo" aria-hidden="true"></i>
           &nbsp;&nbsp;Nollaa
         </a>

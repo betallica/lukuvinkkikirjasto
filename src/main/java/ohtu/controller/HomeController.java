@@ -1,12 +1,16 @@
 package ohtu.controller;
 
 import ohtu.database.repository.BookHintRepository;
+import ohtu.database.repository.HintRepository;
+import ohtu.model.Tag;
 import ohtu.service.HintService;
 import ohtu.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,6 +24,8 @@ public class HomeController {
 
     @Autowired
     private HintService hintService;
+    @Autowired
+    private HintRepository hintRepository;
 
     @Autowired
     private TagService tagService;
@@ -39,8 +45,10 @@ public class HomeController {
         Boolean isRead = isReadFromString(request.getParameter("isread"));
         String[] tags = request.getParameterValues("tags");
         String keyword = request.getParameter("keyword");
-        
+
         if(keyword == null)keyword="";
+
+        String filter = request.getParameter("filter");
 
         int pageNumber = 1;
         int totalHints = hintService.totalNumberOfHints(isRead, tagService.getTagsByNames(tags), keyword);
@@ -53,6 +61,7 @@ public class HomeController {
         model.addAttribute("totalPages", totalNumberOfPages(totalHints));
         model.addAttribute("hints", hintService.getHintsInPage(pageNumber, HINTS_PER_PAGE, isRead, tagService.getTagsByNames(tags), keyword));
         model.addAttribute("tags", tagService.getAllTags());
+        model.addAttribute("filter", filter);
 
         return "home";
     }

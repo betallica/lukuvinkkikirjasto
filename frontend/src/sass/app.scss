@@ -70,6 +70,14 @@ input{
     }
 }
 
+.filter .panel-heading {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
 .is-above {
     z-index: 100000;
 }
