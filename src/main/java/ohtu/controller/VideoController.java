@@ -3,6 +3,7 @@ package ohtu.controller;
 import ohtu.database.dto.CommentDto;
 import ohtu.database.dto.VideoHintDto;
 import ohtu.model.Hint;
+import ohtu.model.VideoHint;
 import ohtu.service.CommentService;
 import ohtu.service.HintService;
 import ohtu.service.TagService;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
+import ohtu.database.dto.BlogHintDto;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -37,6 +41,31 @@ public class VideoController {
         model.addAttribute("allTags", tagService.getAllTags());
 
         return "add_video";
+    }
+    
+    @GetMapping("/videos/{id}/edit")
+    public String editVideo(Model model, @PathVariable long id) throws Exception {
+        VideoHintDto videoHintDto = (VideoHintDto) hintService.getHintDto(id);
+        model.addAttribute("videoHintDto", videoHintDto);
+        model.addAttribute("videoHintId", id);
+        model.addAttribute("allTags", tagService.getAllTags());
+        return "edit_video";
+    }
+    
+    @PostMapping("/videos/{id}/edit")
+    public String saveVideoEdit(Model model, @ModelAttribute @Valid VideoHintDto videoHintDto, BindingResult result, @PathVariable long id) {
+        if (!result.hasErrors()) {
+            hintService.editHint(id, videoHintDto);
+
+            return "redirect:/videos/{id}";
+        } else {
+            
+            model.addAttribute("videoHint", hintService.getHint(id));
+            model.addAttribute("videoHintDto", videoHintDto);
+            model.addAttribute("videoHintId", id);
+            model.addAttribute("allTags", tagService.getAllTags());
+            return "edit_video";
+        }
     }
 
     @PostMapping("/video/add")

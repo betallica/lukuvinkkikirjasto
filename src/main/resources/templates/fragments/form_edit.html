@@ -1,0 +1,14 @@
+<div class="field is-horizontal" th:fragment="tags">
+    <div class="field-label is-large">
+        <label class="label">Tagit</label>
+    </div>
+
+    <div class="field-body" id="tagsBlock" th:replace="tags :: tagsList(${allTags})"></div>
+</div>
+
+<div class="field is-horizontal" th:fragment="submit">
+    <div class="field-label"></div>
+    <div class="field-body">
+        <input class="button is-link is-large" type="submit" value="Lisää muutokset" name="submit" />
+    </div>
+</div>

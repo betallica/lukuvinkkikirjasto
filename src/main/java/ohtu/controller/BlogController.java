@@ -68,6 +68,32 @@ public class BlogController {
         model.addAttribute("commentDto", commentDto);
         return "blog";
     }
+    
+    @GetMapping("/blogs/{id}/edit")
+    public String editBlog(Model model, @PathVariable long id) throws Exception {
+
+        BlogHintDto blogHintDto = (BlogHintDto) hintService.getHintDto(id);
+        model.addAttribute("blogHintDto", blogHintDto);
+        model.addAttribute("blogHintId", id);
+        model.addAttribute("allTags", tagService.getAllTags());
+        
+        return "edit_blog";
+    }
+    
+    @PostMapping("/blogs/{id}/edit")   
+    public String saveBlogEdit (Model model, @ModelAttribute @Valid BlogHintDto blogHintDto, BindingResult result, @PathVariable long id) throws Exception {
+        if (!result.hasErrors()) {
+            hintService.editHint(id, blogHintDto);
+
+            return "redirect:/blogs/{id}";
+        } else {        
+            model.addAttribute("blogHintDto", blogHintDto);
+            model.addAttribute("blogHintId", id);
+            model.addAttribute("allTags", tagService.getAllTags());
+            
+            return "edit_blog";
+        }
+}
 
     @PostMapping(value = "/blogs/{id}", params = "text")
     public String addCommentForBlog(Model model, @ModelAttribute @Valid CommentDto commentDto, BindingResult result,
