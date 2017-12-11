@@ -91,12 +91,6 @@ public class StepsBlogs {
     public void page_with_blog_information_is_presented() throws Throwable {
         assertTrue(driver.getPageSource().contains("Blogi"));
     }
-    
-    @Then("^error message \"([^\"]*)\" is shown in edit form$")
-    public void error_message_is_shown_in_edit_form(String error_message) throws Throwable {
-        driver.get("http://localhost:8080/blogs/1/edit");
-        assertTrue(driver.getPageSource().contains(error_message));
-    }
 
     @When("^blog name is clicked$")
     public void blog_name_is_clicked() throws Throwable {
@@ -116,13 +110,17 @@ public class StepsBlogs {
 
     private void addBlogWith(String name, String author, String url) {
         WebElement element = driver.findElement(By.name("name"));
+        element.clear();
         element.sendKeys(name);
         element = driver.findElement(By.name("author"));
+        element.clear();
         element.sendKeys(author);
         element = driver.findElement(By.name("url"));
+        element.clear();
         element.sendKeys(url);
         element = driver.findElement(By.name("submit"));
         element.click();
     }
+    
 
 }
