@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class BlogController {
@@ -42,10 +43,10 @@ public class BlogController {
     }
 
     @PostMapping("/blog/add")
-    public String saveBlog(Model model, @ModelAttribute @Valid BlogHintDto blogHintDto, BindingResult result) {
+    public String saveBlog(Model model, @ModelAttribute @Valid BlogHintDto blogHintDto, BindingResult result, RedirectAttributes redirect) {
         if (!result.hasErrors()) {
             hintService.createHint(blogHintDto);
-
+            redirect.addFlashAttribute("notification", "Blogivinkki lisätty!");
             return "redirect:/";
         } else {
             for (ObjectError error : result.getAllErrors()) {
@@ -70,7 +71,7 @@ public class BlogController {
 
     @PostMapping(value = "/blogs/{id}", params = "text")
     public String addCommentForBlog(Model model, @ModelAttribute @Valid CommentDto commentDto, BindingResult result,
-                                    @PathVariable long id) {
+                                    @PathVariable long id, RedirectAttributes redirect) {
         if (!result.hasErrors()) {
             commentDto.setHint(hintService.getHint(id));
             commentService.createComment(commentDto);
@@ -79,10 +80,10 @@ public class BlogController {
             model.addAttribute("comments", commentService.getCommentsForHint(id));
 
             model.addAttribute("commentDto", commentDto);
-
+            
             return "blog";
         }
-
+        redirect.addFlashAttribute("notification", "Kommentti lisätty!");
         return "redirect:/blogs/" + id;
     }
 

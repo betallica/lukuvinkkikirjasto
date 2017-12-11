@@ -5,3 +5,83 @@
 .hintTitle {
     display: inline;
 }
+.page-nofication{
+    margin-bottom: 20px;
+}
+.vanish {
+//     -moz-animation: fadeOut 0s ease-in 5s forwards;
+  //  /* Firefox */
+    //-webkit-animation: fadeOut 0s ease-in 5s forwards;
+    ///* Safari and Chrome */
+    //-o-animation: fadeOut 0s ease-in 5s forwards;
+    ///* Opera */
+    //animation: fadeOut 0s ease-in 5s forwards;
+    //-webkit-animation-fill-mode: forwards;
+    //animation-fill-mode: forwards;
+    animation-name: fadeOut;
+    animation-delay: 4s;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+@keyframes cssAnimation {
+    to {
+        width:0;
+        height:0;
+        overflow:hidden;
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+        width:0;
+        height:0;
+        visibility:hidden;
+    }
+}
+@-moz-keyframes fadeOut {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }  
+    100% { 
+        width: 0;
+        height: 0;
+        opacity: 0;
+        visibility: hidden;
+    }
+} 
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }  
+    100% { 
+        width: 0;
+        height: 0;
+        opacity: 0;
+        visibility: hidden;
+    }
+} 
+@-ms-keyframes fadeOut {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }  
+    100% { 
+        width: 0;
+        height: 0;
+        opacity: 0;
+        visibility: hidden;
+    }
+} 
+@-keyframes fadeOut {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }  
+    100% { 
+        width: 0;
+        height: 0;
+        opacity: 0;
+        visibility: hidden;
+    }
+} 

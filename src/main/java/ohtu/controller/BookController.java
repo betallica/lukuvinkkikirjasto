@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class BookController {
@@ -54,10 +55,10 @@ public class BookController {
      * @return Redirects to home or creates view of add_book and sends it.
      */
     @PostMapping("/book/add")
-    public String saveBook(Model model, @ModelAttribute @Valid BookHintDto bookHintDto, BindingResult result) {
+    public String saveBook(Model model, @ModelAttribute @Valid BookHintDto bookHintDto, BindingResult result, RedirectAttributes redirect) {
         if (!result.hasErrors()) {
             hintService.createHint(bookHintDto);
-
+            redirect.addFlashAttribute("notification", "Kirjavinkki lisätty!");
             return "redirect:/";
         } else {
             model.addAttribute("allTags", tagService.getAllTags());
@@ -86,7 +87,7 @@ public class BookController {
 
     @PostMapping(value = "/books/{id}", params = "text")
     public String addCommentForBook(Model model, @ModelAttribute @Valid CommentDto commentDto, BindingResult result,
-                                    @PathVariable long id) {
+                                    @PathVariable long id, RedirectAttributes redirect) {
         if (!result.hasErrors()) {
             commentDto.setHint(hintService.getHint(id));
             commentService.createComment(commentDto);
@@ -98,7 +99,7 @@ public class BookController {
 
             return "book";
         }
-
+        redirect.addFlashAttribute("notification", "Kommentti lisätty!");
         return "redirect:/books/" + id;
     }
 
