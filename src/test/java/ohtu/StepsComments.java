@@ -43,5 +43,8 @@ public class StepsComments {
         WebElement element = driver.findElement(By.name("addComment"));
         element.click();
     }
-
+    @Then("^the new notification with text \"([^\"]*)\" is shown$")
+    public void the_new_notification_with_text_is_shown(String text) throws Throwable {
+        assertTrue(driver.getPageSource().contains(text));
+    }
 }
