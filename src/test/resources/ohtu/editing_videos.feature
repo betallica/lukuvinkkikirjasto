@@ -1,4 +1,4 @@
-Feature: user edit add videos
+Feature: user can edit videos
 
   Scenario: user can edit a video
     Given video with valid name "What is Agility" and valid vidauthor "Mark" and valid url "https://www.youtube.com/watch?XYZ" is entered

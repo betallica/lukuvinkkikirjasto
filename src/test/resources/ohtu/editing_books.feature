@@ -1,4 +1,4 @@
-Feature: user edit add books
+Feature: user can edit books
 
   Scenario: user can edit a book
     Given a book with a name "Cucumber" and author "Matt and Aslak" and isbn "9781111578350" is added
