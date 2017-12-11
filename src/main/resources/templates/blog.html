@@ -44,7 +44,7 @@
         </div>
     </form>
     
-    <a class="button" th:href="@{/blogs/{id}/edit (id=${blogHint.id})}">Editoi Blogia</a>
+    <a class="button" id="edit" th:href="@{/blogs/{id}/edit (id=${blogHint.id})}">Editoi Blogia</a>
 
     <div th:replace="fragments/comments :: comments(@{/blogs/{id} (id=${blogHint.id})})"></div>
 </div>

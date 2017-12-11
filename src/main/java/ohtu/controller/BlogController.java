@@ -80,17 +80,16 @@ public class BlogController {
     }
     
     @PostMapping("/blogs/{id}/edit")   
-    public String saveBlogEdit (Model model, @ModelAttribute @Valid BlogHintDto blogHintDto, BindingResult result, @PathVariable long id) {
+    public String saveBlogEdit (Model model, @ModelAttribute @Valid BlogHintDto blogHintDto, BindingResult result, @PathVariable long id) throws Exception {
         if (!result.hasErrors()) {
             hintService.editHint(id, blogHintDto);
 
             return "redirect:/blogs/{id}";
-        } else {
-            
-            model.addAttribute("blogHint", hintService.getHint(id));
+        } else {        
             model.addAttribute("blogHintDto", blogHintDto);
             model.addAttribute("blogHintId", id);
             model.addAttribute("allTags", tagService.getAllTags());
+            
             return "edit_blog";
         }
 }
