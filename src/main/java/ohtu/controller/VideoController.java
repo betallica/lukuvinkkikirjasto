@@ -3,6 +3,7 @@ package ohtu.controller;
 import ohtu.database.dto.CommentDto;
 import ohtu.database.dto.VideoHintDto;
 import ohtu.model.Hint;
+import ohtu.model.VideoHint;
 import ohtu.service.CommentService;
 import ohtu.service.HintService;
 import ohtu.service.TagService;
@@ -42,15 +43,11 @@ public class VideoController {
     }
     
     @GetMapping("/videos/{id}/edit")
-    public String editVideo(Model model, @PathVariable long id) {
-        
-        VideoHintDto vhDto = new VideoHintDto();
-
-        model.addAttribute("videoHintDto", vhDto);
-
-        model.addAttribute("videoHint", hintService.getHint(id));
+    public String editVideo(Model model, @PathVariable long id) throws Exception {
+        VideoHintDto videoHintDto = (VideoHintDto) hintService.getHintDto(id);
+        model.addAttribute("videoHintDto", videoHintDto);
+        model.addAttribute("videoHintId", id);
         model.addAttribute("allTags", tagService.getAllTags());
-
         return "edit_video";
     }
     

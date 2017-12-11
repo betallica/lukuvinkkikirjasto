@@ -1,7 +1,7 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
 	<h1 class="title">Editoi videovinkki</h1>
 	
-	<form th:action="@{/videos/{id}/edit (id=${videoHint.id})}" th:method="POST" th:object="${videoHintDto}">
+	<form th:action="@{/videos/{id}/edit (id=${videoHintId})}" th:method="POST" th:object="${videoHintDto}">
 		<div class="field is-horizontal">
 			<div class="field-label is-large">
 				<label class="label">Otsikko</label>
@@ -9,7 +9,7 @@
 
 			<div class="field-body">
 				<div class="field">
-					<input class="input is-large" th:classappend="${#fields.hasErrors('name')} ? is-danger" th:value ="${videoHint.name}" id="name" name="name"/>
+					<input class="input is-large" th:classappend="${#fields.hasErrors('name')} ? is-danger" type="text" th:field="*{name}" />
 
 					<p class="help is-danger" th:each="error : ${#fields.errors('name')}" th:text="${error}">
 						Validation error
@@ -25,7 +25,7 @@
 
 			<div class="field-body">
 				<div class="field">
-                                    <input class="input is-large" th:classappend="${#fields.hasErrors('author')} ? is-danger" type="text" th:value ="${videoHint.author}" id="author" name="author"/>
+					<input class="input is-large" th:classappend="${#fields.hasErrors('author')} ? is-danger" type="text" th:field="*{author}" />
 
 					<p class="help is-danger" th:each="error : ${#fields.errors('author')}" th:text="${error}">
 						Validation error
@@ -41,7 +41,7 @@
 
 			<div class="field-body">
 				<div class="field">
-					<input class="input is-large" th:classappend="${#fields.hasErrors('url')} ? is-danger" type="text" th:value ="${videoHint.url}" id="url" name="url"/>
+					<input class="input is-large" th:classappend="${#fields.hasErrors('url')} ? is-danger" type="text" th:field="*{url}" />
 
 					<p class="help is-danger" th:each="error : ${#fields.errors('url')}" th:text="${error}">
 						Validation error
@@ -49,26 +49,8 @@
 				</div>
 			</div>
 		</div>
-            
-            
-            <div class="field is-horizontal" th:fragment="tags">
-                <div class="field-label is-large">
-                    <label class="label">Tagit</label>
-                </div>
 
-                <div th:fragment="tagsList(allTags)" th:unless="${#lists.isEmpty(allTags)}" id="tagsBlock" class="field-body">
-                    <div class="field is-grouped is-grouped-multiline tags">
-                        <div class="tags has-addons control" th:each="tag : ${allTags}">
-                            <span class="tag">
-                                <input class="checkbox" type="checkbox" th:field="*{tags}" th:value="${tag.id}"/>
-                            </span>
-                            <span class="tag is-link" th:text="${tag.name}"></span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            
-            <div th:replace="fragments/form_edit :: submit"></div>
+		<div th:replace="fragments/form :: tags"></div>
+		<div th:replace="fragments/form :: submit"></div>
 	</form>
 </div>
