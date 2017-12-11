@@ -70,6 +70,22 @@ public class StepsBlogs {
         stepsBase.clickLinkWithText(ADD_BLOG_LINK);
         addBlogWith(name, author, url);
     }
+    
+    @Given("^user is at the blogs \"([^\"]*)\" info page$")
+    public void user_is_at_the_named_blogs_info_page(String name) throws Throwable {
+        stepsBase.goToBaseUrl();
+        stepsBase.clickLinkWithText(name);
+    }
+    
+    @Given("^command edit blog is selected$")
+    public void command_edit_blog_is_selected() throws Throwable {
+        stepsBase.clickLinkWithId("edit");
+    }
+    
+    @Then("^user is redirected to blogs \"([^\"]*)\" page$") 
+    public void user_is_redirected_to_named_blogs_page(String name) throws Throwable {
+        assertTrue(driver.getPageSource().contains(name));
+    }
 
     @Then("^page with blog information is presented$")
     public void page_with_blog_information_is_presented() throws Throwable {
@@ -94,13 +110,17 @@ public class StepsBlogs {
 
     private void addBlogWith(String name, String author, String url) {
         WebElement element = driver.findElement(By.name("name"));
+        element.clear();
         element.sendKeys(name);
         element = driver.findElement(By.name("author"));
+        element.clear();
         element.sendKeys(author);
         element = driver.findElement(By.name("url"));
+        element.clear();
         element.sendKeys(url);
         element = driver.findElement(By.name("submit"));
         element.click();
     }
+    
 
 }

@@ -20,6 +20,7 @@ import java.util.Set;
 import ohtu.model.BlogHint;
 import ohtu.model.BookHint;
 import ohtu.model.VideoHint;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 @Service
 public class HintService {
@@ -40,11 +41,24 @@ public class HintService {
         } else if (hintDto instanceof BlogHintDto) {
             return blogHintService.createBlogHint((BlogHintDto) hintDto);
         } else if (hintDto instanceof VideoHintDto) {
-            return videoHintService.createBlogHint((VideoHintDto) hintDto);
+            return videoHintService.createVideoHint((VideoHintDto) hintDto);
         }
 
         return null;
     }
+    
+    public Hint editHint(Long id, HintDto hintDto) {
+        Hint hint= this.getHint(id);
+        if (hint instanceof BlogHint) {
+            return blogHintService.editBlogHint(id, (BlogHintDto) hintDto);
+        } else if (hint instanceof BookHint) {
+            return bookHintService.editBookHint(id, (BookHintDto) hintDto);
+        } else if (hint instanceof VideoHint) {
+            return videoHintService.editVideoHint(id, (VideoHintDto) hintDto);
+        }
+
+        return null;
+}
 
     public List<Hint> getHintsInPage(int pageNumber, int numberOfHints, Boolean isRead, Set<Tag> tags, String keyword) {
         final int pageIndex = pageNumber - 1;
@@ -62,6 +76,19 @@ public class HintService {
 
     public Hint getHint(Long id) {
         return hintRepository.findOne(id);
+    }
+
+    public HintDto getHintDto(Long id) throws Exception {
+        Hint hint = getHint(id);
+        if (hint instanceof VideoHint) {
+            return videoHintService.getVideoHintDto((VideoHint) hint);
+        } else if (hint instanceof BlogHint) {
+            return blogHintService.getBlogHintDto((BlogHint) hint);
+        } else if (hint instanceof BookHint) {
+            return bookHintService.getBookHintDto((BookHint) hint);
+        } else {
+            throw new NotImplementedException();
+        }
     }
 
     public void saveHint(Hint hint) {

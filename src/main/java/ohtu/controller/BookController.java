@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.validation.Valid;
+import ohtu.database.dto.BlogHintDto;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -45,6 +45,19 @@ public class BookController {
         model.addAttribute("allTags", tagService.getAllTags());
         return "add_book";
     }
+    
+    @GetMapping("/books/{id}/edit")
+    public String editBook(Model model, @PathVariable long id) throws Exception {
+        
+        BookHintDto bookHintDto = (BookHintDto) hintService.getHintDto(id);
+        
+        model.addAttribute("bookHintDto", bookHintDto);
+        model.addAttribute("bookHintId", id);
+        model.addAttribute("allTags", tagService.getAllTags());
+        
+        
+        return "edit_book";
+    }
 
     /**
      * Checks if that the book hint is added successfully.
@@ -66,6 +79,22 @@ public class BookController {
             return "add_book";
         }
     }
+    
+    @PostMapping("/books/{id}/edit")
+    public String saveBookEdit (Model model, @ModelAttribute @Valid BookHintDto bookHintDto, BindingResult result, @PathVariable long id) {
+        if (!result.hasErrors()) {
+            hintService.editHint(id, bookHintDto);
+
+            return "redirect:/books/{id}";
+        } else {
+            
+            model.addAttribute("bookHint", hintService.getHint(id));
+            model.addAttribute("bookHintDto", bookHintDto);
+            model.addAttribute("bookHintId", id);
+            model.addAttribute("allTags", tagService.getAllTags());
+            return "edit_book";
+        }
+}
 
     /**
      * A request is made to the books/{id} address and a specific book hint is

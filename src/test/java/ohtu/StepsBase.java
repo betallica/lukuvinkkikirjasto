@@ -58,6 +58,19 @@ public class StepsBase {
             }
         }
     }
+    
+    public void clickLinkWithId(String id) {
+        int trials = 0;
+        while( trials++<5 ) {
+            try{
+                final WebElement element = getDriver().findElement(By.id(id));
+                element.click();
+                break;
+            } catch(Exception e) {
+                e.getStackTrace();
+            }
+        }
+    }
 }
 
 
