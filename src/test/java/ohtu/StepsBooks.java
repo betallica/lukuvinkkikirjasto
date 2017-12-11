@@ -29,6 +29,22 @@ public class StepsBooks {
         driver.get(stepsBase.BASE_URL);
         stepsBase.clickLinkWithText(ADD_BOOK_LINK);
     }
+    
+    @Given("^user is at the books \"([^\"]*)\" info page$")
+    public void user_is_at_the_named_books_info_page(String name) throws Throwable {
+        stepsBase.goToBaseUrl();
+        stepsBase.clickLinkWithText(name);
+    }
+    
+    @Given("^command edit book is selected$")
+    public void command_edit_book_is_selected() throws Throwable {
+        stepsBase.clickLinkWithId("edit");
+    }
+    
+    @Then("^user is redirected to books \"([^\"]*)\" page$") 
+    public void user_is_redirected_to_named_books_page(String name) throws Throwable {
+        assertTrue(driver.getPageSource().contains(name));
+    }
 
     @Given("^a book with a name \"([^\"]*)\" and author \"([^\"]*)\" and isbn \"([^\"]*)\" is added$")
     public void a_book_with_a_name_and_author_and_isbn_is_added(String name, String author, String isbn) throws Throwable {
@@ -118,14 +134,17 @@ public class StepsBooks {
         stepsBase.goToBaseUrl();
         stepsBase.clickLinkWithText(name);
     }
-
+    
 
     private void addBookWithNewestTag(String name, String author, String isbn) {
         WebElement element = driver.findElement(By.name("name"));
+        element.clear();
         element.sendKeys(name);
         element = driver.findElement(By.name("author"));
+        element.clear();
         element.sendKeys(author);
         element = driver.findElement(By.name("isbn"));
+        element.clear();
         element.sendKeys(isbn);
         element = driver.findElement(By.id("tags1"));
         element.click();
@@ -135,10 +154,13 @@ public class StepsBooks {
 
     private void addBookWith(String name, String author, String isbn) {
         WebElement element = driver.findElement(By.name("name"));
+        element.clear();
         element.sendKeys(name);
         element = driver.findElement(By.name("author"));
+        element.clear();
         element.sendKeys(author);
         element = driver.findElement(By.name("isbn"));
+        element.clear();
         element.sendKeys(isbn);
         element = driver.findElement(By.name("submit"));
         element.click();
