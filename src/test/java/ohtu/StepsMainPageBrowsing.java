@@ -35,6 +35,20 @@ public class StepsMainPageBrowsing {
         assertTrue(driver.getPageSource().contains(error_message));
     }
 
+    @When("^user enters \"([^\"]*)\" to search field$")
+    public void user_enters_text_to_search_field(String text) throws Throwable {
+        WebElement element = driver.findElement(By.id("expand"));
+        element.click();
+        element = driver.findElement(By.name("keyword"));
+        element.sendKeys(text);
+    }
+    
+    @When("^user selects filter$")
+    public void user_selects_filter() throws Throwable {
+        WebElement element = driver.findElement(By.id("filter"));
+        element.click();
+    }
+
     @When("^at the home page$")
     public void at_the_home_page() throws Throwable {
         stepsBase.goToBaseUrl();
