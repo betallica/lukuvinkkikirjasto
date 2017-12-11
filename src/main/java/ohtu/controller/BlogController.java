@@ -79,8 +79,7 @@ public class BlogController {
         return "edit_blog";
     }
     
-    @PostMapping("/blogs/{id}/edit")
-    
+    @PostMapping("/blogs/{id}/edit")   
     public String saveBlogEdit (Model model, @ModelAttribute @Valid BlogHintDto blogHintDto, BindingResult result, @PathVariable long id) {
         if (!result.hasErrors()) {
             hintService.editHint(id, blogHintDto);
@@ -90,6 +89,7 @@ public class BlogController {
             
             model.addAttribute("blogHint", hintService.getHint(id));
             model.addAttribute("blogHintDto", blogHintDto);
+            model.addAttribute("blogHintId", id);
             model.addAttribute("allTags", tagService.getAllTags());
             return "edit_blog";
         }
