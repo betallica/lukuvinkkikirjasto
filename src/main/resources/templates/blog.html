@@ -1,4 +1,7 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
+    <div th:if="${notification}!=null">
+        <div th:replace="fragments/notifications"></div>
+    </div>
     <h1 class="title hintTitle" th:text="${blogHint.name}"></h1>
     
     <div class="readIndicator" th:switch="${blogHint.isRead}">

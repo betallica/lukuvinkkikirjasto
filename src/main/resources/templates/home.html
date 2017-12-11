@@ -1,114 +1,127 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
-  <h1 class="title">Vinkit</h1>
+    <div th:if="${notification}!=null">
+        <div th:replace="fragments/notifications"></div>
+    </div>
+    <h1 class="title">Vinkit</h1>
 
-  <form th:action="@{/}" th:method="get">
-    <nav class="panel filter">
-      <p class="panel-heading">
-        Suodatus
-      </p>
+    <form th:action="@{/}" th:method="get">
+        <input type="hidden" name="filter" value="true" />
 
-      <div class="panel-block">
-        <div class="field has-addons" th:with="read=${param.isread != null ? param.isread[0] == 'read' : false}, unread=${param.isread != null ? param.isread[0] == 'unread' : false}">
-          <p class="control">
-            <label class="button">
-              <input id="filter_read" type="radio" name="isread" value="read" th:checked="${read}" /> Käytetyt
-            </label>
-          </p>
+        <nav class="panel filter">
+            <p class="panel-heading">
+                Suodatus&nbsp;&nbsp;<i id="expand" class="is-size-7 fa fa-chevron-up"></i>
+            </p>
 
-          <p class="control">
-            <label class="button">
-              <input id="filter_unread" type="radio" name="isread" value="unread" th:checked="${unread}" /> Käyttämättömät
-            </label>
-          </p>
+            <div class="panel-block">
+                <div class="field has-addons" th:with="read=${param.isread != null ? param.isread[0] == 'read' : false}, unread=${param.isread != null ? param.isread[0] == 'unread' : false}">
+                    <p class="control">
+                        <label class="button">
+                            <input id="filter_read" type="radio" name="isread" value="read" th:checked="${read}" /> Käytetyt
+                        </label>
+                    </p>
 
-          <p class="control">
-            <label class="button">
-              <input id="filter_all" type="radio" name="isread" value="all" th:checked="${!read and !unread}" /> Kaikki
-            </label>
-          </p>
-        </div>
-      </div>
+                    <p class="control">
+                        <label class="button">
+                            <input id="filter_unread" type="radio" name="isread" value="unread" th:checked="${unread}" /> Käyttämättömät
+                        </label>
+                    </p>
 
-      <div class="panel-block">
-        <div class="tags">
-          <label class="tag" th:each="tag : ${tags}" th:with="checked=${param.tags != null ? #lists.contains(param.tags, tag.name) : false}">
-            <input type="checkbox" th:value="${tag.name}" name="tags" class="tag-checkbox" th:checked="${checked}" />
-            <span th:text="${tag.name}"></span>
-          </label>
-        </div>
-      </div>
+                    <p class="control">
+                        <label class="button">
+                            <input id="filter_all" type="radio" name="isread" value="all" th:checked="${!read and !unread}" /> Kaikki
+                        </label>
+                    </p>
+                </div>
+            </div>
 
-      <div class="panel-block">
-        <button id="filter" type="submit" class="button is-link">
-          <i class="fa fa-filter" aria-hidden="true"></i>
-          &nbsp;&nbsp;Suodata
-        </button>
+            <div class="panel-block">
+                <div class="tags">
+                    <label class="tag" th:each="tag : ${tags}" th:with="checked=${param.tags != null ? #lists.contains(param.tags, tag.name) : false}">
+                        <input type="checkbox" th:value="${tag.name}" name="tags" class="tag-checkbox" th:checked="${checked}" />
+                        <span th:text="${tag.name}"></span>
+                    </label>
+                </div>
+            </div>
 
-        &nbsp;&nbsp;
+            <div class="panel-block">
+                <input type="text" name="keyword" placeholder="Vapaa tekstihaku..."/>
+            </div>
 
-        <a class="button is-link is-outlined" href="/">
-          <i class="fa fa-undo" aria-hidden="true"></i>
-          &nbsp;&nbsp;Nollaa
+            <div>
+                <input type="text" name="keyword" placeholder="Vapaa tekstihaku..."/>
+            </div>
+
+            <div class="panel-block">
+                <button id="filter" type="submit" class="button is-link">
+                    <i class="fa fa-filter" aria-hidden="true"></i>
+                    &nbsp;&nbsp;Suodata
+                </button>
+
+                &nbsp;&nbsp;
+
+                <a class="button is-link is-outlined" href="/?filter=true">
+                    <i class="fa fa-undo" aria-hidden="true"></i>
+                    &nbsp;&nbsp;Nollaa
+                </a>
+            </div>
+        </nav>
+    </form>
+
+    <hr/>
+
+    <table class="table is-striped is-fullwidth">
+        <thead>
+            <tr>
+                <th>Nimi</th>
+                <th>Tekijä</th>
+                <th>Tyyppi</th>
+                <th>Luettu</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="hint : ${hints}">
+                <td th:switch="${hint.type}">
+                    <a th:case="'Book'" th:href="@{/books/{hintID}/(hintID=${hint.id})}">
+                        <span th:text="${hint.name}"></span>
+                    </a>
+                    <a th:case="'Blog'" th:href="@{/blogs/{hintID}/(hintID=${hint.id})}">
+                        <span th:text="${hint.name}"></span>
+                    </a>
+                    <a th:case="'Video'" th:href="@{/videos/{hintID}/(hintID=${hint.id})}">
+                        <span th:text="${hint.name}"></span>
+                    </a>
+                </td>
+                <td>
+                    <span th:text="${hint.author}"></span>
+                </td>
+                <td>
+                    <span th:text="${hint.type}"></span>
+                </td>
+                <td th:switch="${hint.isRead}">
+                    <span th:case="false" class="icon has-text-gray">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                    <span th:case="true" class="icon has-text-success">
+                        <i class="fa fa-check-square"></i>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <nav class="pagination">
+        <a th:disabled="${page == 1}" th:href="@{/(page=${page}, action='prev', isread=${param.isread}, tags=${param.tags})}" class="pagination-previous">
+            &laquo; Edellinen
         </a>
-      </div>
+        <a th:disabled="${page >= totalPages}" th:href="@{/(page=${page}, action='next', isread=${param.isread}, tags=${param.tags})}" class="pagination-next">
+            Seuraava &raquo;
+        </a>
+        <ul class="pagination-list">
+            <li class="pagination-ellipsis">Sivu</li>
+            <li class="pagination-ellipsis" th:text="${page}" />
+            <li class="pagination-ellipsis">/</li>
+            <li class="pagination-ellipsis" th:text="${totalPages}" />
+        </ul>
     </nav>
-  </form>
-
-  <hr/>
-
-  <table class="table is-striped is-fullwidth">
-    <thead>
-      <tr>
-        <th>Nimi</th>
-        <th>Tekijä</th>
-        <th>Tyyppi</th>
-        <th>Luettu</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr th:each="hint : ${hints}">
-        <td th:switch="${hint.type}">
-          <a th:case="'Book'" th:href="@{/books/{hintID}/(hintID=${hint.id})}">
-            <span th:text="${hint.name}"></span>
-          </a>
-          <a th:case="'Blog'" th:href="@{/blogs/{hintID}/(hintID=${hint.id})}">
-            <span th:text="${hint.name}"></span>
-          </a>
-          <a th:case="'Video'" th:href="@{/videos/{hintID}/(hintID=${hint.id})}">
-            <span th:text="${hint.name}"></span>
-          </a>
-        </td>
-        <td>
-          <span th:text="${hint.author}"></span>
-        </td>
-        <td>
-          <span th:text="${hint.type}"></span>
-        </td>
-        <td th:switch="${hint.isRead}">
-          <span th:case="false" class="icon has-text-gray">
-            <i class="fa fa-times" aria-hidden="true"></i>
-          </span>
-          <span th:case="true" class="icon has-text-success">
-            <i class="fa fa-check-square"></i>
-          </span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <nav class="pagination">
-    <a th:disabled="${page == 1}" th:href="@{/(page=${page}, action='prev', isread=${param.isread}, tags=${param.tags})}" class="pagination-previous">
-      &laquo; Edellinen
-    </a>
-    <a th:disabled="${page >= totalPages}" th:href="@{/(page=${page}, action='next', isread=${param.isread}, tags=${param.tags})}" class="pagination-next">
-      Seuraava &raquo;
-    </a>
-    <ul class="pagination-list">
-      <li class="pagination-ellipsis">Sivu</li>
-      <li class="pagination-ellipsis" th:text="${page}" />
-      <li class="pagination-ellipsis">/</li>
-      <li class="pagination-ellipsis" th:text="${totalPages}" />
-    </ul>
-  </nav>
 
 </div>

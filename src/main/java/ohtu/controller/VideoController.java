@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import ohtu.database.dto.BlogHintDto;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class VideoController {
@@ -68,10 +69,10 @@ public class VideoController {
     }
 
     @PostMapping("/video/add")
-    public String saveVideo(Model model, @ModelAttribute @Valid VideoHintDto videoHintDto, BindingResult result) {
+    public String saveVideo(Model model, @ModelAttribute @Valid VideoHintDto videoHintDto, BindingResult result, RedirectAttributes redirect) {
         if (!result.hasErrors()) {
             hintService.createHint(videoHintDto);
-
+            redirect.addFlashAttribute("notification", "Videovinkki lisätty!");
             return "redirect:/";
         } else {
             model.addAttribute("videoHintDto", videoHintDto);
@@ -92,7 +93,7 @@ public class VideoController {
 
     @PostMapping(value = "/videos/{id}", params = "text")
     public String addCommentForVideo(Model model, @ModelAttribute @Valid CommentDto commentDto, BindingResult result,
-                                     @PathVariable long id) {
+                                     @PathVariable long id, RedirectAttributes redirect) {
         if (!result.hasErrors()) {
             commentDto.setHint(hintService.getHint(id));
             commentService.createComment(commentDto);
@@ -104,6 +105,7 @@ public class VideoController {
 
             return "video";
         }
+        redirect.addFlashAttribute("notification", "Kommentti lisätty!");
         return "redirect:/videos/" + id;
     }
 
