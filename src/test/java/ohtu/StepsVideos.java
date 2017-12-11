@@ -47,6 +47,16 @@ public class StepsVideos {
         stepsBase.clickLinkWithText(ADD_VIDEO_LINK);
         addVideoWith(name, author, url);
     }
+    
+    @Given("^command edit video is selected$")
+    public void command_edit_video_is_selected() throws Throwable {
+        stepsBase.clickLinkWithId("edit");
+    }
+    
+    @Then("^user is redirected to videos \"([^\"]*)\" page$") 
+    public void user_is_redirected_to_named_videos_page(String name) throws Throwable {
+        assertTrue(driver.getPageSource().contains(name));
+    }
 
     @When("^video name is clicked$")
     public void video_name_is_clicked() throws Throwable {
@@ -92,10 +102,13 @@ public class StepsVideos {
 
     private void addVideoWith(String name, String author, String url) {
         WebElement element = driver.findElement(By.name("name"));
+        element.clear();
         element.sendKeys(name);
         element = driver.findElement(By.name("author"));
+        element.clear();
         element.sendKeys(author);
         element = driver.findElement(By.name("url"));
+        element.clear();
         element.sendKeys(url);
         element = driver.findElement(By.name("submit"));
         element.click();
