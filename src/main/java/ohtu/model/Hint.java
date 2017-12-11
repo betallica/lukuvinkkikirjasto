@@ -18,7 +18,9 @@ public abstract class Hint implements Serializable {
     private String name;
 
     private String type;
-
+    
+    protected String author;
+    
     @ManyToMany
     private Set<Tag> tags;
     
@@ -69,5 +71,13 @@ public abstract class Hint implements Serializable {
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 
 }
