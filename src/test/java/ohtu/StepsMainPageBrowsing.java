@@ -99,4 +99,9 @@ public class StepsMainPageBrowsing {
         element.click();
     }
 
+    @Then("^notification \"([^\"]*)\" is shown$")
+    public void notification_is_shown(String notification_text) throws Throwable {
+        assertTrue(driver.getPageSource().contains(notification_text));
+    }
 }
+
