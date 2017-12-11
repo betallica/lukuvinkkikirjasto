@@ -47,12 +47,12 @@ public class BookController {
     }
     
     @GetMapping("/books/{id}/edit")
-    public String editBook(Model model, @PathVariable long id) {
+    public String editBook(Model model, @PathVariable long id) throws Exception {
         
-        BookHintDto bhDto = new BookHintDto();
+        BookHintDto bookHintDto = (BookHintDto) hintService.getHintDto(id);
         
-        model.addAttribute("bookHintDto", bhDto);
-        model.addAttribute("bookHint", hintService.getHint(id));
+        model.addAttribute("bookHintDto", bookHintDto);
+        model.addAttribute("bookHintId", id);
         model.addAttribute("allTags", tagService.getAllTags());
         
         

@@ -91,6 +91,10 @@ public class HintService {
         Hint hint = getHint(id);
         if (hint instanceof VideoHint) {
             return videoHintService.getVideoHintDto((VideoHint) hint);
+        } else if (hint instanceof BlogHint) {
+            return blogHintService.getBlogHintDto((BlogHint) hint);
+        } else if (hint instanceof BookHint) {
+            return bookHintService.getBookHintDto((BookHint) hint);
         } else {
             throw new NotImplementedException();
         }

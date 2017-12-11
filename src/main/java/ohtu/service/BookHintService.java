@@ -46,5 +46,14 @@ public class BookHintService {
 	public BookHint saveBookHint(BookHint bookHint) {
             return bookHintRepository.save(bookHint);
         }
+        
+        public BookHintDto getBookHintDto(BookHint bookHint) {
+        BookHintDto bookHintDto = new BookHintDto();
+        bookHintDto.setAuthor(bookHint.getAuthor());
+        bookHintDto.setIsbn(bookHint.getIsbn());
+        bookHintDto.setName(bookHint.getName());
+        bookHintDto.setTags(bookHint.getTags());
+        return bookHintDto;
+    }
 	
 }

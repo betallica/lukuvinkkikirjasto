@@ -1,7 +1,7 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
 	<h1 class="title">Editoi kirjavinkki</h1>
 	
-	<form th:action="@{/books/{id}/edit (id=${bookHint.id})}" th:method="POST" th:object="${bookHintDto}">
+	<form th:action="@{/books/{id}/edit (id=${bookHintId})}" th:method="POST" th:object="${bookHintDto}">
 		<div class="field is-horizontal">
 			<div class="field-label is-large">
 				<label class="label">Otsikko</label>
@@ -9,7 +9,7 @@
 
 			<div class="field-body">
 				<div class="field">
-					<input class="input is-large" th:classappend="${#fields.hasErrors('name')} ? is-danger" th:value ="${bookHint.name}" id="name" name="name"/>
+					<input class="input is-large" th:classappend="${#fields.hasErrors('name')} ? is-danger" type="text" th:field="*{name}" />
 
 					<p class="help is-danger" th:each="error : ${#fields.errors('name')}" th:text="${error}">
 						Validation error
@@ -25,7 +25,7 @@
 
 			<div class="field-body">
 				<div class="field">
-                                    <input class="input is-large" th:classappend="${#fields.hasErrors('author')} ? is-danger" type="text" th:value ="${bookHint.author}" id="author" name="author"/>
+                                    <input class="input is-large" th:classappend="${#fields.hasErrors('author')} ? is-danger" type="text" th:field="*{author}" />
 
 					<p class="help is-danger" th:each="error : ${#fields.errors('author')}" th:text="${error}">
 						Validation error
@@ -41,7 +41,7 @@
 
 			<div class="field-body">
 				<div class="field">
-					<input class="input is-large" th:classappend="${#fields.hasErrors('isbn')} ? is-danger" type="text" th:value ="${bookHint.isbn}" id="isbn" name="isbn"/>
+					<input class="input is-large" th:classappend="${#fields.hasErrors('isbn')} ? is-danger" type="text" th:field="*{isbn}" />
 
 					<p class="help is-danger" th:each="error : ${#fields.errors('isbn')}" th:text="${error}">
 						Validation error
@@ -49,7 +49,7 @@
 				</div>
 			</div>
 		</div>
-		<div th:replace="fragments/form_edit :: tags"></div>
-		<div th:replace="fragments/form_edit :: submit"></div>
+		<div th:replace="fragments/form :: tags"></div>
+		<div th:replace="fragments/form :: submit"></div>
 	</form>
 </div>

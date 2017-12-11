@@ -69,12 +69,11 @@ public class BlogController {
     }
     
     @GetMapping("/blogs/{id}/edit")
-    public String editBlog(Model model, @PathVariable long id) {
+    public String editBlog(Model model, @PathVariable long id) throws Exception {
 
-        BlogHintDto bhDto = new BlogHintDto();
-
-        model.addAttribute("blogHintDto", bhDto);
-        model.addAttribute("blogHint", hintService.getHint(id));
+        BlogHintDto blogHintDto = (BlogHintDto) hintService.getHintDto(id);
+        model.addAttribute("blogHintDto", blogHintDto);
+        model.addAttribute("blogHintId", id);
         model.addAttribute("allTags", tagService.getAllTags());
         
         return "edit_blog";
