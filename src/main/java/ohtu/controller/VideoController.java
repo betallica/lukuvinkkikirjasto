@@ -62,11 +62,7 @@ public class VideoController {
             return "redirect:/videos/{id}";
         } else {
             
-            for (ObjectError error : result.getAllErrors()) {
-                FieldError fError = (FieldError) error;
-                System.out.println(fError.getField() + " : " + fError.getCode());
-            }
-            
+            model.addAttribute("videoHint", hintService.getHint(id));
             model.addAttribute("videoHintDto", videoHintDto);
             model.addAttribute("allTags", tagService.getAllTags());
             return "edit_video";

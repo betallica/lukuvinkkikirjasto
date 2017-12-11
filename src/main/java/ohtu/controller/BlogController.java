@@ -88,10 +88,8 @@ public class BlogController {
 
             return "redirect:/blogs/{id}";
         } else {
-            for (ObjectError error : result.getAllErrors()) {
-                FieldError fError = (FieldError) error;
-                System.out.println(fError.getField() + " : " + fError.getCode());
-            }
+            
+            model.addAttribute("blogHint", hintService.getHint(id));
             model.addAttribute("blogHintDto", blogHintDto);
             model.addAttribute("allTags", tagService.getAllTags());
             return "edit_blog";

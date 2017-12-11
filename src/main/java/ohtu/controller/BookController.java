@@ -88,6 +88,7 @@ public class BookController {
             return "redirect:/books/{id}";
         } else {
             
+            model.addAttribute("bookHint", hintService.getHint(id));
             model.addAttribute("bookHintDto", bookHintDto);
             model.addAttribute("allTags", tagService.getAllTags());
             return "edit_book";
