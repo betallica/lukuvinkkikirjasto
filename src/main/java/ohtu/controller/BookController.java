@@ -90,6 +90,7 @@ public class BookController {
             
             model.addAttribute("bookHint", hintService.getHint(id));
             model.addAttribute("bookHintDto", bookHintDto);
+            model.addAttribute("bookHintId", id);
             model.addAttribute("allTags", tagService.getAllTags());
             return "edit_book";
         }

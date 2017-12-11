@@ -61,6 +61,7 @@ public class VideoController {
             
             model.addAttribute("videoHint", hintService.getHint(id));
             model.addAttribute("videoHintDto", videoHintDto);
+            model.addAttribute("videoHintId", id);
             model.addAttribute("allTags", tagService.getAllTags());
             return "edit_video";
         }
