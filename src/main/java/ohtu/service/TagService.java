@@ -32,16 +32,19 @@ public class TagService {
     }
     
     public Set<Tag> getTagsByNames(String[] names) {
-    	if(names == null) return null;
+    	if(names == null || names.length == 0) return null;
     	
     	HashSet<Tag> tags = new HashSet();
 
     	for(int i = 0; i < names.length; i++) {
     		String name = names[i];
+    		if(name.isEmpty())continue;
     		if(tagRepository.findByName(name)!=null) {
     			tags.add(tagRepository.findByName(name));
     		}
     	}
+
+    	if(tags.size() == 0) return null;
     	
     	return tags;
     }

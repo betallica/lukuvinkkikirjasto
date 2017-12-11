@@ -52,7 +52,6 @@ public class HintService {
         Page<Hint> pages;
         
         pages = hintRepository.findByFilters(isRead, tags, keyword, pageable);
-        
         return pages.getContent();
     }
 
