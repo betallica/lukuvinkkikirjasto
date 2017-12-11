@@ -28,7 +28,16 @@ public interface HintRepository extends JpaRepository<Hint, Long> {
 	@Query(value="SELECT DISTINCT h FROM Hint h LEFT JOIN h.comments c "
 			+ "WHERE LOWER(h.name) LIKE LOWER(CONCAT('%',:keyword, '%')) "
 			+ "OR LOWER(c.text) LIKE LOWER(CONCAT('%',:keyword, '%'))")
-    Page<Hint> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
+    public Page<Hint> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
+	
+	@Query(value="SELECT DISTINCT h FROM Hint h LEFT JOIN h.comments c "
+			+ "WHERE (h.isRead=:isRead OR :isRead IS NULL) "
+			+ "AND (:tags IS NULL OR (SELECT t FROM Tag t RIGHT JOIN t.hints th WHERE th=h) IN :tags) "
+			+ "AND (LOWER(h.name) LIKE LOWER(CONCAT('%',:keyword, '%')) "		// Find By Keyword
+			+ "OR LOWER(c.text) LIKE LOWER(CONCAT('%',:keyword, '%')))")			
+	public Page<Hint> findByFilters(@Param("isRead") Boolean isRead, @Param("tags") Set<Tag> tags, @Param("keyword") String keyword, Pageable pageable);
+	
+	//public Page<Hint> findByIsReadAndTagsInAnd(boolean isRead, Set<Tag> tags, String keyword, Pageable pageable);
 
 	public List<Hint> findByIsRead(Boolean isRead);
 

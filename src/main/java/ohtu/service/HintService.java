@@ -50,19 +50,9 @@ public class HintService {
         final int pageIndex = pageNumber - 1;
         Pageable pageable = new PageRequest(pageIndex, numberOfHints);
         Page<Hint> pages;
-        if(!keyword.isEmpty()) {
-        	pages = hintRepository.findByKeyword(keyword, pageable);
-        } else if (isRead != null) {
-        	if(tags != null && !tags.isEmpty()) {
-        		pages = hintRepository.findDistinctByIsReadAndTagsInOrderByIdDesc(isRead, tags, pageable);
-        	} else {
-        		pages = hintRepository.findByIsReadOrderByIdDesc(isRead, pageable);
-        	}
-        } else if(tags != null && !tags.isEmpty()) {
-        	pages = hintRepository.findDistinctByTagsInOrderByIdDesc(tags, pageable);
-        } else {
-            pages = hintRepository.findAllByOrderByIdDesc(pageable);
-        }
+        
+        pages = hintRepository.findByFilters(isRead, tags, keyword, pageable);
+        
         return pages.getContent();
     }
 
