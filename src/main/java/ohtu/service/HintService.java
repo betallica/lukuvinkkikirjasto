@@ -16,6 +16,7 @@ import ohtu.database.repository.HintRepository;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import ohtu.model.BlogHint;
 import ohtu.model.BookHint;
@@ -27,7 +28,6 @@ public class HintService {
 
     @Autowired
     private HintRepository hintRepository;
-
     @Autowired
     private BookHintService bookHintService;
     @Autowired
@@ -58,15 +58,29 @@ public class HintService {
         }
 
         return null;
-}
+    }
 
-    public List<Hint> getHintsInPage(int pageNumber, int numberOfHints, Boolean isRead, Set<Tag> tags, String keyword) {
+    private List<Hint> getHintsWithDatabaseQuery(int pageNumber, int numberOfHints, Boolean isRead, Set<Tag> tags, String keyword) {
         final int pageIndex = pageNumber - 1;
         Pageable pageable = new PageRequest(pageIndex, numberOfHints);
         Page<Hint> pages;
-        
         pages = hintRepository.findByFilters(isRead, tags, keyword, pageable);
         return pages.getContent();
+    }
+
+    private List<Hint> getAllHintsThatMatch(int pageNumber, int hintsPerPage, Boolean isRead, Set<Tag> tags, String keyword) {
+        long startIndex = (pageNumber - 1) * hintsPerPage;
+        return hintRepository.findAllByOrderByIdDesc().stream()
+                .filter(h -> isRead != null ? h.getIsRead() == isRead : true)
+                .filter(h -> tags != null ? h.getTags().containsAll(tags) : true)
+                .filter(h -> keyword.isEmpty() ? true : hintMatchesKeyword(h, keyword))
+                .skip(startIndex)
+                .limit(hintsPerPage)
+                .collect(Collectors.toList());
+    }
+
+    public List<Hint> getHintsInPage(int pageNumber, int numberOfHints, Boolean isRead, Set<Tag> tags, String keyword) {
+        return getAllHintsThatMatch(pageNumber, numberOfHints, isRead, tags, keyword);
     }
 
     public int totalNumberOfHints(Boolean isRead, Set<Tag> tags, String keyword) {
@@ -100,4 +114,12 @@ public class HintService {
             videoHintService.saveVideoHint((VideoHint) hint);
         }
     }
+
+    public boolean hintMatchesKeyword(Hint h, String keyword) {
+        boolean matches =  h.getAuthor().contains(keyword)
+                || h.getName().contains(keyword)
+                || h.getComments().stream().anyMatch(comment -> comment.getText().contains(keyword));
+        return matches;
+    }
+
 }
