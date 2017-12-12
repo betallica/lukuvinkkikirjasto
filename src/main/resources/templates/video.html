@@ -39,14 +39,20 @@
             </tr>
         </tbody>
     </table>
-    <form th:method="POST" th:action="@{/videos/{id} (id=${videoHint.id})}" class="isReadButton">
-        <div th:switch="${videoHint.isRead}">
-            <input th:case="false" type="submit" value="Merkitse katsotuksi" name="isRead" class="button is-link isReadButton"/>
-            <input th:case="true" type="submit" value="Merkitse katsomattomaksi" name="isRead" class="button is-link isReadButton"/>
-        </div>
-    </form>
-    
-    <a class="button" id="edit" th:href="@{/videos/{id}/edit (id=${videoHint.id})}">Editoi Video</a>
+
+    <div class="field is-grouped">
+        <p class="control">
+            <a class="button is-link" id="edit" th:href="@{/videos/{id}/edit (id=${videoHint.id})}">Editoi Video</a>
+        </p>
+        <p class="control">
+            <form th:method="POST" th:action="@{/videos/{id} (id=${videoHint.id})}" class="isReadButton">
+                <div th:switch="${videoHint.isRead}">
+                    <input th:case="false" type="submit" value="Merkitse katsotuksi" name="isRead" class="button is-link isReadButton"/>
+                    <input th:case="true" type="submit" value="Merkitse katsomattomaksi" name="isRead" class="button is-link isReadButton"/>
+                </div>
+            </form>
+        </p>
+    </div>
 
     <div th:replace="fragments/comments :: comments(@{/videos/{id} (id=${videoHint.id})})"></div>
 </div>

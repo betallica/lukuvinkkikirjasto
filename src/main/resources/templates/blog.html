@@ -40,14 +40,21 @@
         </tbody>
     </table>
 
-    <form th:method="POST" th:action="@{/blogs/{id} (id=${blogHint.id})}" class="isReadButton">
-        <div th:switch="${blogHint.isRead}">
-            <input th:case="false" type="submit" value="Merkitse luetuksi" name="isRead" class="button is-link isReadButton"/>
-            <input th:case="true" type="submit" value="Merkitse lukemattomaksi" name="isRead" class="button is-link isReadButton"/>
-        </div>
-    </form>
+    <div class="field is-grouped">
+        <p class="control">
+            <a class="button is-link" id="edit" th:href="@{/blogs/{id}/edit (id=${blogHint.id})}">Editoi Blogia</a>
+        </p>
+        <p class="control">
+            <form th:method="POST" th:action="@{/blogs/{id} (id=${blogHint.id})}" class="isReadButton">
+                <div th:switch="${blogHint.isRead}">
+                    <input th:case="false" type="submit" value="Merkitse luetuksi" name="isRead" class="button is-link isReadButton"/>
+                    <input th:case="true" type="submit" value="Merkitse lukemattomaksi" name="isRead" class="button is-link isReadButton"/>
+                </div>
+            </form>
+        </p>
+    </div>
+
     
-    <a class="button" id="edit" th:href="@{/blogs/{id}/edit (id=${blogHint.id})}">Editoi Blogia</a>
 
     <div th:replace="fragments/comments :: comments(@{/blogs/{id} (id=${blogHint.id})})"></div>
 </div>
