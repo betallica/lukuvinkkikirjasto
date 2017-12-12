@@ -23,7 +23,7 @@ public abstract class Hint implements Serializable {
     
     @ManyToMany
     private Set<Tag> tags;
-    
+
     @OneToMany(mappedBy="hint")
     private List<Comment> comments;
 
@@ -79,5 +79,13 @@ public abstract class Hint implements Serializable {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
 }
