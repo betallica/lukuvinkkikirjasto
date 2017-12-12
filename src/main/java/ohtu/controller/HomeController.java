@@ -51,6 +51,7 @@ public class HomeController {
             pageNumber = newPageNumber(request.getParameter("page"), action, totalHints);
         }
 
+        model.addAttribute("keyword", keyword);
         model.addAttribute("page", pageNumber);
         model.addAttribute("totalPages", totalNumberOfPages(totalHints));
         model.addAttribute("hints", hintService.getHintsInPage(pageNumber, HINTS_PER_PAGE, isRead, tagService.getTagsByNames(tags), keyword));

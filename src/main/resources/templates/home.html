@@ -16,19 +16,19 @@
                 <div class="field has-addons" th:with="read=${param.isread != null ? param.isread[0] == 'read' : false}, unread=${param.isread != null ? param.isread[0] == 'unread' : false}">
                     <p class="control">
                         <label class="button">
-                            <input id="filter_read" type="radio" name="isread" value="read" th:checked="${read}" /> Käytetyt
+                            <input id="filter_read" type="radio" name="isread" value="read" th:checked="${read}" onchange="this.form.submit()"/> Käytetyt
                         </label>
                     </p>
 
                     <p class="control">
                         <label class="button">
-                            <input id="filter_unread" type="radio" name="isread" value="unread" th:checked="${unread}" /> Käyttämättömät
+                            <input id="filter_unread" type="radio" name="isread" value="unread" th:checked="${unread}" onchange="this.form.submit()"/> Käyttämättömät
                         </label>
                     </p>
 
                     <p class="control">
                         <label class="button">
-                            <input id="filter_all" type="radio" name="isread" value="all" th:checked="${!read and !unread}" /> Kaikki
+                            <input id="filter_all" type="radio" name="isread" value="all" th:checked="${!read and !unread}" onchange="this.form.submit()"/> Kaikki
                         </label>
                     </p>
                 </div>
@@ -37,7 +37,7 @@
             <div class="panel-block">
                 <div class="tags">
                     <label class="tag" th:each="tag : ${tags}" th:with="checked=${param.tags != null ? #lists.contains(param.tags, tag.name) : false}">
-                        <input type="checkbox" th:value="${tag.name}" name="tags" class="tag-checkbox" th:checked="${checked}" />
+                        <input type="checkbox" th:value="${tag.name}" name="tags" class="tag-checkbox" th:checked="${checked}" onchange="this.form.submit()"/>
                         <span th:text="${tag.name}"></span>
                     </label>
                 </div>
@@ -45,7 +45,7 @@
 
             <div class="panel-block">
                 <div class="field">
-                    <input class="input" type="text" name="keyword" placeholder="Vapaa tekstihaku..."/>
+                    <input class="input" type="text" name="keyword" placeholder="Vapaa tekstihaku..." th:value="${keyword}" onchange="this.form.submit()"/>
                 </div>
             </div>
 
