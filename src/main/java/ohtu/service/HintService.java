@@ -116,7 +116,7 @@ public class HintService {
     }
 
     public boolean hintMatchesKeyword(Hint h, String keyword) {
-        boolean authorMatches =  (h.getAuthor() != null ? h.getAuthor().contains(keyword) : true);
+        boolean authorMatches =  h.getAuthor() != null ? h.getAuthor().contains(keyword) : true;
         return authorMatches || h.getName().contains(keyword) || h.getComments().stream().anyMatch(comment -> comment.getText().contains(keyword));
     }
 
