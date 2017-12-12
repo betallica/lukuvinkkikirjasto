@@ -73,7 +73,7 @@ public class HintService {
         return hintRepository.findAllByOrderByIdDesc().stream()
                 .filter(h -> isRead != null ? h.getIsRead() == isRead : true)
                 .filter(h -> tags != null ? h.getTags().containsAll(tags) : true)
-                .filter(h -> keyword.isEmpty() ? true : hintMatchesKeyword(h, keyword))
+                .filter(h -> keyword.isEmpty() || keyword == null ? true : hintMatchesKeyword(h, keyword))
                 .skip(startIndex)
                 .limit(hintsPerPage)
                 .collect(Collectors.toList());
@@ -116,10 +116,8 @@ public class HintService {
     }
 
     public boolean hintMatchesKeyword(Hint h, String keyword) {
-        boolean matches =  h.getAuthor().contains(keyword)
-                || h.getName().contains(keyword)
-                || h.getComments().stream().anyMatch(comment -> comment.getText().contains(keyword));
-        return matches;
+        boolean authorMatches =  (h.getAuthor() != null ? h.getAuthor().contains(keyword) : true);
+        return authorMatches || h.getName().contains(keyword) || h.getComments().stream().anyMatch(comment -> comment.getText().contains(keyword));
     }
 
 }
