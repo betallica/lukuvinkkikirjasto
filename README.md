@@ -10,6 +10,8 @@
 
 - Google Sheets: [Backlog](https://docs.google.com/spreadsheets/d/1I5ekYUIwwIMCS3j7zQsP_keDep6tV_8D772lOwKTHKE)
 
+- Google Docs: [Final report](https://docs.google.com/document/d/1dr7AyO8xdgGw6FUTu8ZZBSl7--GAvwAYruXiLCXWXLc/edit?usp=sharing)
+
 <!--- Google Slides: [Layouts & Functional description](https://docs.google.com/presentation/d/1s_RKYejlTn85c9iI1tOGxoGk3G4OnT2LkCz3LkncwVM/edit?usp=sharing) --->
 
 ## Sovelluskehitys
